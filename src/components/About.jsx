@@ -42,8 +42,8 @@ const About = () => {
       <div className="container">
         <h2>About Herma</h2>
         <p className="about-description">
-          Herma is an intelligent assistant that helps you find answers, analyze documents, and get things done. 
-          With our powerful AI technology, Herma can understand your questions and provide accurate, helpful responses.
+          Herma is an intelligent assistant that helps you find answers, analyze documents, and get things done privately. 
+          With our powerful AI technology, Herma can run entirely on your computer to understand your questions and provide accurate, helpful responses.
         </p>
         
         <div className="features" id="features">

@@ -12,18 +12,23 @@ const Hero = () => {
   return (
     <section className="hero">
       <div className="container hero-content">
-        <h1>Your Smart Assistant for Everything</h1>
+        <h1>Your Private Personal AI Assistant</h1>
         <p>
           Herma helps you get answers to all your questions, analyze documents, 
           and more — all in a beautiful, intuitive interface.
         </p>
         
         <div className="cta-container" id="download">
-          <button onClick={handleDownload} className="cta-button">
-            Download Herma
-          </button>
+          <div className="cta-button-container">
+            <button onClick={handleDownload} className="cta-button">
+              Download Herma for Windows!
+            </button>
+            <button onClick={handleDownload} className="cta-button">
+              Download Herma for Mac!
+            </button>
+          </div>
           <p className="platform-note">
-            Available for Windows, macOS, and Linux
+            Available for Windows and macOS
           </p>
         </div>
         
