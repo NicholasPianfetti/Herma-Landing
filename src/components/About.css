@@ -1,0 +1,39 @@
+/* About.css */
+.about {
+    padding: var(--margin-xl) 0;
+    background-color: var(--secondary-bg);
+  }
+  
+  .about h2 {
+    font-size: var(--h2-size);
+    margin-bottom: var(--margin-l);
+    color: var(--highlight-color);
+    text-align: center;
+  }
+  
+  .about-description {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto var(--margin-xl);
+  }
+  
+  .features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--margin-l);
+    justify-content: center;
+  }
+  
+  @media (max-width: 768px) {
+    .about {
+      padding: var(--margin-l) 0;
+    }
+  
+    .about h2 {
+      margin-bottom: var(--margin-s);
+    }
+  
+    .about-description {
+      margin-bottom: var(--margin-l);
+    }
+  }
