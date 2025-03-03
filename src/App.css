@@ -26,7 +26,7 @@
   --h4-size: var(--base-size);
   --h5-size: calc(var(--base-size) / var(--ratio));
 
-  --font: 'Roboto', Arial, sans-serif;
+  --font: 'Times New Roman', Arial, sans-serif;
   --font-size: 16px;
 
   /* Spacing System */

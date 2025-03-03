@@ -1,5 +1,6 @@
 // Header.jsx
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Header.css';
 
 const Header = () => {
@@ -13,8 +14,10 @@ const Header = () => {
     <header className="header">
       <div className="container nav-container">
         <div className="logo-container">
-          <img src="/Herma.jpeg" alt="Herma Logo" className="logo" />
-          <div className="logo-text">Herma</div>
+          <Link to="../" className='logo-container'>
+            <img src="/Herma.jpeg" alt="Herma Logo" className="logo" />
+            <div className="logo-text">Herma</div>
+          </Link>
         </div>
         
         <div className="mobile-menu-button" onClick={toggleMenu}>
@@ -30,9 +33,9 @@ const Header = () => {
         </div>
         
         <nav className={`nav-links ${menuOpen ? 'active' : ''}`}>
+          <a href="#" className="nav-link">Download</a>
           <a href="#features" className="nav-link">Features</a>
           <a href="#about" className="nav-link">About</a>
-          <a href="#download" className="nav-link">Download</a>
         </nav>
       </div>
     </header>
