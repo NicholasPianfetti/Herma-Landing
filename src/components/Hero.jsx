@@ -13,10 +13,9 @@ const Hero = () => {
   return (
     <section className="hero">
       <div className="container hero-content">
-          <h1>Your Private AI Assistant</h1>
+          <h1>The Future is Private</h1>
         <p>
-          Herma helps you get answers to all your questions, analyze documents, 
-          and more — all in a beautiful, intuitive interface.
+          Herma is your new private AI assistant to analyze your documents, answer questions, and solve your problems. All without leaving your device. 
         </p>
 
         <div className="cta-container" id="download">

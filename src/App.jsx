@@ -8,6 +8,7 @@ import About from './components/About';
 import Footer from './components/Footer';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
+import Attributions from './pages/Attributions';
 
 // Home component to wrap main page content
 const Home = () => {
@@ -28,6 +29,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/attributions" element={<Attributions />} />
         </Routes>
         <Footer />
       </div>

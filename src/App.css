@@ -9,10 +9,10 @@
 
 :root {
   /* Color Palette */
-  --primary-bg: #A9B5DF;
-  --secondary-bg: #7886C7;
-  --selected-color: #FFF2F2;
-  --highlight-color: #2D336B;
+  --primary-bg: #E8E8E4;
+  --secondary-bg: #9CA9D6;
+  --selected-color: #F5F7FF;
+  --highlight-color: #2D3D78;
   --border-color: rgba(255, 255, 255, 0.1);
   --text-color: black;
   --button-hover: white;
@@ -49,6 +49,15 @@
 }
 
 body {
+    /* Color Palette */
+  --primary-bg: #E8E8E4;
+  --secondary-bg: #9CA9D6;
+  --selected-color: #F5F7FF;
+  --highlight-color: #2D3D78;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --text-color: black;
+  --text-colorw: white;
+  --button-hover: white;
   font-family: var(--font);
   font-size: var(--font-size);
   line-height: 1.5;

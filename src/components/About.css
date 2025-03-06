@@ -2,6 +2,7 @@
 .about {
     padding: var(--margin-xl) 0;
     background-color: var(--secondary-bg);
+    border-top: 2px solid var(--highlight-color);
   }
   
   .about h2 {
