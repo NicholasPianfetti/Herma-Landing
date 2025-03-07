@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Herma-Landing-Page/static/css/main.cbc86bb9.css",
+    "main.js": "/Herma-Landing-Page/static/js/main.3cde6286.js",
+    "index.html": "/Herma-Landing-Page/index.html",
+    "main.cbc86bb9.css.map": "/Herma-Landing-Page/static/css/main.cbc86bb9.css.map",
+    "main.3cde6286.js.map": "/Herma-Landing-Page/static/js/main.3cde6286.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cbc86bb9.css",
+    "static/js/main.3cde6286.js"
+  ]
+}
