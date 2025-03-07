@@ -12,10 +12,8 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
-  "homepage": "https://nicholaspianfetti.github.io/Herma-Landing/",
+
   "scripts":{
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "start": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
     "build": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts build",
     "test": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts test",
