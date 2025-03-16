@@ -1,14 +1,15 @@
 {
   "files": {
-    "main.css": "/Herma-Landing/static/css/main.acdc21e9.css",
-    "main.js": "/Herma-Landing/static/js/main.7b26c46a.js",
+    "main.css": "/Herma-Landing/static/css/main.4971df5f.css",
+    "main.js": "/Herma-Landing/static/js/main.be813f48.js",
+    "static/media/app-preview.png": "/Herma-Landing/static/media/app-preview.7779c30cc3c96a5018be.png",
     "static/media/Herma.jpeg": "/Herma-Landing/static/media/Herma.fbab95905cdc0de697f3.jpeg",
     "index.html": "/Herma-Landing/index.html",
-    "main.acdc21e9.css.map": "/Herma-Landing/static/css/main.acdc21e9.css.map",
-    "main.7b26c46a.js.map": "/Herma-Landing/static/js/main.7b26c46a.js.map"
+    "main.4971df5f.css.map": "/Herma-Landing/static/css/main.4971df5f.css.map",
+    "main.be813f48.js.map": "/Herma-Landing/static/js/main.be813f48.js.map"
   },
   "entrypoints": [
-    "static/css/main.acdc21e9.css",
-    "static/js/main.7b26c46a.js"
+    "static/css/main.4971df5f.css",
+    "static/js/main.be813f48.js"
   ]
 }
