@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
+import HermaLogo from './Herma.jpeg';
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -14,9 +15,9 @@ const Header = () => {
     <header className="header">
       <div className="container nav-container">
         <div className="logo-container">
-          <Link to="../" className='logo-container'>
-            <img src="/Herma.jpeg" alt="Herma Logo" className="logo" />
-            <div className="logo-text">Herma</div>
+          <Link to="/" className='logo-container'>
+            <img src={HermaLogo} alt="Herma Logo" className="logo"/>
+            <div className="logo-text">HΞRMΛ</div>
           </Link>
         </div>
         

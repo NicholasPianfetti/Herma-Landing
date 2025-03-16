@@ -40,7 +40,7 @@ const About = () => {
   return (
     <section className="about" id="about">
       <div className="container">
-        <h2>About Herma</h2>
+        <h2>About HΞRMΛ</h2>
         <p className="about-description">
           Herma is an intelligent assistant that helps you find answers, analyze documents, and get things done privately. 
           With our powerful AI technology, Herma can run entirely on your computer to understand your questions and provide accurate, helpful responses.
