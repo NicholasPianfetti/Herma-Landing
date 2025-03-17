@@ -1,10 +1,12 @@
 /* Enhanced Hero.css */
 .hero {
+  margin-top: 5rem;
   padding: var(--margin-xl) 0;
   text-align: center;
   background-color: var(--primary-bg);
   position: relative;
   overflow: hidden;
+  box-shadow: 0 10px 10px rgba(45, 61, 120, 0.25);
 }
 
 .hero-content {
@@ -43,6 +45,7 @@
   justify-content: center;
   gap: 2rem;
   flex-wrap: wrap;
+  margin-bottom: 5rem;
 }
 
 .button-icon {
@@ -97,6 +100,98 @@
   opacity: 0.7;
 }
 
+/* Add these styles to your Hero.css file */
+
+.system-requirements-container {
+  margin-top: var(--margin-l);
+  text-align: center;
+  position: relative;
+}
+
+.requirements-title {
+  font-size: calc(var(--h4-size));
+  color: var(--highlight-color);
+  display: inline-block;
+  padding: var(--margin-s) var(--margin-m);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.requirements-title:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.requirements-hint {
+  margin-left: 5px;
+  font-size: 0.7rem;
+  transition: transform 0.3s ease;
+}
+
+.requirements-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, opacity 0.3s ease, transform 0.3s ease;
+  opacity: 0;
+  transform: translateY(-10px);
+  margin-top: 0;
+  padding: 0 var(--margin-m);
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: var(--radius-lg);
+  text-align: left;
+}
+
+/* Styles for clicked state */
+.system-requirements-container.requirements-open .requirements-content {
+  max-height: 500px;
+  opacity: 1;
+  transform: translateY(0);
+  margin-top: var(--margin-s);
+  padding: var(--margin-m);
+}
+
+.requirements-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--margin-m);
+}
+
+.requirement-item {
+  padding: var(--margin-s);
+  background-color: white;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.requirement-item h4 {
+  font-size: calc(var(--h4-size) * 0.8);
+  margin-bottom: 0.5rem;
+  color: var(--highlight-color);
+}
+
+.requirement-item p {
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.requirements-note {
+  font-size: 0.85rem;
+  text-align: center;
+  margin-top: var(--margin-m);
+  opacity: 0.8;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .requirements-grid {
+      grid-template-columns: 1fr;
+  }
+}
+
 .app-preview-container {
   max-width: 90%;
   margin: var(--margin-xl) auto 0;
@@ -106,15 +201,17 @@
   animation: fadeInUp 0.6s ease-out;
   animation-delay: 0.6s;
   animation-fill-mode: both;
-  margin-top: 10rem;
-  margin-bottom: 10rem;
+  margin-top: 3rem;
+  margin-bottom: 7.5rem;
+  border-radius: 20px;
+  box-shadow: 15px 15px 15px rgba(45, 61, 120, 0.3);
 }
 
 .app-gallery-wrapper {
   position: relative;
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.05);
-  border: solid 2px black;
+  border: solid 2px var(--highlight-color);
   border-radius: var(--radius-lg);
 }
 
@@ -150,7 +247,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.4) 70%, transparent);
+  background: linear-gradient(to top, rgba(45, 61, 120, 0.8), rgba(45, 61, 120, 0.4) 75%, transparent);
   padding: var(--margin-m);
   text-align: left;
   color: white;

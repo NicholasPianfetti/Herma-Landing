@@ -11,13 +11,22 @@ const Header = () => {
     setMenuOpen(!menuOpen);
   };
 
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    // Close the mobile menu after clicking
+    setMenuOpen(false);
+  };
+
   return (
     <header className="header">
       <div className="container nav-container">
         <div className="logo-container">
           <Link to="/" className='logo-container'>
             <img src={HermaLogo} alt="Herma Logo" className="logo"/>
-            <div className="logo-text">HΞRMΛ</div>
+            <div className="logo-text">HΞRMA</div>
           </Link>
         </div>
         
@@ -35,8 +44,16 @@ const Header = () => {
         
         <nav className={`nav-links ${menuOpen ? 'active' : ''}`}>
           <a href="#" className="nav-link">Download</a>
-          <a href="#features" className="nav-link">Features</a>
-          <a href="#about" className="nav-link">About</a>
+          <a 
+            href="#about-description" 
+            className="nav-link"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection('about');
+            }}
+            >  
+              About
+            </a>
         </nav>
       </div>
     </header>
