@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/Herma-Landing/static/css/main.f3d14f03.css",
-    "main.js": "/Herma-Landing/static/js/main.feabca7b.js",
-    "static/media/creative-content.png": "/Herma-Landing/static/media/creative-content.fb0a06b68616375726ef.png",
-    "static/media/complex-problem.png": "/Herma-Landing/static/media/complex-problem.5e5df832b8bd6135ecd4.png",
-    "static/media/doc-upload.png": "/Herma-Landing/static/media/doc-upload.315dce7907e8e9433e32.png",
-    "static/media/app-preview.png": "/Herma-Landing/static/media/app-preview.7779c30cc3c96a5018be.png",
+    "main.css": "/Herma-Landing/static/css/main.cf9d183f.css",
+    "main.js": "/Herma-Landing/static/js/main.9a387df7.js",
+    "static/media/creative-content.png": "/Herma-Landing/static/media/creative-content.5e333aaa2f5f6364735d.png",
+    "static/media/complex-problem.png": "/Herma-Landing/static/media/complex-problem.c0fb3379421f1bac7965.png",
+    "static/media/doc-upload.png": "/Herma-Landing/static/media/doc-upload.8c2ec49cc11f0962a276.png",
+    "static/media/app-preview.png": "/Herma-Landing/static/media/app-preview.f801fb6443f54eca28b0.png",
     "static/media/Herma.jpeg": "/Herma-Landing/static/media/Herma.fbab95905cdc0de697f3.jpeg",
     "index.html": "/Herma-Landing/index.html",
-    "main.f3d14f03.css.map": "/Herma-Landing/static/css/main.f3d14f03.css.map",
-    "main.feabca7b.js.map": "/Herma-Landing/static/js/main.feabca7b.js.map"
+    "main.cf9d183f.css.map": "/Herma-Landing/static/css/main.cf9d183f.css.map",
+    "main.9a387df7.js.map": "/Herma-Landing/static/js/main.9a387df7.js.map"
   },
   "entrypoints": [
-    "static/css/main.f3d14f03.css",
-    "static/js/main.feabca7b.js"
+    "static/css/main.cf9d183f.css",
+    "static/js/main.9a387df7.js"
   ]
 }
