@@ -101,14 +101,26 @@
 }
 
 /* Add these styles to your Hero.css file */
+.dropdown-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--margin-m);
+  margin-top: var(--margin-s);
+  width: 100%;
+}
 
-.system-requirements-container {
+.system-requirements-container,
+.tips-container {
   margin-top: var(--margin-l);
   text-align: center;
   position: relative;
+  width: 100%;
 }
 
-.requirements-title {
+.requirements-title,
+.tips-title {
   font-size: calc(var(--h4-size));
   color: var(--highlight-color);
   display: inline-block;
@@ -121,20 +133,23 @@
   z-index: 2;
 }
 
-.requirements-title:hover {
+.requirements-title:hover,
+.tips-title:hover {
   background-color: rgba(0, 0, 0, 0.05);
 }
 
-.requirements-hint {
+.requirements-hint,
+.tips-hint {
   margin-left: 5px;
   font-size: 0.7rem;
   transition: transform 0.3s ease;
 }
 
-.requirements-content {
+.requirements-content,
+.tips-content {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.5s ease, opacity 0.3s ease, transform 0.3s ease;
+  transition: max-height 0.3s ease, opacity 0.15s ease, transform 0.15s ease;
   opacity: 0;
   transform: translateY(-10px);
   margin-top: 0;
@@ -153,32 +168,45 @@
   padding: var(--margin-m);
 }
 
-.requirements-grid {
+.tips-container.tips-open .tips-content {
+  max-height: 500px;
+  opacity: 1;
+  transform: translateY(0);
+  margin-top: var(--margin-s);
+  padding: var(--margin-m);
+}
+
+.requirements-grid,
+.tips-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--margin-m);
 }
 
-.requirement-item {
+.requirement-item,
+.tip-item {
   padding: var(--margin-s);
   background-color: white;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
 }
 
-.requirement-item h4 {
-  font-size: calc(var(--h4-size) * 0.8);
+.requirement-item h4,
+.tip-item h4 {
+  font-size: calc(var(--h4-size) * 0.65);
   margin-bottom: 0.5rem;
   color: var(--highlight-color);
 }
 
-.requirement-item p {
-  font-size: 0.9rem;
+.requirement-item p,
+.tip-item p {
+  font-size: 0.75rem;
   margin: 0;
   line-height: 1.4;
 }
 
-.requirements-note {
+.requirements-note,
+.tips-note {
   font-size: 0.85rem;
   text-align: center;
   margin-top: var(--margin-m);
@@ -187,11 +215,11 @@
 }
 
 @media (max-width: 768px) {
-  .requirements-grid {
-      grid-template-columns: 1fr;
+  .requirements-grid,
+  .tips-grid {
+    grid-template-columns: 1fr;
   }
 }
-
 .app-preview-container {
   max-width: 90%;
   margin: var(--margin-xl) auto 0;

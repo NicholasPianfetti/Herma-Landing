@@ -135,7 +135,7 @@ const TermsOfService = () => {
           <div className="policy-contact">
             <p>
               If you have any questions about these Terms, please contact us at: 
-              <a href="mailto:herma@email.com"> herma@email.com</a>
+              <a href="mailto:herma@email.com"> hermalocal@gmail.com</a>
             </p>
           </div>
           

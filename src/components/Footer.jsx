@@ -47,7 +47,7 @@ const Footer = () => {
           </a>
         </div>
         <div className="copyright">
-        <span className='email'>Contact Us: herma@gmail.com</span>
+        <span className='email'>Contact Us: hermalocal@gmail.com</span>
           &copy; {currentYear} Herma. All rights reserved.
         </div>
       </div>

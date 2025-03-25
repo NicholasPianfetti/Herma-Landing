@@ -8,10 +8,7 @@ import complexProblemImage from './complex-problem.png';
 
 const Hero = () => {
   const [requirementsOpen, setRequirementsOpen] = useState(false);
-
-  const toggleRequirements = () => {
-    setRequirementsOpen(!requirementsOpen);
-  };
+  const [tipsOpen, setTipsOpen] = useState(false);
 
   const scrollGallery = (direction) => {
     const track = document.getElementById('gallery-track');
@@ -92,12 +89,50 @@ const Hero = () => {
     // window.location.href = downloadUrls[platform];
   };
 
+  const toggleRequirements = () => {
+    setRequirementsOpen(!requirementsOpen);
+    
+    // Update spacer height when requirements are toggled
+    //updateSpacerHeight();
+  };
+  
+  const toggleTips = () => {
+    setTipsOpen(!tipsOpen);
+    
+    // Update spacer height when tips are toggled
+    //updateSpacerHeight();
+  };
+  
+  // Function to update the content spacer height
+  const updateSpacerHeight = () => {
+    const spacer = document.querySelector('.content-spacer');
+    const requirementsContent = document.querySelector('.requirements-content');
+    const tipsContent = document.querySelector('.tips-content');
+    
+    if (requirementsOpen || tipsOpen) {
+      spacer.style.display = 'block';
+      
+      // Determine the tallest content element
+      let height = 0;
+      if (requirementsOpen) {
+        height = Math.max(height, requirementsContent.scrollHeight + 40);
+      }
+      if (tipsOpen) {
+        height = Math.max(height, tipsContent.scrollHeight + 40);
+      }
+      
+      spacer.style.height = height + 'px';
+    } else {
+      spacer.style.display = 'none';
+    }
+  };
+
   return (
     <section className="hero">
       <div className="container hero-content">
-          <h1>The Future is Local</h1>
+          <h1>Privacy is Power</h1>
         <p>
-          Herma is your personal private AI assistant. Herma can analyze your documents, answer your questions, and solve your problems. All without leaving your device. 
+        A local alternative to cloud-based AI
         </p>
 
         <div className="cta-container" id="download">
@@ -116,9 +151,10 @@ const Hero = () => {
           </p>
         </div>
         
-        <div className={`system-requirements-container ${requirementsOpen ? 'requirements-open' : ''}`}>
+        <div className="dropdown-container">
+          <div className={`system-requirements-container ${requirementsOpen ? 'requirements-open' : ''}`}>
             <h3 className="requirements-title" onClick={toggleRequirements}>
-              System Suggestions <span className="requirements-hint">{requirementsOpen ? '▲' : '▼'}</span>
+              System Requirements <span className="requirements-hint">{requirementsOpen ? '▲' : '▼'}</span>
             </h3>
             <div className="requirements-content">
               <div className="requirements-grid">
@@ -143,8 +179,37 @@ const Hero = () => {
                 Herma uses Llama 3.2:1B technology to deliver AI capabilities directly on your device without sending your data to the cloud.
               </div>
             </div>
-        </div>
+          </div>
 
+          <div className={`tips-container ${tipsOpen ? 'tips-open' : ''}`}>
+            <h3 className="tips-title" onClick={toggleTips}>
+              Tips for Herma <span className="tips-hint">{tipsOpen ? '▲' : '▼'}</span>
+            </h3>
+            <div className="tips-content">
+              <div className="tips-grid">
+                <div className="tip-item">
+                  <h4>Be Specific</h4>
+                  <p>Clearly state your problem and provide necessary context for better responses.</p>
+                </div>
+                <div className="tip-item">
+                  <h4>Break Down Complex Tasks</h4>
+                  <p>Split complex requests into smaller, more manageable steps for better results.</p>
+                </div>
+                <div className="tip-item">
+                  <h4>Iterative Refinement</h4>
+                  <p>Follow up with clarifications to refine responses toward your needs.</p>
+                </div>
+                <div className="tip-item">
+                  <h4>Memory Overflow</h4>
+                  <p>Longer chats may decrease response accuracy.</p>
+                </div>
+              </div>
+              <div className="tips-note">
+                Herma's capabilities shine when your prompts are clear, specific, and provide the right context for your question.
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="app-preview-container">
           <div className="app-gallery-wrapper">
             <div className="gallery-controls">

@@ -162,7 +162,7 @@ const PrivacyPolicy = () => {
               For general inquiries, complaints, questions, or claims concerning the Application, please contact:
             </p>
             <p>
-              <a href="mailto:herma@email.com">herma@email.com</a>
+              <a href="mailto:herma@email.com">hermalocal@gmail.com</a>
             </p>
           </div>
           

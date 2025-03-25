@@ -12,8 +12,8 @@ const About = () => {
           <path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"/>
         </svg>
       ),
-      title: "Document Analysis",
-      description: "Upload PDFs, documents, spreadsheets, and more. Herma can analyze and answer questions about your files."
+      title: "Clear Analysis",
+      description: "Retrieval augmented generated context from documents, chat history, and more allows Herma to provide accurate and efficient responses."
     },
     {
       id: 2,
@@ -23,7 +23,7 @@ const About = () => {
         </svg>
       ),
       title: "Smart Conversations",
-      description: "Herma remembers context and can have natural, helpful conversations about complex topics."
+      description: "Herma combines local LLMs with powerful memory to have helpful conversations about complex topics."
     },
     {
       id: 3,
@@ -33,17 +33,19 @@ const About = () => {
         </svg>
       ),
       title: "Private & Secure",
-      description: "Your conversations and documents stay on your device. Your privacy is our priority."
+      description: "Your conversations and documents stay on your device. No information leaves your control. Your privacy is our priority."
     }
   ];
 
   return (
     <section className="about" id="about">
       <div className="container">
-        <h2>About HΞRMA</h2>
+        <h2>About HΞRMΛ</h2>
         <p className="about-description">
           Herma is an intelligent assistant that helps you find answers, analyze documents, and get things done privately. 
-          With our powerful AI technology, Herma can run entirely on your computer to understand your questions and provide accurate, helpful responses.
+          Currently, you have two choices when using private data with LLMs: 
+          either expose private information to the cloud or use custom locally run LLMs that are expensive, complex, and lack the capabilities of cloud-based models. 
+          By creating a federated data ecosystem for local AI, we aim to lower costs, expand accessibility, and bring the capabilities of cloud-based AI to a local system.
         </p>
         
         <div className="features" id="features">
