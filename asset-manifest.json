@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Herma-Landing/static/css/main.17747f1b.css",
-    "main.js": "/Herma-Landing/static/js/main.feea6265.js",
+    "main.js": "/Herma-Landing/static/js/main.c30d3ac9.js",
     "static/media/creative-content.png": "/Herma-Landing/static/media/creative-content.5e333aaa2f5f6364735d.png",
     "static/media/complex-problem.png": "/Herma-Landing/static/media/complex-problem.c0fb3379421f1bac7965.png",
     "static/media/doc-upload.png": "/Herma-Landing/static/media/doc-upload.8c2ec49cc11f0962a276.png",
@@ -9,10 +9,10 @@
     "static/media/Herma.jpeg": "/Herma-Landing/static/media/Herma.fbab95905cdc0de697f3.jpeg",
     "index.html": "/Herma-Landing/index.html",
     "main.17747f1b.css.map": "/Herma-Landing/static/css/main.17747f1b.css.map",
-    "main.feea6265.js.map": "/Herma-Landing/static/js/main.feea6265.js.map"
+    "main.c30d3ac9.js.map": "/Herma-Landing/static/js/main.c30d3ac9.js.map"
   },
   "entrypoints": [
     "static/css/main.17747f1b.css",
-    "static/js/main.feea6265.js"
+    "static/js/main.c30d3ac9.js"
   ]
 }
