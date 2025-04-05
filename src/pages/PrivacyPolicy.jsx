@@ -84,7 +84,7 @@ const PrivacyPolicy = () => {
           
           <h2>4. COLLECTION AND USE OF INFORMATION</h2>
           <p>
-            You acknowledge that when you download, install, or use the Application, Company may use automatic means to collect information about your device and about your use of the Application for diagnostic and improvement purposes only. No user Content will be collected. All information we collect through or in connection with this Application is subject to our Privacy Policy at www.herma.com/privacy-policy. By downloading, installing, using, and providing information to or through this Application, you consent to all actions taken by us with respect to your information in compliance with the Privacy Policy.
+            You acknowledge that when you download the Application, Company may use automatic means to collect information about your device and about your use of the Application for diagnostic and improvement purposes only. No user Content will be collected. All information we collect through or in connection with this Application is subject to our Privacy Policy. By downloading, installing, using, and providing information to or through this Application, you consent to all actions taken by us with respect to your information in compliance with the Privacy Policy.
           </p>
           
           <h2>5. UPDATES</h2>
@@ -167,7 +167,7 @@ const PrivacyPolicy = () => {
           </div>
           
           <p className="policy-updated">
-            Last updated: February 27, 2025
+            Last updated: April 5, 2025
           </p>
         </div>
       </div>
