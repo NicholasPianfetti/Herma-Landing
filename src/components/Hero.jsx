@@ -5,6 +5,7 @@ import appPreviewImage from './app-preview.png';
 import docUploadImage from './doc-upload.png';
 import creativeContentImage from './creative-content.png';
 import complexProblemImage from './complex-problem.png';
+import handleDownload from './handleDownload'; // Import the download handler
 
 const Hero = () => {
   const [requirementsOpen, setRequirementsOpen] = useState(false);
@@ -15,7 +16,6 @@ const Hero = () => {
     if (!track) return;
 
     const slideWidth = track.querySelector('.gallery-slide').offsetWidth;
-
     const currentPosition = Math.round(track.scrollLeft / slideWidth);
     const totalSlides = track.querySelectorAll('.gallery-slide').length;
 
@@ -74,20 +74,6 @@ const Hero = () => {
       track.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
-  const handleDownload = (platform) => {
-    // In a real implementation, this would trigger the download
-    // based on platform detection or offer platform options
-    const platformName = platform === 'windows' ? 'Windows' : 'Mac';
-    alert(`Starting download for ${platformName}...`);
-
-    // Example of what the real implementation might look like:
-    // const downloadUrls = {
-    //   windows: 'https://download.herma.ai/latest/windows',
-    //   mac: 'https://download.herma.ai/latest/mac'
-    // };
-    // window.location.href = downloadUrls[platform];
-  };
 
   const toggleRequirements = () => {
     setRequirementsOpen(!requirementsOpen);
