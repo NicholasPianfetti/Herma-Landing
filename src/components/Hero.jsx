@@ -1,5 +1,6 @@
 // Hero.jsx
 import React, {useEffect, useRef, useState} from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './Hero.css';
 import appPreviewImage from './app-preview.png';
 import docUploadImage from './doc-upload.png';
@@ -113,6 +114,22 @@ const Hero = () => {
     }
   };
 
+    const navigate = useNavigate();
+    
+    // Function to handle navigation and scroll to top
+    const handleNavigation = (path, e) => {
+      e.preventDefault();
+      
+      // Navigate to the page
+      navigate(path);
+      
+      // Scroll to top
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    };
+
   return (
     <section className="hero">
       <div className="container hero-content">
@@ -131,6 +148,24 @@ const Hero = () => {
               <span className="button-icon">⌘ </span>
               Download for Mac
             </button>
+          </div>
+          <div className="download-terms">
+            By downloading, you agree to our&nbsp;
+            <a 
+            href="/privacy-policy" 
+            className="license-link" 
+            onClick={(e) => handleNavigation('/privacy-policy', e)}
+            >
+            License 
+            </a>
+            &nbsp;and&nbsp;
+            <a 
+            href="/terms-of-service" 
+            className="license-link" 
+            onClick={(e) => handleNavigation('/terms-of-service', e)}
+            >
+            Terms of Service
+            </a>.
           </div>
           <p className="platform-note">
             Available for Windows and macOS • Runs entirely locally • Completely Private

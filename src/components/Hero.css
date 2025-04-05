@@ -45,7 +45,7 @@
   justify-content: center;
   gap: 2rem;
   flex-wrap: wrap;
-  margin-bottom: 5rem;
+  margin-bottom: 1rem;
 }
 
 .button-icon {
@@ -98,6 +98,17 @@
   font-size: 0.8rem;
   font-style: italic;
   opacity: 0.7;
+}
+
+.download-terms {
+  font-size: 14px;
+  font-style: italic;
+  opacity: 0.7;
+}
+
+.license-link {
+  color: purple;
+  text-decoration: none;
 }
 
 /* Add these styles to your Hero.css file */
