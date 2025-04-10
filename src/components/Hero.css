@@ -230,6 +230,10 @@
   .tips-grid {
     grid-template-columns: 1fr;
   }
+
+  .mac-button {
+    align-self: center;
+  }
 }
 .app-preview-container {
   max-width: 90%;
