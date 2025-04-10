@@ -3,6 +3,7 @@
     flex: 1;
     min-width: 300px;
     max-width: 350px;
+    max-height: 275px;
     background-color: var(--primary-bg);
     padding: var(--margin-l);
     border-radius: var(--radius-lg);
