@@ -76,70 +76,63 @@ const Hero = () => {
     };
   }, []);
 
+  // Track window width for responsive behavior
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  
+  // Update window width when resized
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   const toggleRequirements = () => {
     setRequirementsOpen(!requirementsOpen);
-    
-    // Update spacer height when requirements are toggled
-    //updateSpacerHeight();
+    // Close tips when requirements is opened, but only on mobile
+    // if (!requirementsOpen && tipsOpen && windowWidth <= 768) {
+    //   setTipsOpen(false);
+    // }
   };
   
   const toggleTips = () => {
     setTipsOpen(!tipsOpen);
-    
-    // Update spacer height when tips are toggled
-    //updateSpacerHeight();
-  };
-  
-  // Function to update the content spacer height
-  const updateSpacerHeight = () => {
-    const spacer = document.querySelector('.content-spacer');
-    const requirementsContent = document.querySelector('.requirements-content');
-    const tipsContent = document.querySelector('.tips-content');
-    
-    if (requirementsOpen || tipsOpen) {
-      spacer.style.display = 'block';
-      
-      // Determine the tallest content element
-      let height = 0;
-      if (requirementsOpen) {
-        height = Math.max(height, requirementsContent.scrollHeight + 40);
-      }
-      if (tipsOpen) {
-        height = Math.max(height, tipsContent.scrollHeight + 40);
-      }
-      
-      spacer.style.height = height + 'px';
-    } else {
-      spacer.style.display = 'none';
-    }
+    // Close requirements when tips is opened, but only on mobile
+    // if (!tipsOpen && requirementsOpen && windowWidth <= 768) {
+    //   setRequirementsOpen(false);
+    // }
   };
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
     
-    // Function to handle navigation and scroll to top
-    const handleNavigation = (path, e) => {
-      e.preventDefault();
-      
-      // Navigate to the page
-      navigate(path);
-      
-      // Scroll to top
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    };
+  // Function to handle navigation and scroll to top
+  const handleNavigation = (path, e) => {
+    e.preventDefault();
+    
+    // Navigate to the page
+    navigate(path);
+    
+    // Scroll to top
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
 
-    const handleDownloadTemp = (platform) => {
-      alert('Herma on Windows coming soon!');
-    }
+  const handleDownloadTemp = (platform) => {
+    alert('Herma on Windows coming soon!');
+  }
 
   return (
     <section className="hero">
       <div className="container hero-content">
-          <h1>Privacy is Power</h1>
+        <h1>Privacy is Power</h1>
         <p>
-        A local alternative to cloud-based AI
+          A local alternative to cloud-based AI
         </p>
 
         <div className="cta-container" id="download">

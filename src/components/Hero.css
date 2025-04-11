@@ -14,6 +14,7 @@
   margin: 0 auto;
   position: relative;
   z-index: 1;
+  padding: 0 1rem; /* Added for better mobile padding */
 }
 
 .hero h1 {
@@ -111,7 +112,7 @@
   text-decoration: none;
 }
 
-/* Add these styles to your Hero.css file */
+/* Dropdown container */
 .dropdown-container {
   display: flex;
   flex-direction: row;
@@ -160,7 +161,7 @@
 .tips-content {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.3s ease, opacity 0.15s ease, transform 0.15s ease;
+  transition: max-height 0.5s ease, opacity 0.3s ease, transform 0.3s ease;
   opacity: 0;
   transform: translateY(-10px);
   margin-top: 0;
@@ -172,7 +173,7 @@
 
 /* Styles for clicked state */
 .system-requirements-container.requirements-open .requirements-content {
-  max-height: 500px;
+  max-height: 800px; /* Increased to allow more content on mobile */
   opacity: 1;
   transform: translateY(0);
   margin-top: var(--margin-s);
@@ -180,7 +181,7 @@
 }
 
 .tips-container.tips-open .tips-content {
-  max-height: 500px;
+  max-height: 800px; /* Increased to allow more content on mobile */
   opacity: 1;
   transform: translateY(0);
   margin-top: var(--margin-s);
@@ -225,16 +226,6 @@
   font-style: italic;
 }
 
-@media (max-width: 768px) {
-  .requirements-grid,
-  .tips-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .mac-button {
-    align-self: center;
-  }
-}
 .app-preview-container {
   max-width: 90%;
   margin: var(--margin-xl) auto 0;
@@ -401,9 +392,11 @@
   }
 }
 
+/* Enhanced Mobile Styles */
 @media (max-width: 768px) {
   .hero {
       padding: var(--margin-l) 0;
+      margin-top: 4rem; /* Reduced top margin */
   }
 
   .hero h1 {
@@ -423,6 +416,7 @@
   .cta-button-container {
       flex-direction: column;
       gap: var(--margin-m);
+      align-items: center;
   }
 
   .cta-button {
@@ -431,6 +425,68 @@
       max-width: 280px;
   }
 
+  /* Updated dropdown container for mobile */
+  .dropdown-container {
+      flex-direction: column;
+      gap: var(--margin-s);
+  }
+
+  .system-requirements-container,
+  .tips-container {
+      width: 100%;
+      margin-top: var(--margin-s);
+  }
+
+  .requirements-title,
+  .tips-title {
+      width: 100%;
+      padding: var(--margin-s);
+      font-size: calc(var(--h4-size) * 0.9);
+  }
+
+  /* Responsive grid for mobile */
+  .requirements-grid,
+  .tips-grid {
+      grid-template-columns: 1fr;
+      gap: var(--margin-s);
+  }
+  
+  .requirement-item,
+  .tip-item {
+      padding: var(--margin-s);
+  }
+  
+  .requirement-item h4,
+  .tip-item h4 {
+      font-size: calc(var(--h4-size) * 0.7);
+      margin-bottom: 0.3rem;
+  }
+  
+  .requirement-item p,
+  .tip-item p {
+      font-size: 0.8rem;
+      line-height: 1.3;
+  }
+  
+  .requirements-note,
+  .tips-note {
+      font-size: 0.8rem;
+      padding: 0 var(--margin-s);
+      margin-top: var(--margin-s);
+  }
+
+  /* Improved animation timing for mobile */
+  .requirements-content,
+  .tips-content {
+      transition: max-height 0.4s ease, opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .system-requirements-container.requirements-open .requirements-content,
+  .tips-container.tips-open .tips-content {
+      max-height: 1200px; /* Further increased for smaller screens */
+  }
+
+  /* Gallery controls for mobile */
   .gallery-arrow {
       width: 32px;
       height: 32px;
@@ -443,5 +499,47 @@
 
   .slide-caption p {
       font-size: 0.8rem;
+  }
+  
+  /* Additional spacing for better mobile readability */
+  .app-preview-container {
+      margin-bottom: 5rem;
+      margin-top: 2rem;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .hero h1 {
+      font-size: calc(var(--h1-size) * 0.8);
+  }
+
+  .hero p {
+      font-size: calc(var(--h4-size) * 0.7);
+  }
+
+  .requirements-title,
+  .tips-title {
+      font-size: calc(var(--h4-size) * 0.8);
+  }
+  
+  .requirements-content,
+  .tips-content {
+      padding: var(--margin-s);
+  }
+  
+  .requirement-item,
+  .tip-item {
+      padding: var(--margin-s);
+  }
+  
+  .requirement-item p,
+  .tip-item p {
+      font-size: 0.75rem;
+  }
+  
+  .cta-button {
+      font-size: calc(var(--h4-size) * 0.7);
+      padding: var(--margin-s) var(--margin-m);
   }
 }
