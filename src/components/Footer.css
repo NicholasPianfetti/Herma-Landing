@@ -1,49 +1,62 @@
 /* Footer.css */
 .footer {
-    background-color: var(--highlight-color);
-    color: white;
-    padding: var(--margin-s);
-    box-shadow: 0px -1px 2px var(--primary-bg);
-    height: 75px;
-  }
-  
-  .footer-content {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    margin: 0;
-  }
-  
+  background-color: var(--highlight-color);
+  color: white;
+  padding: var(--margin-s);
+  box-shadow: 0px -1px 2px var(--primary-bg);
+  min-height: 75px; /* Changed from fixed height to min-height */
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 0;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: var(--margin-l);
+}
+
+.footer-link {
+  color: white;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.footer-link:hover {
+  opacity: 0.8;
+}
+
+.copyright {
+  opacity: 0.7;
+  font-size: 0.9rem;
+  width: 100%;
+  justify-content: space-between;
+  display: flex; /* Added to ensure proper alignment */
+  margin-top: var(--margin-s); /* Added spacing between links and copyright */
+}
+
+.email {
+  margin-right: 2.5rem;
+}
+
+@media (max-width: 768px) {
   .footer-links {
-    display: flex;
-    justify-content: center;
-    gap: var(--margin-l);
-  }
-  
-  .footer-link {
-    color: white;
-    text-decoration: none;
-    transition: opacity 0.2s ease;
-  }
-  
-  .footer-link:hover {
-    opacity: 0.8;
+    flex-direction: column;
+    gap: var(--margin-s);
   }
   
   .copyright {
-    opacity: 0.7;
-    font-size: 0.9rem;
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .email {
-    margin-right: 2.5rem;
+    flex-direction: column; /* Stack copyright content on mobile */
+    align-items: center; /* Center copyright content */
+    margin-top: var(--margin-m); /* Increased top margin for better spacing */
   }
   
-  @media (max-width: 768px) {
-    .footer-links {
-      flex-direction: column;
-      gap: var(--margin-s);
-    }
+  .email {
+    margin-right: 0; /* Remove margin in stacked layout */
+    margin-bottom: var(--margin-xs); /* Add space between email and copyright text */
   }
+}
