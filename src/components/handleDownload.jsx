@@ -35,7 +35,7 @@ const handleDownload = (platform) => {
   
   // 2. Define the download URLs for each platform
   const downloadUrls = {
-    windows: 'https://github.com/NicholasPianfetti/Herma-Landing/releases/download/v0.1.0/Herma-0.1.0.exe',
+    windows: 'https://github.com/NicholasPianfetti/Herma-Landing/releases/download/v0.1.0/Herma-0.1.0.msi',
     mac: 'https://github.com/NicholasPianfetti/Herma-Landing/releases/download/v0.1.0/Herma-0.1.0.dmg',
   };
   

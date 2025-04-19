@@ -123,10 +123,6 @@ const Hero = () => {
     });
   };
 
-  const handleDownloadTemp = (platform) => {
-    alert('Herma on Windows coming soon!');
-  }
-
   return (
     <section className="hero">
       <div className="container hero-content">
@@ -137,10 +133,10 @@ const Hero = () => {
 
         <div className="cta-container" id="download">
           <div className="cta-button-container">
-            {/* <button onClick={() => handleDownloadTemp('windows')} className="cta-button windows-button">
+            { <button onClick={() => handleDownload('windows')} className="cta-button windows-button">
               <span className="button-icon">⊞ </span>
               Download for Windows
-            </button> */}
+            </button> }
             <button onClick={() => handleDownload('mac')} className="cta-button mac-button">
               <span className="button-icon">⌘ </span>
               Download for Mac
