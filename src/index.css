@@ -1,6 +1,8 @@
 /* Import fonts - Add Google Fonts or your preferred font */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 /* Base reset */
 body {
   margin: 0;

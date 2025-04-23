@@ -1,4 +1,5 @@
 /**** General ****/
+
 *,
 *::before,
 *::after {
@@ -23,7 +24,7 @@
   --h1-size: calc(var(--base-size) * var(--ratio) * var(--ratio) * var(--ratio));
   --h2-size: calc(var(--base-size) * var(--ratio) * var(--ratio));
   --h3-size: calc(var(--base-size) * var(--ratio));
-  --h4-size: var(--base-size);
+  --h4-size: 1.125rem;
   --h5-size: calc(var(--base-size) / var(--ratio));
 
   --font: 'Times New Roman', Arial, sans-serif;
@@ -31,9 +32,9 @@
 
   /* Spacing System */
   --margin-xxs: 0.25rem;
-  --margin-xs: 0.5rem;
+  --margin-xs: 0.25rem;
   --margin-s: 1rem;
-  --margin-m: 1.5rem;
+  --margin-m: 1rem;
   --margin-l: 2rem;
   --margin-xl: 3rem;
 
@@ -44,7 +45,7 @@
 
   /* Shadows */
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
