@@ -10,6 +10,8 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import Attributions from './pages/Attributions';
 import ReactGA from 'react-ga4';
+import FAQ from './components/FAQ';
+import HowToUse from './components/HowToUse';
 
 // Initialize with enhanced configuration options
 ReactGA.initialize('G-FSS7V9WPY5', {
@@ -81,6 +83,8 @@ const Home = () => {
     <>
       <Hero />
       <About />
+      <HowToUse />
+      <FAQ />
     </>
   );
 };
@@ -122,13 +126,3 @@ function App() {
 }
 
 export default App;
-
-// function App() {
-//   return (
-//     <div>
-//       <h1>Hello, World!</h1>
-//     </div>
-//   );
-// }
-
-// export default App;

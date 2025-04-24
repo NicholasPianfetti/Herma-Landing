@@ -1,315 +1,17 @@
-// // Hero.jsx
-// import React, {useEffect, useRef, useState} from 'react';
-// import { Link, useNavigate } from 'react-router-dom';
-// import './Hero.css';
-// import appPreviewImage from './app-preview.png';
-// import docUploadImage from './doc-upload.png';
-// import creativeContentImage from './creative-content.png';
-// import complexProblemImage from './complex-problem.png';
-// import handleDownload from './handleDownload'; // Import the download handler
-
-// const Hero = () => {
-//   const [requirementsOpen, setRequirementsOpen] = useState(false);
-//   const [tipsOpen, setTipsOpen] = useState(false);
-
-//   const scrollGallery = (direction) => {
-//     const track = document.getElementById('gallery-track');
-//     if (!track) return;
-
-//     const slideWidth = track.querySelector('.gallery-slide').offsetWidth;
-//     const currentPosition = Math.round(track.scrollLeft / slideWidth);
-//     const totalSlides = track.querySelectorAll('.gallery-slide').length;
-
-//     let newPosition = currentPosition + direction;
-
-//     if (newPosition < 0) newPosition = totalSlides - 1;
-//     if (newPosition >= totalSlides) newPosition = 0;
-
-//     track.scrollTo({
-//       left: newPosition * slideWidth,
-//       behavior: 'smooth'
-//     });
-
-//     updateDotIndicators(newPosition);
-//   }
-
-//   const scrollToSlide = (slideIndex) => {
-//     const track = document.getElementById('gallery-track');
-//     if (!track) return;
-    
-//     const slideWidth = track.querySelector('.gallery-slide').offsetWidth;
-    
-//     track.scrollTo({
-//       left: slideIndex * slideWidth,
-//       behavior: 'smooth'
-//     });
-    
-//     updateDotIndicators(slideIndex);
-//   };
-  
-//   const updateDotIndicators = (activeIndex) => {
-//     const dots = document.querySelectorAll('.gallery-dots .dot');
-//     dots.forEach((dot, index) => {
-//       if (index === activeIndex) {
-//         dot.classList.add('active');
-//       } else {
-//         dot.classList.remove('active');
-//       }
-//     });
-//   };
-  
-//   // Listen for scroll events to update the dots
-//   useEffect(() => {
-//     const track = document.getElementById('gallery-track');
-//     if (!track) return;
-    
-//     const handleScroll = () => {
-//       const slideWidth = track.querySelector('.gallery-slide').offsetWidth;
-//       const currentPosition = Math.round(track.scrollLeft / slideWidth);
-//       updateDotIndicators(currentPosition);
-//     };
-    
-//     track.addEventListener('scroll', handleScroll);
-    
-//     return () => {
-//       track.removeEventListener('scroll', handleScroll);
-//     };
-//   }, []);
-
-//   // Track window width for responsive behavior
-//   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  
-//   // Update window width when resized
-//   useEffect(() => {
-//     const handleResize = () => {
-//       setWindowWidth(window.innerWidth);
-//     };
-    
-//     window.addEventListener('resize', handleResize);
-//     return () => {
-//       window.removeEventListener('resize', handleResize);
-//     };
-//   }, []);
-
-//   const toggleRequirements = () => {
-//     setRequirementsOpen(!requirementsOpen);
-//     // Close tips when requirements is opened, but only on mobile
-//     // if (!requirementsOpen && tipsOpen && windowWidth <= 768) {
-//     //   setTipsOpen(false);
-//     // }
-//   };
-  
-//   const toggleTips = () => {
-//     setTipsOpen(!tipsOpen);
-//     // Close requirements when tips is opened, but only on mobile
-//     // if (!tipsOpen && requirementsOpen && windowWidth <= 768) {
-//     //   setRequirementsOpen(false);
-//     // }
-//   };
-
-//   const navigate = useNavigate();
-    
-//   // Function to handle navigation and scroll to top
-//   const handleNavigation = (path, e) => {
-//     e.preventDefault();
-    
-//     // Navigate to the page
-//     navigate(path);
-    
-//     // Scroll to top
-//     window.scrollTo({
-//       top: 0,
-//       behavior: 'smooth'
-//     });
-//   };
-
-//   return (
-//     <section className="hero">
-//       <div className="container hero-content">
-//         <h1>Privacy is Power</h1>
-//         <p>
-//           A local alternative to cloud-based AI
-//         </p>
-
-//         <div className="cta-container" id="download">
-//           <div className="cta-button-container">
-//             { <button onClick={() => handleDownload('windows')} className="cta-button windows-button">
-//               <span className="button-icon">⊞ </span>
-//               Download for Windows
-//             </button> }
-//             <button onClick={() => handleDownload('mac')} className="cta-button mac-button">
-//               <span className="button-icon">⌘ </span>
-//               Download for Mac
-//             </button>
-//           </div>
-//           <div className="download-terms">
-//             By downloading, you agree to our&nbsp;
-//             <a 
-//             href="/privacy-policy" 
-//             className="license-link" 
-//             onClick={(e) => handleNavigation('/privacy-policy', e)}
-//             >
-//             License 
-//             </a>
-//             &nbsp;and&nbsp;
-//             <a 
-//             href="/terms-of-service" 
-//             className="license-link" 
-//             onClick={(e) => handleNavigation('/terms-of-service', e)}
-//             >
-//             Terms of Service
-//             </a>.
-//           </div>
-//           <p className="platform-note">
-//             Available for MacOS • Runs entirely locally • Completely Private
-//           </p>
-//         </div>
-        
-//         <div className="dropdown-container">
-//           <div className={`system-requirements-container ${requirementsOpen ? 'requirements-open' : ''}`}>
-//             <h3 className="requirements-title" onClick={toggleRequirements}>
-//               System Requirements <span className="requirements-hint">{requirementsOpen ? '▲' : '▼'}</span>
-//             </h3>
-//             <div className="requirements-content">
-//               <div className="requirements-grid">
-//                 <div className="requirement-item">
-//                   <h4>Processor</h4>
-//                   <p>Modern CPU (Intel i5/AMD Ryzen 5 or higher)</p>
-//                 </div>
-//                 <div className="requirement-item">
-//                   <h4>Memory</h4>
-//                   <p>16GB RAM minimum, 32GB recommended for complex tasks</p>
-//                 </div>
-//                 <div className="requirement-item">
-//                   <h4>Graphics</h4>
-//                   <p>GPU with CUDA support recommended for best performance</p>
-//                 </div>
-//                 <div className="requirement-item">
-//                   <h4>Storage</h4>
-//                   <p>20GB available disk space for model and dependencies</p>
-//                 </div>
-//               </div>
-//               <div className="requirements-note">
-//                 Herma uses Llama 3.2:1B technology to deliver AI capabilities directly on your device without sending your data to the cloud.
-//               </div>
-//             </div>
-//           </div>
-
-//           <div className={`tips-container ${tipsOpen ? 'tips-open' : ''}`}>
-//             <h3 className="tips-title" onClick={toggleTips}>
-//               Tips for Herma <span className="tips-hint">{tipsOpen ? '▲' : '▼'}</span>
-//             </h3>
-//             <div className="tips-content">
-//               <div className="tips-grid">
-//                 <div className="tip-item">
-//                   <h4>Be Specific</h4>
-//                   <p>Clearly state your problem and provide necessary context for better responses.</p>
-//                 </div>
-//                 <div className="tip-item">
-//                   <h4>Break Down Complex Tasks</h4>
-//                   <p>Split complex requests into smaller, more manageable steps for better results.</p>
-//                 </div>
-//                 <div className="tip-item">
-//                   <h4>Iterative Refinement</h4>
-//                   <p>Follow up with clarifications to refine responses toward your needs.</p>
-//                 </div>
-//                 <div className="tip-item">
-//                   <h4>Memory Overflow</h4>
-//                   <p>Longer chats may decrease response accuracy.</p>
-//                 </div>
-//               </div>
-//               <div className="tips-note">
-//                 Herma's capabilities shine when your prompts are clear, specific, and provide the right context for your question.
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//         <div className="app-preview-container">
-//           <div className="app-gallery-wrapper">
-//             <div className="gallery-controls">
-//               <button className="gallery-arrow gallery-prev" onClick={() => scrollGallery(-1)}>❮</button>
-//               <button className="gallery-arrow gallery-next" onClick={() => scrollGallery(1)}>❯</button>
-//             </div>
-            
-//             <div className="gallery-track" id="gallery-track">
-//             <div className="gallery-slide">
-//                 <img 
-//                   src={appPreviewImage} 
-//                   alt="Herma App Preview - Private AI" 
-//                   className="app-preview"
-//                 />
-//                 <div className="slide-caption">
-//                   <h3>Private AI</h3>
-//                   <p>All data stays on your device</p>
-//                 </div>
-//               </div>
-
-//               <div className="gallery-slide">
-//                 <img 
-//                   src={docUploadImage} 
-//                   alt="Herma App Preview - Document Analysis" 
-//                   className="app-preview"
-//                 />
-//                 <div className="slide-caption">
-//                   <h3>Analyze Documents</h3>
-//                   <p>Power Herma with your personal documents</p>
-//                 </div>
-//               </div>
-              
-//               <div className="gallery-slide">
-//                 <img 
-//                   src={creativeContentImage} 
-//                   alt="Herma App Preview - Content Generation" 
-//                   className="app-preview"
-//                 />
-//                 <div className="slide-caption">
-//                   <h3>Generate Creative Content</h3>
-//                   <p>Create drafts, outlines, and fresh ideas</p>
-//                 </div>
-//               </div>
-              
-//               <div className="gallery-slide">
-//                 <img 
-//                   src={complexProblemImage} 
-//                   alt="Herma App Preview - Problem Solving" 
-//                   className="app-preview"
-//                 />
-//                 <div className="slide-caption">
-//                   <h3>Solve Complex Problems</h3>
-//                   <p>Get step-by-step guidance for any challenge</p>
-//                 </div>
-//               </div>
-//             </div>
-
-//             <div className="gallery-dots">
-//               <span className="dot active" onClick={() => scrollToSlide(0)}></span>
-//               <span className="dot" onClick={() => scrollToSlide(1)}></span>
-//               <span className="dot" onClick={() => scrollToSlide(2)}></span>
-//               <span className="dot" onClick={() => scrollToSlide(3)}></span>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default Hero;
-
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import appPreviewImage from './app-preview.png';
 import docUploadImage from './doc-upload.png';
 import creativeContentImage from './creative-content.png';
 import complexProblemImage from './complex-problem.png';
-import handleDownload from './handleDownload'; // Import the updated download handler
+import handleDownload from './handleDownload';
 
 const Hero = () => {
   const [requirementsOpen, setRequirementsOpen] = useState(false);
   const [tipsOpen, setTipsOpen] = useState(false);
   const [enlargedImage, setEnlargedImage] = useState(null);
   const [osType, setOsType] = useState('unknown');
-  const carouselRef = useRef(null);
+  const [activeSlide, setActiveSlide] = useState(0);
   
   // Detect OS on component mount
   useEffect(() => {
@@ -317,65 +19,36 @@ const Hero = () => {
       const userAgent = window.navigator.userAgent;
       const platform = window.navigator.platform;
       
-      // Check for macOS
       if (platform.indexOf('Mac') !== -1 || 
           userAgent.indexOf('Macintosh') !== -1 || 
           userAgent.indexOf('MacIntel') !== -1) {
         return 'mac';
       }
       
-      // Check for Windows
       if (platform.indexOf('Win') !== -1 || 
           userAgent.indexOf('Windows') !== -1) {
         return 'windows';
       }
       
-      // Check for Linux
       if (platform.indexOf('Linux') !== -1 || 
           userAgent.indexOf('Linux') !== -1) {
         return 'linux';
       }
       
-      // If OS cannot be determined
       return 'unknown';
     };
     
     setOsType(detectOS());
   }, []);
-  
-  // Get the appropriate download button text based on detected OS
-  const getDownloadButtonText = () => {
-    switch(osType) {
-      case 'windows':
-        return (
-          <>
-            <span className="mr-2 font-normal text-[1.1em]">⊞ </span>
-            Download for Windows
-          </>
-        );
-      case 'mac':
-        return (
-          <>
-            <span className="mr-2 font-normal text-[1.1em]">⌘ </span>
-            Download for Mac
-          </>
-        );
-      case 'linux':
-        return (
-          <>
-            <span className="mr-2 font-normal text-[1.1em]">🐧 </span>
-            Download for Linux
-          </>
-        );
-      default:
-        return (
-          <>
-            <span className="mr-2 font-normal text-[1.1em]">↓ </span>
-            Download Herma
-          </>
-        );
-    }
-  };
+
+  // Auto rotate slides
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % gallerySlides.length);
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, []);
   
   // Gallery data
   const gallerySlides = [
@@ -404,6 +77,13 @@ const Hero = () => {
       description: "Get step-by-step guidance for any challenge"
     }
   ];
+  
+  // Handler for download button click
+  const handleDownloadClick = (osType) => {
+    return () => {
+      handleDownload(osType);
+    };
+  };
 
   // Function to enlarge image
   const handleImageClick = (slide) => {
@@ -428,177 +108,247 @@ const Hero = () => {
   // Function to handle navigation and scroll to top
   const handleNavigation = (path, e) => {
     e.preventDefault();
-    
-    // Navigate to the page
     navigate(path);
-    
-    // Scroll to top
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
   };
 
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <section className="mt-20 py-[var(--margin-xl)] text-center bg-[var(--primary-bg)] relative overflow-hidden shadow-[0_10px_10px_rgba(45,61,120,0.25)] md:mt-16 md:py-[var(--margin-l)]">
-      <div className="container max-w-[800px] mx-auto relative z-[1] px-4">
-        <h1 className="text-[var(--h1-size)] mb-[var(--margin-m)] text-[var(--highlight-color)] animate-[fadeInDown_0.6s_ease-out] md:mb-[var(--margin-s)] md:text-[calc(var(--h1-size)*0.9)] sm:text-[calc(var(--h1-size)*0.8)]">
-          Privacy is Power
-        </h1>
-        <p className="text-[var(--h4-size)] mb-[var(--margin-l)] text-[var(--highlight-color)] opacity-90 animate-[fadeInUp_0.6s_ease-out_0.2s_both] md:text-[calc(var(--h4-size)*0.8)] md:mb-[var(--margin-s)] sm:text-[calc(var(--h4-size)*0.7)]">
-          A local alternative to cloud-based AI
-        </p>
-
-        <div className="my-[var(--margin-xl)] animate-[fadeInUp_0.6s_ease-out_0.4s_both] md:my-[var(--margin-l)]" id="download">
-          <div className="flex justify-center mb-4">
-            <button 
-              onClick={handleDownload('windows')} 
-              className="inline-flex items-center justify-center min-w-[250px] bg-[var(--highlight-color)] text-white text-[calc(var(--h4-size)*0.8)] font-bold py-[var(--margin-m)] px-[var(--margin-xl)] rounded-[var(--radius-lg)] no-underline transition-all duration-300 shadow-[var(--shadow-lg)] border-none cursor-pointer hover:translate-y-[-3px] hover:scale-105 hover:shadow-[0_12px_20px_rgba(0,0,0,0.15)] active:translate-y-[1px] active:scale-[0.98] md:w-full md:max-w-[280px] md:py-[var(--margin-s)] md:px-[var(--margin-l)] md:text-[calc(var(--h4-size)*0.7)] sm:py-[var(--margin-s)] sm:px-[var(--margin-m)]"
-            >
-              {getDownloadButtonText()}
-            </button>
-          </div>
-          <div className="text-[14px] italic opacity-70">
-            By downloading, you agree to our&nbsp;
-            <a 
-              href="/privacy-policy" 
-              className="text-purple no-underline" 
-              onClick={(e) => handleNavigation('/privacy-policy', e)}
-            >
-              License 
-            </a>
-            &nbsp;and&nbsp;
-            <a 
-              href="/terms-of-service" 
-              className="text-purple no-underline" 
-              onClick={(e) => handleNavigation('/terms-of-service', e)}
-            >
-              Terms of Service
-            </a>.
-          </div>
-          <p className="mt-[var(--margin-s)] text-[0.8rem] italic opacity-70">
-            {osType === 'mac' ? 'Available for macOS' : osType === 'windows' ? 'Available for Windows' : 'Available for Windows and macOS'} • Runs entirely locally • Completely Private
-          </p>
+    <div className="bg-gradient-to-b from-blue-50 to-white">
+      {/* Hero Section */}
+      <section className="w-full pt-24 pb-12 overflow-hidden relative">
+        {/* Background Patterns */}
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
+          <div className="absolute top-0 left-0 w-full h-full bg-repeat opacity-30" 
+               style={{backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSIjMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoNDB2NDBoLTQweiIgZmlsbD0ibm9uZSIvPjxjaXJjbGUgY3g9IjIwIiBjeT0iMjAiIHI9IjEiLz48L2c+PC9zdmc+')"}}></div>
         </div>
-        
-        <div className="flex flex-row justify-center items-start gap-[var(--margin-m)] mt-[var(--margin-s)] w-full md:flex-col md:gap-[var(--margin-s)]">
-          <div className={`mt-[var(--margin-l)] text-center relative w-full md:mt-[var(--margin-s)]`}>
-            <h3 
-              className={`text-[var(--h4-size)] text-[var(--highlight-color)] inline-block py-[var(--margin-s)] px-[var(--margin-m)] rounded-[var(--radius-md)] cursor-pointer transition-all duration-300 mb-0 relative z-[2] hover:bg-black/5 md:w-full md:py-[var(--margin-s)] md:text-[calc(var(--h4-size)*0.9)] sm:text-[calc(var(--h4-size)*0.8)]`} 
-              onClick={toggleRequirements}
-            >
-              System Requirements <span className="ml-[5px] text-[0.7rem] transition-transform duration-300">{requirementsOpen ? '▲' : '▼'}</span>
-            </h3>
-            <div 
-              className={`overflow-hidden transition-all duration-500 opacity-0 -translate-y-[10px] mt-0 px-[var(--margin-m)] bg-black/[0.03] rounded-[var(--radius-lg)] text-left ${
-                requirementsOpen ? 'max-h-[800px] opacity-100 translate-y-0 mt-[var(--margin-s)] p-[var(--margin-m)] sm:p-[var(--margin-s)]' : 'max-h-0 p-0'
-              }`}
-            >
-              <div className="grid grid-cols-2 gap-[var(--margin-m)] md:grid-cols-1 md:gap-[var(--margin-s)]">
-                <div className="p-[var(--margin-s)] bg-white rounded-[var(--radius-md)] shadow-[var(--shadow-sm)]">
-                  <h4 className="text-[calc(var(--h4-size)*0.65)] mb-2 text-[var(--highlight-color)]">Processor</h4>
-                  <p className="text-[0.75rem] m-0 leading-[1.4]">Modern CPU (Intel i5/AMD Ryzen 5 or higher)</p>
-                </div>
-                <div className="p-[var(--margin-s)] bg-white rounded-[var(--radius-md)] shadow-[var(--shadow-sm)]">
-                  <h4 className="text-[calc(var(--h4-size)*0.65)] mb-2 text-[var(--highlight-color)]">Memory</h4>
-                  <p className="text-[0.75rem] m-0 leading-[1.4]">16GB RAM minimum, 32GB recommended for complex tasks</p>
-                </div>
-                <div className="p-[var(--margin-s)] bg-white rounded-[var(--radius-md)] shadow-[var(--shadow-sm)]">
-                  <h4 className="text-[calc(var(--h4-size)*0.65)] mb-2 text-[var(--highlight-color)]">Graphics</h4>
-                  <p className="text-[0.75rem] m-0 leading-[1.4]">GPU with CUDA support recommended for best performance</p>
-                </div>
-                <div className="p-[var(--margin-s)] bg-white rounded-[var(--radius-md)] shadow-[var(--shadow-sm)]">
-                  <h4 className="text-[calc(var(--h4-size)*0.65)] mb-2 text-[var(--highlight-color)]">Storage</h4>
-                  <p className="text-[0.75rem] m-0 leading-[1.4]">20GB available disk space for model and dependencies</p>
-                </div>
-              </div>
-              <div className="text-[0.85rem] text-center mt-[var(--margin-m)] opacity-80 italic md:text-[0.8rem] md:mt-[var(--margin-s)] md:px-[var(--margin-s)]">
-                Herma uses Llama 3.2:1B technology to deliver AI capabilities directly on your device without sending your data to the cloud.
-              </div>
-            </div>
-          </div>
 
-          <div className={`mt-[var(--margin-l)] text-center relative w-full md:mt-[var(--margin-s)]`}>
-            <h3 
-              className={`text-[var(--h4-size)] text-[var(--highlight-color)] inline-block py-[var(--margin-s)] px-[var(--margin-m)] rounded-[var(--radius-md)] cursor-pointer transition-all duration-300 mb-0 relative z-[2] hover:bg-black/5 md:w-full md:py-[var(--margin-s)] md:text-[calc(var(--h4-size)*0.9)] sm:text-[calc(var(--h4-size)*0.8)]`} 
-              onClick={toggleTips}
-            >
-              Tips for Herma <span className="ml-[5px] text-[0.7rem] transition-transform duration-300">{tipsOpen ? '▲' : '▼'}</span>
-            </h3>
-            <div 
-              className={`overflow-hidden transition-all duration-500 opacity-0 -translate-y-[10px] mt-0 px-[var(--margin-m)] bg-black/[0.03] rounded-[var(--radius-lg)] text-left ${
-                tipsOpen ? 'max-h-[800px] opacity-100 translate-y-0 mt-[var(--margin-s)] p-[var(--margin-m)] sm:p-[var(--margin-s)]' : 'max-h-0 p-0'
-              }`}
-            >
-              <div className="grid grid-cols-2 gap-[var(--margin-m)] md:grid-cols-1 md:gap-[var(--margin-s)]">
-                <div className="p-[var(--margin-s)] bg-white rounded-[var(--radius-md)] shadow-[var(--shadow-sm)]">
-                  <h4 className="text-[calc(var(--h4-size)*0.65)] mb-2 text-[var(--highlight-color)]">Be Specific</h4>
-                  <p className="text-[0.75rem] m-0 leading-[1.4]">Clearly state your problem and provide necessary context for better responses.</p>
-                </div>
-                <div className="p-[var(--margin-s)] bg-white rounded-[var(--radius-md)] shadow-[var(--shadow-sm)]">
-                  <h4 className="text-[calc(var(--h4-size)*0.65)] mb-2 text-[var(--highlight-color)]">Break Down Complex Tasks</h4>
-                  <p className="text-[0.75rem] m-0 leading-[1.4]">Split complex requests into smaller, more manageable steps for better results.</p>
-                </div>
-                <div className="p-[var(--margin-s)] bg-white rounded-[var(--radius-md)] shadow-[var(--shadow-sm)]">
-                  <h4 className="text-[calc(var(--h4-size)*0.65)] mb-2 text-[var(--highlight-color)]">Iterative Refinement</h4>
-                  <p className="text-[0.75rem] m-0 leading-[1.4]">Follow up with clarifications to refine responses toward your needs.</p>
-                </div>
-                <div className="p-[var(--margin-s)] bg-white rounded-[var(--radius-md)] shadow-[var(--shadow-sm)]">
-                  <h4 className="text-[calc(var(--h4-size)*0.65)] mb-2 text-[var(--highlight-color)]">Memory Overflow</h4>
-                  <p className="text-[0.75rem] m-0 leading-[1.4]">Longer chats may decrease response accuracy.</p>
-                </div>
-              </div>
-              <div className="text-[0.85rem] text-center mt-[var(--margin-m)] opacity-80 italic md:text-[0.8rem] md:mt-[var(--margin-s)] md:px-[var(--margin-s)]">
-                Herma's capabilities shine when your prompts are clear, specific, and provide the right context for your question.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      {/* Gallery Section with Distinct Background */}
-      <div className="w-full mt-16 py-12 px-4 bg-[#f5f7fa] border-t-2 border-b-2 border-[var(--highlight-color)]/20">
-        <div className="max-w-[1200px] mx-auto">
-          <h2 className="text-[var(--h3-size)] mb-8 text-[var(--highlight-color)]">Explore Herma</h2>
-          {/* Simple Scrollable Gallery */}
-          <div className="overflow-x-auto overflow-y-hidden pb-6 hide-scrollbar">
-            <div className="flex gap-6 min-w-max" ref={carouselRef}>
-              {gallerySlides.map((slide, index) => (
-                <div
-                  key={index}
-                  className="w-[480px] bg-white rounded-xl shadow-lg cursor-pointer transition-transform duration-300 overflow-hidden hover:shadow-xl hover:scale-[1.02]"
-                  onClick={() => handleImageClick(slide)}
+        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+            {/* Content Column */}
+            <div className="w-full lg:w-1/2 text-center lg:text-left">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-blue-900 tracking-tight">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600">
+                  Privacy is Power
+                </span>
+              </h1>
+
+              <p className="text-xl md:text-2xl text-[var(--highlight-color)] mb-8 font-light">
+                A local alternative to cloud-based AI
+              </p>
+
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-8">
+                <button 
+                  onClick={handleDownloadClick(osType === 'mac' ? 'mac' : 'windows')} 
+                  className="px-6 py-3 bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 text-white font-medium rounded-lg shadow-lg transform transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-center"
                 >
-                  <div className="relative pt-[56.25%]"> {/* 16:9 aspect ratio */}
-                    <img 
-                      src={slide.image} 
-                      alt={slide.alt} 
-                      className="absolute top-0 left-0 w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="p-4 text-left">
-                    <h3 className="text-lg font-bold text-[var(--highlight-color)] mb-1">{slide.title}</h3>
-                    <p className="text-sm text-gray-700">{slide.description}</p>
-                  </div>
+                  {osType === 'mac' ? (
+                    <><span className="mr-2 text-xl">⌘</span> Download for Mac</>
+                  ) : osType === 'windows' ? (
+                    <><span className="mr-2 text-xl">⊞</span> Download for Windows</>
+                  ) : (
+                    <><span className="mr-2 text-xl">↓</span> Download Herma</>
+                  )}
+                </button>
+                
+                <Link 
+                  to="#tutorial" 
+                  className="px-6 py-3 bg-transparent border border-blue-600 text-blue-600 font-medium rounded-lg transition-all duration-300 ease-in-out hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection('tutorial');
+                  }}
+                >
+                  Learn More
+                </Link>
+              </div>
+
+              <p className="text-sm text-blue-800/70 mb-2">
+                By downloading, you agree to our <a href="/privacy-policy" onClick={(e) => handleNavigation('/privacy-policy', e)} className="underline hover:text-blue-800">License</a> and <a href="/terms-of-service" onClick={(e) => handleNavigation('/terms-of-service', e)} className="underline hover:text-blue-800">Terms of Service</a>.
+              </p>
+              
+              <p className="text-sm text-blue-800/70">
+                {osType === 'mac' ? 'Available for macOS' : osType === 'windows' ? 'Available for Windows' : 'Available for Windows and macOS'} • Runs entirely locally • Completely Private
+              </p>
+            </div>
+
+            {/* Image Column with Carousel */}
+            <div className="w-full lg:w-1/2 relative">
+              {/* Decorative elements */}
+              <div className="absolute -top-4 -right-4 w-20 h-20 bg-[var(--highlight-color)] rounded-full opacity-40 animate-pulse"></div>
+              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-[var(--secondary-bg)] rounded-full opacity-40 animate-pulse" style={{animationDelay: "1s"}}></div>
+              <div className="relative overflow-hidden rounded-xl shadow-2xl bg-white p-2">
+                <div className="relative">
+                  {gallerySlides.map((slide, index) => (
+                    <div 
+                      key={index} 
+                      className={`transition-all duration-500 ease-in-out ${index === activeSlide ? "opacity-100" : "opacity-0 absolute top-0 left-0"}`}
+                    >
+                      <div className="relative pt-[56.25%]">
+                        <img 
+                          src={slide.image} 
+                          alt={slide.alt} 
+                          className="absolute top-0 left-0 w-full h-full object-cover rounded"
+                          onClick={() => handleImageClick(slide)}
+                        />
+                      </div>
+                      <div className="py-3 px-2 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-b">
+                        <h3 className="text-lg font-bold text-blue-900">{slide.title}</h3>
+                        <p className="text-sm text-blue-700">{slide.description}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+
+                {/* Carousel Navigation */}
+                <div className="absolute bottom-14 left-0 right-0 flex justify-center gap-2 p-2">
+                  {gallerySlides.map((_, index) => (
+                    <button
+                      key={index}
+                      className={`w-2.5 h-2.5 rounded-full transition-all ${
+                        index === activeSlide 
+                          ? "bg-blue-600 w-6" 
+                          : "bg-blue-300 hover:bg-blue-400"
+                      }`}
+                      onClick={() => setActiveSlide(index)}
+                      aria-label={`Go to slide ${index + 1}`}
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      
-      {/* Enlarged Image Modal - Image Only */}
+      </section>
+
+      {/* Info Sections */}
+      <section className="py-16 bg-white" id="features">
+        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-blue-900 mb-4">Everything You Need to Know</h2>
+            <p className="text-lg text-blue-600 max-w-2xl mx-auto">
+              Get started with Herma and experience private AI on your device
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* System Requirements Card */}
+            <div className={`bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 ${requirementsOpen ? 'h-auto' : 'h-[4.5rem]'}`}>
+              <div 
+                className="bg-[var(--secondary-bg)] px-6 py-4 cursor-pointer flex justify-between items-center"
+                onClick={toggleRequirements}
+                style={{ borderRadius: requirementsOpen ? '0.75rem 0.75rem 0 0' : '0.75rem' }}
+              >
+                <h3 className="text-xl font-semibold text-white">System Requirements</h3>
+                <span className="text-white text-sm bg-white/20 w-8 h-8 rounded-full flex items-center justify-center">
+                  {requirementsOpen ? "−" : "+"}
+                </span>
+              </div>
+              
+              <div className={`transition-all duration-300 ${requirementsOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
+                <div className="p-6">
+                  <div className="grid sm:grid-cols-2 gap-4 mb-6">
+                    <div className="bg-blue-50 p-4 rounded-lg">
+                      <h4 className="font-semibold text-blue-900 mb-2">Processor</h4>
+                      <p className="text-sm text-blue-700">Modern CPU (Intel i5/AMD Ryzen 5 or higher)</p>
+                    </div>
+                    <div className="bg-blue-50 p-4 rounded-lg">
+                      <h4 className="font-semibold text-blue-900 mb-2">Memory</h4>
+                      <p className="text-sm text-blue-700">16GB RAM minimum, 32GB recommended for complex tasks</p>
+                    </div>
+                    <div className="bg-blue-50 p-4 rounded-lg">
+                      <h4 className="font-semibold text-blue-900 mb-2">Graphics</h4>
+                      <p className="text-sm text-blue-700">GPU with CUDA support recommended for best performance</p>
+                    </div>
+                    <div className="bg-blue-50 p-4 rounded-lg">
+                      <h4 className="font-semibold text-blue-900 mb-2">Storage</h4>
+                      <p className="text-sm text-blue-700">20GB available disk space for model and dependencies</p>
+                    </div>
+                  </div>
+                  <div className="text-sm text-center text-blue-600 italic">
+                    Herma uses Llama 3.2:1B technology to deliver AI capabilities directly on your device without sending your data to the cloud.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Tips Card */}
+            <div className={`bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 ${tipsOpen ? 'h-auto' : 'h-[4.5rem]'}`}>
+              <div 
+                className="bg-[var(--secondary-bg)] px-6 py-4 cursor-pointer flex justify-between items-center"
+                onClick={toggleTips}
+                style={{ borderRadius: tipsOpen ? '0.75rem 0.75rem 0 0' : '0.75rem' }}
+              >
+                <h3 className="text-xl font-semibold text-white">Tips for Herma</h3>
+                <span className="text-white text-sm bg-white/20 w-8 h-8 rounded-full flex items-center justify-center">
+                  {tipsOpen ? "−" : "+"}
+                </span>
+              </div>
+              
+              <div className={`transition-all duration-300 ${tipsOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
+                <div className="p-6">
+                  <div className="grid sm:grid-cols-2 gap-4 mb-6">
+                    <div className="bg-indigo-50 p-4 rounded-lg">
+                      <h4 className="font-semibold text-indigo-900 mb-2">Be Specific</h4>
+                      <p className="text-sm text-indigo-700">Clearly state your problem and provide necessary context for better responses.</p>
+                    </div>
+                    <div className="bg-indigo-50 p-4 rounded-lg">
+                      <h4 className="font-semibold text-indigo-900 mb-2">Break Down Complex Tasks</h4>
+                      <p className="text-sm text-indigo-700">Split complex requests into smaller, more manageable steps for better results.</p>
+                    </div>
+                    <div className="bg-indigo-50 p-4 rounded-lg">
+                      <h4 className="font-semibold text-indigo-900 mb-2">Iterative Refinement</h4>
+                      <p className="text-sm text-indigo-700">Follow up with clarifications to refine responses toward your needs.</p>
+                    </div>
+                    <div className="bg-indigo-50 p-4 rounded-lg">
+                      <h4 className="font-semibold text-indigo-900 mb-2">Memory Overflow</h4>
+                      <p className="text-sm text-indigo-700">Longer chats may decrease response accuracy.</p>
+                    </div>
+                  </div>
+                  <div className="text-sm text-center text-indigo-600 italic">
+                    Herma's capabilities shine when your prompts are clear, specific, and provide the right context for your question.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* CTA Section */}
+          <div className="mt-16 text-center">
+            <div className="inline-block bg-gradient-to-r from-blue-100 to-indigo-100 p-8 rounded-xl shadow-sm">
+              <h3 className="text-2xl font-bold text-blue-900 mb-4">Ready to experience AI with privacy?</h3>
+              <button 
+                onClick={handleDownloadClick(osType === 'mac' ? 'mac' : 'windows')} 
+                className="px-8 py-4 bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 text-white font-medium rounded-lg shadow-lg transform transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+              >
+                Download Herma Now
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Enlarged Image Modal */}
       {enlargedImage && (
         <div 
           className="fixed top-0 left-0 w-full h-full bg-black/90 flex items-center justify-center z-50 p-4"
           onClick={closeEnlargedImage}
         >
           <div 
-            className="relative max-w-[95%] max-h-[95%] overflow-hidden"
-            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking on the content
+            className="relative max-w-4xl w-full rounded-lg overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
           >
             <button 
-              className="absolute top-4 right-4 bg-black/50 text-white w-10 h-10 rounded-full flex items-center justify-center z-10 text-xl hover:bg-black/80"
+              className="absolute top-4 right-4 bg-black/50 text-white w-10 h-10 rounded-full flex items-center justify-center z-10 hover:bg-black/80 transition-colors"
               onClick={closeEnlargedImage}
             >
               ✕
@@ -606,46 +356,16 @@ const Hero = () => {
             <img 
               src={enlargedImage.image} 
               alt={enlargedImage.alt} 
-              className="w-full h-auto max-h-[95vh] object-contain"
+              className="w-full h-auto max-h-[80vh] object-contain"
             />
+            <div className="absolute bottom-0 left-0 right-0 bg-black/70 text-white p-4">
+              <h3 className="text-xl font-bold">{enlargedImage.title}</h3>
+              <p>{enlargedImage.description}</p>
+            </div>
           </div>
         </div>
       )}
-      
-      {/* Add the CSS animations and hide scrollbar styles */}
-      <style jsx>{`
-        @keyframes fadeInDown {
-          from {
-            opacity: 0;
-            transform: translateY(-20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        
-        .hide-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
-    </section>
+    </div>
   );
 };
 

@@ -62,6 +62,7 @@ body {
 
 /* Policy.css */
 .policy-container {
+  margin-top: 3rem;
   padding: var(--margin-xl, 3rem) 0;
   min-height: 70vh;
 }
