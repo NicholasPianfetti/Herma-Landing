@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import HermaLogo from './Herma.jpeg';
 import handleDownload from './handleDownload';
+import MenuOverlay from './MenuOverlay'; // Import the new menu overlay component
 
 const Header = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [osType, setOsType] = useState('unknown');
+  const [menuOpen, setMenuOpen] = useState(false); // Menu state
   
   // Detect OS on component mount
   useEffect(() => {
@@ -51,8 +52,31 @@ const Header = () => {
     };
   }, [scrolled]);
 
+  // Close menu on window resize
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  // Make sure menu is closed when component mounts
+  useEffect(() => {
+    setMenuOpen(false);
+  }, []);
+
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
+  };
+
+  const closeMenu = () => {
+    setMenuOpen(false);
   };
 
   const scrollToSection = (id) => {
@@ -60,23 +84,24 @@ const Header = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-    setMenuOpen(false);
+    closeMenu();
   };
   
   const handleDownloadClick = () => {
     handleDownload(osType === 'mac' ? 'mac' : 'windows');
+    closeMenu();
   };
 
   return (
     <>
       <header 
-        className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-sm transition-all duration-300 w-full 
+        className={`fixed top-0 left-0 right-0 z-40 backdrop-blur-sm transition-all duration-300 w-full 
         ${scrolled 
           ? 'py-2 bg-[var(--primary-bg)]/95 shadow-lg' 
           : 'py-4 bg-[var(--primary-bg)]/80'
         }`}
       >
-        <div className="w-full px-6 lg:px-8 mx-auto max-w-[1400px]">
+        <div className="w-full px-4 sm:px-6 lg:px-8 mx-auto max-w-[1400px]">
           <div className="flex justify-between items-center">
             {/* Logo */}
             <div className="flex items-center relative z-10">
@@ -85,7 +110,7 @@ const Header = () => {
                 className="flex items-center group"
                 aria-label="Home"
               >
-                <div className={`h-10 w-10 overflow-hidden rounded-lg mr-3 shadow-sm transition-all duration-300 
+                <div className={`h-8 w-8 sm:h-10 sm:w-10 overflow-hidden rounded-lg mr-2 sm:mr-3 shadow-sm transition-all duration-300 
                   group-hover:shadow-lg ${scrolled ? 'scale-90' : ''}`}>
                   <img 
                     src={HermaLogo} 
@@ -95,11 +120,11 @@ const Header = () => {
                 </div>
                 <div className="flex flex-col items-start">
                   <span className={`font-bold tracking-wide transition-all duration-300
-                    ${scrolled ? 'text-xl' : 'text-2xl'}`}>
+                    ${scrolled ? 'text-lg sm:text-xl' : 'text-xl sm:text-2xl'}`}>
                     <span className="text-[var(--highlight-color)]">HΞRMΛ</span>
                   </span>
                   {!scrolled && (
-                    <span className="text-xs text-blue-800/60 font-medium -mt-1">
+                    <span className="hidden sm:inline-block text-xs text-blue-800/60 font-medium -mt-1">
                       Local AI Assistant
                     </span>
                   )}
@@ -107,35 +132,38 @@ const Header = () => {
               </Link>
             </div>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-2">
-              <div className="px-4 py-1.5 bg-[var(--secondary-bg)]/20 rounded-full flex items-center mr-2">
-                <Link 
-                  to="#features" 
-                  className="px-4 py-1 rounded-full text-[var(--text-color)] hover:text-[var(--highlight-color)] hover:bg-[var(--secondary-bg)]/40 transition-colors duration-200"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection('features');
-                  }}
-                >
-                  Features
-                </Link>
-                <Link 
-                  to="#about" 
-                  className="px-4 py-1 rounded-full text-[var(--text-color)] hover:text-[var(--highlight-color)] hover:bg-[var(--secondary-bg)]/40 transition-colors duration-200"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection('about');
-                  }}
-                >
-                  About
-                </Link>
-              </div>
+            {/* Desktop Navigation and Mobile Menu Toggle */}
+            <div className="flex items-center gap-2">
+              {/* Desktop Navigation */}
+              <nav className="hidden md:flex items-center gap-2">
+                <div className="px-4 py-1.5 bg-[var(--secondary-bg)]/20 rounded-full flex items-center mr-2">
+                  <Link 
+                    to="#features" 
+                    className="px-4 py-1 rounded-full text-[var(--text-color)] hover:text-[var(--highlight-color)] hover:bg-[var(--secondary-bg)]/40 transition-colors duration-200"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection('features');
+                    }}
+                  >
+                    Features
+                  </Link>
+                  <Link 
+                    to="#about" 
+                    className="px-4 py-1 rounded-full text-[var(--text-color)] hover:text-[var(--highlight-color)] hover:bg-[var(--secondary-bg)]/40 transition-colors duration-200"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection('about');
+                    }}
+                  >
+                    About
+                  </Link>
+                </div>
+              </nav>
               
-              {/* Download Button with OS Detection */}
+              {/* Download Button */}
               <button 
                 onClick={handleDownloadClick}
-                className="px-5 py-2 bg-blue-900 text-white font-medium rounded-full shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 flex items-center gap-2 group"
+                className="hidden sm:flex px-5 py-2 bg-blue-900 text-white font-medium rounded-full shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 items-center gap-2 group"
               >
                 <span className="text-sm text-white/90 group-hover:text-white transition-colors">
                   Download
@@ -148,94 +176,29 @@ const Header = () => {
                       : '↓'}
                 </span>
               </button>
-            </nav>
-
-            {/* Mobile menu button */}
-            <div className="md:hidden relative z-10">
+              
+              {/* Mobile Menu Button */}
               <button
                 onClick={toggleMenu}
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-[var(--secondary-bg)]/20 text-[var(--highlight-color)] hover:bg-[var(--secondary-bg)]/40 transition-colors focus:outline-none"
+                className="md:hidden w-10 h-10 flex items-center justify-center rounded-full bg-[var(--secondary-bg)]/20 text-[var(--highlight-color)] hover:bg-[var(--secondary-bg)]/40 transition-colors focus:outline-none"
                 aria-expanded={menuOpen}
+                aria-label={menuOpen ? 'Close menu' : 'Open menu'}
               >
-                <span className="sr-only">
-                  {menuOpen ? 'Close menu' : 'Open menu'}
-                </span>
-                {!menuOpen ? (
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                  </svg>
-                ) : (
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                )}
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
               </button>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Mobile menu overlay */}
-      <div 
-        className={`fixed inset-0 bg-black/20 backdrop-blur-sm z-40 transition-opacity duration-300 md:hidden
-        ${menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
-        onClick={toggleMenu}
-      ></div>
-
-      {/* Mobile menu panel */}
-      <div 
-        className={`fixed top-0 right-0 bottom-0 w-64 bg-[var(--primary-bg)] shadow-xl z-50 transform transition-transform duration-300 ease-in-out md:hidden
-        ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`}
-      >
-        <div className="p-5 flex flex-col h-full">
-          <div className="flex justify-between items-center mb-8">
-            <span className="text-xl font-bold text-[var(--highlight-color)]">Menu</span>
-            <button
-              onClick={toggleMenu}
-              className="w-8 h-8 flex items-center justify-center rounded-full bg-[var(--secondary-bg)]/20 text-[var(--highlight-color)]"
-            >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-
-          <nav className="flex flex-col gap-3">
-            <Link 
-              to="#features" 
-              className="px-4 py-2 rounded-lg bg-[var(--secondary-bg)]/10 hover:bg-[var(--secondary-bg)]/30 text-[var(--text-color)] transition-colors"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection('features');
-              }}
-            >
-              Features
-            </Link>
-            <Link 
-              to="#about" 
-              className="px-4 py-2 rounded-lg bg-[var(--secondary-bg)]/10 hover:bg-[var(--secondary-bg)]/30 text-[var(--text-color)] transition-colors"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection('about');
-              }}
-            >
-              About
-            </Link>
-          </nav>
-
-          <div className="mt-auto pt-4 border-t border-[var(--highlight-color)]/10">
-            <button 
-              onClick={handleDownloadClick}
-              className="w-full py-3 bg-[var(--highlight-color)] text-white font-medium rounded-lg flex items-center justify-center gap-2"
-            >
-              <span>Download {osType === 'mac' ? 'for Mac' : osType === 'windows' ? 'for Windows' : 'Herma'}</span>
-              <span className="bg-white/20 w-6 h-6 rounded-full flex items-center justify-center text-sm">
-                {osType === 'mac' ? '⌘' : osType === 'windows' ? '⊞' : '↓'}
-              </span>
-            </button>
-          </div>
-        </div>
-      </div>
+      {/* Menu Overlay - Completely separate from the header */}
+      <MenuOverlay 
+        isOpen={menuOpen} 
+        onClose={closeMenu} 
+        osType={osType} 
+      />
     </>
   );
 };
