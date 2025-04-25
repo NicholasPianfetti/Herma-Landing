@@ -135,7 +135,7 @@ const Hero = () => {
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
             {/* Content Column */}
-            <div className="w-full lg:w-1/2 text-center lg:text-left">
+            <div className="w-full lg:w-1/2 text-center">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-blue-900 tracking-tight">
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600">
                   Privacy is Power
@@ -146,7 +146,7 @@ const Hero = () => {
                 A local alternative to cloud-based AI
               </p>
 
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-8">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
                 <button 
                   onClick={handleDownloadClick(osType === 'mac' ? 'mac' : 'windows')} 
                   className="px-6 py-3 bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 text-white font-medium rounded-lg shadow-lg transform transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-center"
@@ -171,13 +171,13 @@ const Hero = () => {
                   Learn More
                 </Link>
               </div>
-
-              <p className="text-sm text-blue-800/70 mb-2">
-                By downloading, you agree to our <a href="/privacy-policy" onClick={(e) => handleNavigation('/privacy-policy', e)} className="underline hover:text-blue-800">License</a> and <a href="/terms-of-service" onClick={(e) => handleNavigation('/terms-of-service', e)} className="underline hover:text-blue-800">Terms of Service</a>.
-              </p>
               
               <p className="text-sm text-blue-800/70">
-                {osType === 'mac' ? 'Available for macOS' : osType === 'windows' ? 'Available for Windows' : 'Available for Windows and macOS'} • Runs entirely locally • Completely Private
+                {osType === 'mac' ? 'Available for Mac' : osType === 'windows' ? 'Available for Windows' : 'Available for Windows and macOS'} • Completely Private • No internet needed
+              </p>
+
+              <p className="text-[0.75rem] text-blue-800/70 mb-2">
+                By downloading, you agree to our <a href="/privacy-policy" onClick={(e) => handleNavigation('/privacy-policy', e)} className="underline hover:text-blue-800">License</a> and <a href="/terms-of-service" onClick={(e) => handleNavigation('/terms-of-service', e)} className="underline hover:text-blue-800">Terms of Service</a>.
               </p>
             </div>
 
@@ -248,7 +248,7 @@ const Hero = () => {
                 onClick={toggleRequirements}
                 style={{ borderRadius: requirementsOpen ? '0.75rem 0.75rem 0 0' : '0.75rem' }}
               >
-                <h3 className="text-xl font-semibold text-white">System Requirements</h3>
+                <h3 className="text-xl font-semibold text-white">System Suggestions</h3>
                 <span className="text-white text-sm bg-white/20 w-8 h-8 rounded-full flex items-center justify-center">
                   {requirementsOpen ? "−" : "+"}
                 </span>
@@ -288,7 +288,7 @@ const Hero = () => {
                 onClick={toggleTips}
                 style={{ borderRadius: tipsOpen ? '0.75rem 0.75rem 0 0' : '0.75rem' }}
               >
-                <h3 className="text-xl font-semibold text-white">Tips for Herma</h3>
+                <h3 className="text-xl font-semibold text-white">Helpful Tips</h3>
                 <span className="text-white text-sm bg-white/20 w-8 h-8 rounded-full flex items-center justify-center">
                   {tipsOpen ? "−" : "+"}
                 </span>
@@ -299,23 +299,23 @@ const Hero = () => {
                   <div className="grid sm:grid-cols-2 gap-4 mb-6">
                     <div className="bg-indigo-50 p-4 rounded-lg">
                       <h4 className="font-semibold text-indigo-900 mb-2">Be Specific</h4>
-                      <p className="text-sm text-indigo-700">Clearly state your problem and provide necessary context for better responses.</p>
+                      <p className="text-sm text-indigo-700">Clearly state your problem and provide extra context for better responses.</p>
                     </div>
                     <div className="bg-indigo-50 p-4 rounded-lg">
-                      <h4 className="font-semibold text-indigo-900 mb-2">Break Down Complex Tasks</h4>
+                      <h4 className="font-semibold text-indigo-900 mb-2">Break Down Tasks</h4>
                       <p className="text-sm text-indigo-700">Split complex requests into smaller, more manageable steps for better results.</p>
                     </div>
                     <div className="bg-indigo-50 p-4 rounded-lg">
-                      <h4 className="font-semibold text-indigo-900 mb-2">Iterative Refinement</h4>
-                      <p className="text-sm text-indigo-700">Follow up with clarifications to refine responses toward your needs.</p>
+                      <h4 className="font-semibold text-indigo-900 mb-2">Follow-up Questions</h4>
+                      <p className="text-sm text-indigo-700">Follow up with clarifications to guide responses toward your needs.</p>
                     </div>
                     <div className="bg-indigo-50 p-4 rounded-lg">
-                      <h4 className="font-semibold text-indigo-900 mb-2">Memory Overflow</h4>
+                      <h4 className="font-semibold text-indigo-900 mb-2">Short Memory</h4>
                       <p className="text-sm text-indigo-700">Longer chats may decrease response accuracy.</p>
                     </div>
                   </div>
                   <div className="text-sm text-center text-indigo-600 italic">
-                    Herma's capabilities shine when your prompts are clear, specific, and provide the right context for your question.
+                    Herma shines when you are clear, specific, and provide the right context for your question.
                   </div>
                 </div>
               </div>
@@ -325,12 +325,12 @@ const Hero = () => {
           {/* CTA Section */}
           <div className="mt-16 text-center">
             <div className="inline-block bg-gradient-to-r from-blue-100 to-indigo-100 p-8 rounded-xl shadow-sm">
-              <h3 className="text-2xl font-bold text-blue-900 mb-4">Ready to experience AI with privacy?</h3>
+              <h3 className="text-2xl font-bold text-blue-900 mb-4">Ready to experience private AI?</h3>
               <button 
                 onClick={handleDownloadClick(osType === 'mac' ? 'mac' : 'windows')} 
                 className="px-8 py-4 bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 text-white font-medium rounded-lg shadow-lg transform transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
               >
-                Download Herma Now
+                Download Herma Today
               </button>
             </div>
           </div>

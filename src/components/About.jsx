@@ -24,7 +24,7 @@ const About = () => {
         </svg>
       ),
       title: "Private",
-      description: "Your conversations and documents stay on your device. No information leaves your control. Your privacy is our priority."
+      description: "Your conversations and documents stay on your device. No information leaves your control."
     },
     {
       id: 5,
@@ -33,8 +33,8 @@ const About = () => {
           <path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/>
         </svg>
       ),
-      title: "Low Latency",
-      description: "Herma runs locally, so you can get fast responses without the need for an internet connection. No more waiting for cloud processing."
+      title: "WIFI Free",
+      description: "Herma runs locally, so you can get fast responses without the need for an internet connection."
     },
     {
       id: 6,
@@ -43,8 +43,8 @@ const About = () => {
           <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
         </svg>
       ),
-      title: "Large Context",
-      description: "Herma can handle large documents and conversations, making it easy to analyze and summarize complex information."
+      title: "Upload Documents",
+      description: "Herma can handle large documents, making it easy to analyze and summarize complex information."
     }
   ];
 
@@ -58,7 +58,7 @@ const About = () => {
         </svg>
       ),
       title: "Clear Analysis",
-      description: "Retrieval augmented generated context from documents, memory, and more allows Herma to provide accurate and efficient responses."
+      description: "Context from documents, memory, and more allows Herma to provide accurate and efficient responses."
     },
     {
       id: 2,
@@ -68,7 +68,7 @@ const About = () => {
         </svg>
       ),
       title: "Smart Conversations",
-      description: "Herma combines local LLMs with powerful memory to have helpful conversations about complex topics."
+      description: "Herma combines local LLMs with powerful memory to have helpful conversations."
     },
     {
       id: 3,
@@ -78,7 +78,7 @@ const About = () => {
         </svg>
       ),
       title: "Fully Personalized",
-      description: "Herma learns from your documents and conversations, allowing it to provide personalized responses and suggestions."
+      description: "Herma learns from your documents and conversations, allowing it to provide personalized responses."
     },
   ];
 
@@ -95,7 +95,7 @@ const About = () => {
         {/* Section Header with Decorative Elements */}
         <div className="relative mb-16 text-center">
           <div className="absolute top-1/2 left-0 w-full h-px bg-[var(--highlight-color)]/20 -z-10"></div>
-          <h2 className="inline-block bg-gradient-to-r from-[var(--primary-bg)] to-[var(--primary-bg)] px-8 text-4xl font-bold relative z-10">
+          <h2 className="inline-block bg-gradient-to-r from-[var(--primary-bg)] to-[var(--primary-bg)] px-8 text-4xl font-bold relative z-10 rounded-xl">
             About <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--highlight-color)] to-[var(--highlight-color)] font-bold">HΞRMΛ</span>
           </h2>
         </div>
@@ -103,12 +103,12 @@ const About = () => {
         {/* Description Block */}
         <div className="max-w-3xl mx-auto mb-16">
           <p className="text-center text-lg text-[var(--text-color)] leading-relaxed">
-            Herma is an intelligent assistant that helps you find answers, analyze documents, and get things done privately. 
-            Currently, you have two choices when using private data with LLMs: 
-            either expose private information to the cloud or use custom locally run LLMs that are expensive, complex, and lack the capabilities of cloud-based models. 
+            When you use AI with your personal data, you typically face a difficult choice: either send your private information 
+            to cloud services or struggle with complicated local solutions that don't work as well.
           </p>
           <p className="text-center text-lg text-[var(--text-color)] leading-relaxed mt-4">
-            By creating a federated data ecosystem for local AI, we aim to lower costs, expand accessibility, and bring the capabilities of cloud-based AI to a local system.
+          Herma gives you the best of both worlds- powerful AI capabilities that run entirely on your device. 
+            We're making private AI usable, affordable, and accessible to everyone.
           </p>
         </div>
         
@@ -157,9 +157,9 @@ const About = () => {
         {/* Final CTA Banner */}
         <div className="mt-24 text-center">
           <div className="bg-[var(--highlight-color)] rounded-xl py-10 px-8 shadow-xl">
-            <h3 className="text-2xl font-bold text-white mb-4">Experience the Power of Local AI</h3>
-            <p className="text-[var(--secondary-bg)]/90 mb-8 max-w-2xl mx-auto">
-              Join us in building a future where powerful AI is available to everyone, without compromising on privacy or performance.
+            <h3 className="text-2xl font-bold text-white mb-2">Experience the Power of Local AI</h3>
+            <p className="text-[var(--secondary-bg)]/90 mb-2 max-w-2xl mx-auto">
+              Join us in building a future where local AI is powerful and private.
             </p>
             <button onClick={handleDownloadClick(osType === 'mac' ? 'mac' : 'windows')}  className="px-8 py-3 bg-[var(--button-hover)] text-[var(--highlight-color)] font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               Download Now

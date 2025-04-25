@@ -10,13 +10,13 @@ const FAQ = () => {
     },
     {
       id: 2,
-      question: "Do I need an internet connection to use Herma?",
+      question: "Do I need internet to use Herma?",
       answer: "No, Herma works completely offline. Once installed, you can use all of Herma's features without an internet connection. This makes it perfect for working with sensitive data or in environments where connectivity is limited or unavailable."
     },
     {
       id: 3,
       question: "How does Herma compare to cloud-based AI assistants?",
-      answer: "While cloud-based AI assistants may offer more extensive features due to their access to larger models, Herma provides comparable functionality with the added benefit of complete privacy. Herma is optimized to run efficiently on consumer hardware while still delivering high-quality responses, document analysis, and creative content generation."
+      answer: "While cloud-based AI assistants may offer access to larger models, Herma provides comparable functionality with the added benefit of complete privacy. Herma is optimized to run efficiently on consumer hardware while still delivering high-quality responses, document analysis, and creative content generation."
     },
     {
       id: 4,
@@ -40,7 +40,7 @@ const FAQ = () => {
     },
     {
       id: 8,
-      question: "Is Herma suitable for business or enterprise use?",
+      question: "Is Herma good for work use?",
       answer: "Absolutely. Herma's privacy-first approach makes it ideal for businesses handling sensitive information. With no data leaving your devices, you can confidently use Herma for proprietary research, financial analysis, customer data processing, and other sensitive tasks without privacy concerns."
     }
   ];
@@ -65,7 +65,7 @@ const FAQ = () => {
         </div>
 
         {/* FAQ Accordion */}
-        <div className="space-y-4">
+        <div className="space-y-4 bg-[var(--secondary-bg)] p-6 rounded-lg shadow-lg">
           {faqItems.map((item) => (
             <div 
               key={item.id} 

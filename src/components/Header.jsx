@@ -101,7 +101,7 @@ const Header = () => {
           : 'py-4 bg-[var(--primary-bg)]/80'
         }`}
       >
-        <div className="w-full px-4 sm:px-6 lg:px-8 mx-auto max-w-[1400px]">
+        <div className="w-full px-6 sm:px-8 lg:px-12">
           <div className="flex justify-between items-center">
             {/* Logo */}
             <div className="flex items-center relative z-10">
