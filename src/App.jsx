@@ -13,7 +13,9 @@ import ReactGA from 'react-ga4';
 import FAQ from './components/FAQ';
 import HowToUse from './components/HowToUse';
 import Contact from './components/Contact';
+import { initializeAnalytics, trackAppUsers } from './utils/analytics';
 
+initializeAnalytics();
 // Initialize with enhanced configuration options
 ReactGA.initialize('G-FSS7V9WPY5', {
   debug: process.env.NODE_ENV === 'development', // Enable debug mode in development
@@ -35,16 +37,18 @@ const RouteTracker = () => {
   const location = useLocation();
   
   useEffect(() => {
-    // Capture detailed page information
+    // Track app users on each page change
+    trackAppUsers();
+    
+    // Rest of your existing tracking code...
     ReactGA.send({
       hitType: "pageview",
       page: location.pathname,
       title: document.title,
       location: window.location.href,
-      dimension1: window.innerWidth <= 768 ? 'mobile' : 'desktop' // Custom dimension for device type
+      dimension1: window.innerWidth <= 768 ? 'mobile' : 'desktop'
     });
     
-    // Log navigation as events too (useful for conversion tracking)
     ReactGA.event({
       category: 'Navigation',
       action: 'PageView',

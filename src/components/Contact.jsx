@@ -1,6 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import ReactGA from 'react-ga4';
 import emailjs from '@emailjs/browser';
+import { trackConversion } from '../utils/analytics';
 
 const Contact = () => {
   // Form state
@@ -19,6 +20,18 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState(false);
+  
+  // Check if user is from app on component mount
+  const [isAppUser, setIsAppUser] = useState(false);
+  
+  useEffect(() => {
+    // Check if user came from app or is marked as an app user
+    const urlParams = new URLSearchParams(window.location.search);
+    const fromApp = urlParams.get('utm_source') === 'herma_app';
+    const storedAppUser = localStorage.getItem('appUser') === 'true';
+    
+    setIsAppUser(fromApp || storedAppUser);
+  }, []);
   
   // Available subject options
   const subjectOptions = [
@@ -98,16 +111,17 @@ const Contact = () => {
     
     try {
       // Send email using EmailJS
-      // Replace these IDs with your actual EmailJS service, template, and user IDs
-      // You'll get these when you set up EmailJS
       const result = await emailjs.sendForm(
-        'service_eqqo6n9', // Replace with your service ID
-        'template_09owcap', // Replace with your template ID 
+        'service_eqqo6n9',
+        'template_09owcap',
         form.current,
-        'fdlfNIrca3C4488jB' // Replace with your public key
+        'fdlfNIrca3C4488jB'
       );
       
       console.log('Email successfully sent!', result.text);
+      
+      // Track conversion with app user distinction
+      trackConversion('Contact Form Submission');
       
       // Reset form after successful submission
       setFormData({
@@ -123,7 +137,9 @@ const Contact = () => {
       ReactGA.event({
         category: 'Contact',
         action: 'FormSubmitSuccess',
-        label: formData.subject
+        label: formData.subject,
+        // Add additional dimension to track app users
+        appUser: isAppUser ? 'true' : 'false'
       });
       
     } catch (error) {
