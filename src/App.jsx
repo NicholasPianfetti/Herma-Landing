@@ -12,6 +12,7 @@ import Attributions from './pages/Attributions';
 import ReactGA from 'react-ga4';
 import FAQ from './components/FAQ';
 import HowToUse from './components/HowToUse';
+import Contact from './components/Contact';
 
 // Initialize with enhanced configuration options
 ReactGA.initialize('G-FSS7V9WPY5', {
@@ -84,6 +85,7 @@ const Home = () => {
       <Hero />
       <About />
       <HowToUse />
+      <Contact />
       <FAQ />
     </>
   );
