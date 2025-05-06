@@ -12,7 +12,7 @@ const Hero = () => {
   const [enlargedImage, setEnlargedImage] = useState(null);
   const [osType, setOsType] = useState('unknown');
   const [activeSlide, setActiveSlide] = useState(0);
-  
+
   // Detect OS on component mount
   useEffect(() => {
     const detectOS = () => {
@@ -123,71 +123,89 @@ const Hero = () => {
   };
 
   return (
-    <div className="bg-gradient-to-b from-blue-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white overflow-hidden">
       {/* Hero Section */}
-      <section className="w-full pt-24 pb-12 overflow-hidden relative">
-        {/* Background Patterns */}
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
-          <div className="absolute top-0 left-0 w-full h-full bg-repeat opacity-30" 
+      <section className="relative w-full min-h-screen flex items-center justify-center pt-16 pb-24 overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-[var(--highlight-color)] opacity-5 rounded-bl-full transform -translate-y-1/4 translate-x-1/4"></div>
+          <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-indigo-500 opacity-5 rounded-tr-full transform translate-y-1/4 -translate-x-1/4"></div>
+          <div className="absolute top-0 left-0 w-full h-full bg-repeat opacity-30 pointer-events-none"
                style={{backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSIjMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoNDB2NDBoLTQweiIgZmlsbD0ibm9uZSIvPjxjaXJjbGUgY3g9IjIwIiBjeT0iMjAiIHI9IjEiLz48L2c+PC9zdmc+')"}}></div>
         </div>
 
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
-            {/* Content Column */}
-            <div className="w-full lg:w-1/2 text-center">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-blue-900 tracking-tight">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600">
-                  Privacy is Power
-                </span>
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
+            {/* Text Column */}
+            <div className="w-full lg:w-1/2 text-center lg:text-left">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 leading-tight">
+                Privacy is Power
               </h1>
-
-              <p className="text-xl md:text-2xl text-[var(--highlight-color)] mb-8 font-light">
+              
+              <p className="text-xl md:text-2xl text-blue-800 mb-6 font-light max-w-xl mx-auto lg:mx-0">
                 A local alternative to cloud-based AI
               </p>
+              
+              <p className="text-lg text-blue-700 mb-8 max-w-lg mx-auto lg:mx-0">
+                Take the short way. All your data stays on your device.
+              </p>
 
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-6">
                 <button 
                   onClick={handleDownloadClick(osType === 'mac' ? 'mac' : 'windows')} 
-                  className="px-6 py-3 bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 text-white font-medium rounded-lg shadow-lg transform transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-center"
+                  className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 text-white font-semibold rounded-lg shadow-xl hover:shadow-2xl transform transition duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[var(--highlight-color)] focus:ring-opacity-50"
                 >
                   {osType === 'mac' ? (
-                    <><span className="mr-2 text-xl">⌘</span> Download for Mac</>
+                    <span className="flex items-center justify-center">
+                      <span className="mr-2 text-xl">⌘</span> Download for Mac
+                    </span>
                   ) : osType === 'windows' ? (
-                    <><span className="mr-2 text-xl">⊞</span> Download for Windows</>
+                    <span className="flex items-center justify-center">
+                      <span className="mr-2 text-xl">⊞</span> Download for Windows
+                    </span>
                   ) : (
-                    <><span className="mr-2 text-xl">↓</span> Download Herma</>
+                    <span className="flex items-center justify-center">
+                      <span className="mr-2 text-xl">↓</span> Download Herma
+                    </span>
                   )}
                 </button>
                 
                 <Link 
                   to="#tutorial" 
-                  className="px-6 py-3 bg-transparent border border-blue-600 text-blue-600 font-medium rounded-lg transition-all duration-300 ease-in-out hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                  className="w-full sm:w-auto px-8 py-4 bg-white border-2 border-[var(--highlight-color)] text-[var(--highlight-color)] font-semibold rounded-lg transition duration-300 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
                   onClick={(e) => {
                     e.preventDefault();
-                    scrollToSection('tutorial');
+                    scrollToSection('features');
                   }}
                 >
                   Learn More
                 </Link>
               </div>
               
-              <p className="text-sm text-blue-800/70">
+              <p className="text-sm text-blue-800/70 mb-2">
                 {osType === 'mac' ? 'Available for Mac' : osType === 'windows' ? 'Available for Windows' : 'Available for Windows and macOS'} • Completely Private • No internet needed
               </p>
 
-              <p className="text-[0.75rem] text-blue-800/70 mb-2">
+              <p className="text-[0.75rem] text-blue-800/70">
                 By downloading, you agree to our <a href="/privacy-policy" onClick={(e) => handleNavigation('/privacy-policy', e)} className="underline hover:text-blue-800">License</a> and <a href="/terms-of-service" onClick={(e) => handleNavigation('/terms-of-service', e)} className="underline hover:text-blue-800">Terms of Service</a>.
               </p>
             </div>
 
-            {/* Image Column with Carousel */}
+            {/* Image Column */}
             <div className="w-full lg:w-1/2 relative">
-              {/* Decorative elements */}
-              <div className="absolute -top-4 -right-4 w-20 h-20 bg-[var(--highlight-color)] rounded-full opacity-40 animate-pulse"></div>
-              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-[var(--secondary-bg)] rounded-full opacity-40 animate-pulse" style={{animationDelay: "1s"}}></div>
-              <div className="relative overflow-hidden rounded-xl shadow-2xl bg-white p-2">
-                <div className="relative">
+              <div className="absolute -top-16 -right-16 w-64 h-64 bg-[var(--highlight-color)] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
+              <div className="absolute -bottom-16 -left-16 w-64 h-64 bg-indigo-600 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
+              
+              {/* App Preview Frame */}
+              <div className="relative rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 p-1 shadow-2xl">
+                <div className="absolute top-0 left-0 right-0 h-8 bg-gray-800 rounded-t-2xl flex items-center px-4">
+                  <div className="flex space-x-2">
+                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                  </div>
+                </div>
+                <div className="bg-white rounded-b-xl pt-8">
                   {gallerySlides.map((slide, index) => (
                     <div 
                       key={index} 
@@ -197,32 +215,32 @@ const Hero = () => {
                         <img 
                           src={slide.image} 
                           alt={slide.alt} 
-                          className="absolute top-0 left-0 w-full h-full object-cover rounded"
+                          className="absolute top-0 left-0 w-full h-full object-cover cursor-pointer"
                           onClick={() => handleImageClick(slide)}
                         />
                       </div>
-                      <div className="py-3 px-2 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-b">
+                      <div className="py-4 px-6 bg-gradient-to-r from-blue-50 to-indigo-50">
                         <h3 className="text-lg font-bold text-blue-900">{slide.title}</h3>
                         <p className="text-sm text-blue-700">{slide.description}</p>
                       </div>
                     </div>
                   ))}
-                </div>
-
-                {/* Carousel Navigation */}
-                <div className="absolute bottom-14 left-0 right-0 flex justify-center gap-2 p-2">
-                  {gallerySlides.map((_, index) => (
-                    <button
-                      key={index}
-                      className={`w-2.5 h-2.5 rounded-full transition-all ${
-                        index === activeSlide 
-                          ? "bg-blue-600 w-6" 
-                          : "bg-blue-300 hover:bg-blue-400"
-                      }`}
-                      onClick={() => setActiveSlide(index)}
-                      aria-label={`Go to slide ${index + 1}`}
-                    />
-                  ))}
+                
+                  {/* Carousel Navigation */}
+                  <div className="absolute bottom-14 left-0 right-0 flex justify-center gap-2 p-2">
+                    {gallerySlides.map((_, index) => (
+                      <button
+                        key={index}
+                        className={`w-2.5 h-2.5 rounded-full transition-all ${
+                          index === activeSlide 
+                            ? "bg-[var(--highlight-color)] w-8" 
+                            : "bg-blue-300 hover:bg-blue-400"
+                        }`}
+                        onClick={() => setActiveSlide(index)}
+                        aria-label={`Go to slide ${index + 1}`}
+                      />
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -230,8 +248,8 @@ const Hero = () => {
         </div>
       </section>
 
-      {/* Info Sections */}
-      <section className="py-16 bg-white" id="features">
+      {/* Features Section */}
+      <section className="py-24 bg-white" id="features">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-blue-900 mb-4">Everything You Need to Know</h2>
@@ -242,14 +260,13 @@ const Hero = () => {
 
           <div className="grid md:grid-cols-2 gap-8">
             {/* System Requirements Card */}
-            <div className={`bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 ${requirementsOpen ? 'h-auto' : 'h-[4.5rem]'}`}>
+            <div className="bg-white rounded-xl overflow-hidden shadow-xl border border-blue-100 hover:shadow-2xl transition-all duration-300">
               <div 
-                className="bg-[var(--secondary-bg)] px-6 py-4 cursor-pointer flex justify-between items-center"
+                className="bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 px-6 py-5 cursor-pointer flex justify-between items-center"
                 onClick={toggleRequirements}
-                style={{ borderRadius: requirementsOpen ? '0.75rem 0.75rem 0 0' : '0.75rem' }}
               >
                 <h3 className="text-xl font-semibold text-white">System Suggestions</h3>
-                <span className="text-white text-sm bg-white/20 w-8 h-8 rounded-full flex items-center justify-center">
+                <span className="text-white text-xl bg-white/20 w-8 h-8 rounded-full flex items-center justify-center">
                   {requirementsOpen ? "−" : "+"}
                 </span>
               </div>
@@ -282,14 +299,13 @@ const Hero = () => {
             </div>
 
             {/* Tips Card */}
-            <div className={`bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 ${tipsOpen ? 'h-auto' : 'h-[4.5rem]'}`}>
+            <div className="bg-white rounded-xl overflow-hidden shadow-xl border border-blue-100 hover:shadow-2xl transition-all duration-300">
               <div 
-                className="bg-[var(--secondary-bg)] px-6 py-4 cursor-pointer flex justify-between items-center"
+                className="bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 px-6 py-5 cursor-pointer flex justify-between items-center"
                 onClick={toggleTips}
-                style={{ borderRadius: tipsOpen ? '0.75rem 0.75rem 0 0' : '0.75rem' }}
               >
                 <h3 className="text-xl font-semibold text-white">Helpful Tips</h3>
-                <span className="text-white text-sm bg-white/20 w-8 h-8 rounded-full flex items-center justify-center">
+                <span className="text-white text-xl bg-white/20 w-8 h-8 rounded-full flex items-center justify-center">
                   {tipsOpen ? "−" : "+"}
                 </span>
               </div>
@@ -322,16 +338,64 @@ const Hero = () => {
             </div>
           </div>
 
+          {/* Key Benefits Section */}
+          <div className="mt-24">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold text-blue-900 mb-4">Key Benefits</h2>
+              <p className="text-lg text-blue-600 max-w-2xl mx-auto">
+                Why choose Herma for your AI needs
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-blue-100 flex flex-col items-center text-center">
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[var(--highlight-color)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-blue-900 mb-3">100% Private</h3>
+                <p className="text-blue-700">Your data never leaves your device. No cloud processing means total privacy protection.</p>
+              </div>
+              
+              <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-blue-100 flex flex-col items-center text-center">
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[var(--highlight-color)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-blue-900 mb-3">Fast Response</h3>
+                <p className="text-blue-700">Get instant results with no internet latency. Local processing means quicker AI interactions.</p>
+              </div>
+              
+              <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-blue-100 flex flex-col items-center text-center">
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[var(--highlight-color)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-blue-900 mb-3">Always Available</h3>
+                <p className="text-blue-700">Works offline with no subscription required. Access powerful AI capabilities anytime, anywhere.</p>
+              </div>
+            </div>
+          </div>
+
           {/* CTA Section */}
-          <div className="mt-16 text-center">
-            <div className="inline-block bg-gradient-to-r from-blue-100 to-indigo-100 p-8 rounded-xl shadow-sm">
-              <h3 className="text-2xl font-bold text-blue-900 mb-4">Ready to experience private AI?</h3>
+          <div className="mt-24 text-center">
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-12 rounded-2xl shadow-lg">
+              <h3 className="text-3xl font-bold text-blue-900 mb-6">Ready to experience private AI?</h3>
+              <p className="text-xl text-blue-700 mb-8 max-w-2xl mx-auto">
+                Download Herma today and take control of your AI experience
+              </p>
               <button 
                 onClick={handleDownloadClick(osType === 'mac' ? 'mac' : 'windows')} 
-                className="px-8 py-4 bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 text-white font-medium rounded-lg shadow-lg transform transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                className="px-10 py-5 bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 text-white text-xl font-medium rounded-lg shadow-xl transform transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
               >
-                Download Herma Today
+                Download Herma Now
               </button>
+              <p className="mt-4 text-sm text-blue-600">
+                {osType === 'mac' ? 'Available for Mac' : osType === 'windows' ? 'Available for Windows' : 'Available for Windows and macOS'} • No Internet Required
+              </p>
             </div>
           </div>
         </div>

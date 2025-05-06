@@ -46,40 +46,44 @@ const HowToUse = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-[var(--primary-bg)] to-[var(--secondary-bg)]/20" id="tutorial">
+    <section className="py-24 bg-gradient-to-b from-blue-50 to-white" id="tutorial">
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-[var(--highlight-color)] mb-4">How to Use Herma</h2>
-          <p className="text-lg text-[var(--highlight-color)]/80 max-w-3xl mx-auto">
+          <h2 className="text-3xl font-bold text-blue-900 mb-4">How to Use Herma</h2>
+          <p className="text-lg text-blue-600 max-w-3xl mx-auto">
             Follow these simple steps to get the most out of your private AI assistant.
           </p>
+          <div className="w-32 h-1 bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 mx-auto mt-6"></div>
         </div>
 
         {/* Tutorial Navigation */}
-        <div className="flex justify-center mb-6 overflow-x-auto pb-4 hide-scrollbar">
-          <div className="flex space-x-2 mx-auto">
+        <div className="flex justify-center mb-10 overflow-x-auto pb-4 hide-scrollbar">
+          <div className="flex space-x-3 mx-auto">
             {tutorialSteps.map((step) => (
               <button
                 key={step.id}
-                className={`px-4 py-2 rounded-full transition-all duration-300 whitespace-nowrap ${
+                className={`px-5 py-2.5 rounded-lg transition-all duration-300 whitespace-nowrap flex items-center shadow-sm ${
                   activeStep === step.id
-                    ? 'bg-[var(--highlight-color)] text-white shadow-md'
-                    : 'bg-[var(--secondary-bg)]/30 text-[var(--highlight-color)] hover:bg-[var(--secondary-bg)]/50'
+                    ? 'bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 text-white shadow-md'
+                    : 'bg-white border border-blue-200 text-blue-700 hover:bg-blue-50'
                 }`}
                 onClick={() => setActiveStep(step.id)}
               >
-                Step {step.id}
+                <span className={`w-6 h-6 rounded-full mr-2 flex items-center justify-center text-sm ${
+                  activeStep === step.id ? 'bg-white text-blue-700' : 'bg-blue-100 text-blue-700'
+                }`}>{step.id}</span>
+                <span className="font-medium">Step {step.id}</span>
               </button>
             ))}
           </div>
         </div>
 
         {/* Tutorial Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Tutorial Image Area */}
-          <div className="bg-[var(--primary-bg)] rounded-xl shadow-lg p-6 h-80 flex items-center justify-center order-2 md:order-1">
-            <div className="relative w-full h-full rounded-lg overflow-hidden bg-[var(--secondary-bg)]/10">
+          <div className="bg-white rounded-2xl shadow-xl p-6 h-80 flex items-center justify-center order-2 lg:order-1 border border-blue-100">
+            <div className="relative w-full h-full rounded-lg overflow-hidden bg-blue-50">
               {/* Tutorial images */}
               <div className="w-full h-full">
                 {activeStep === 1 && (
@@ -87,9 +91,9 @@ const HowToUse = () => {
                     <img 
                       src={installImage} 
                       alt="Install and launch Herma" 
-                      className="object-contain max-h-[85%] rounded-lg shadow-md"
+                      className="object-contain max-h-[85%] rounded-lg shadow-md my-auto"
                     />
-                    <p className="text-[var(--highlight-color)] mt-4 font-medium">
+                    <p className="text-blue-800 mt-4 font-medium">
                       Install and launch Herma on your device
                     </p>
                   </div>
@@ -99,9 +103,9 @@ const HowToUse = () => {
                     <img 
                       src={questionImage} 
                       alt="Ask questions in the chat interface" 
-                      className="object-contain max-h-[85%] rounded-lg shadow-md"
+                      className="object-contain max-h-[85%] rounded-lg shadow-md my-auto"
                     />
-                    <p className="text-[var(--highlight-color)] mt-4 font-medium">
+                    <p className="text-blue-800 mt-4 font-medium">
                       Ask questions in the chat interface
                     </p>
                   </div>
@@ -111,9 +115,9 @@ const HowToUse = () => {
                     <img 
                       src={uploadImage} 
                       alt="Upload documents for analysis" 
-                      className="object-contain max-h-[85%] rounded-lg shadow-md"
+                      className="object-contain max-h-[85%] rounded-lg shadow-md my-auto"
                     />
-                    <p className="text-[var(--highlight-color)] mt-4 font-medium">
+                    <p className="text-blue-800 mt-4 font-medium">
                       Upload documents for analysis
                     </p>
                   </div>
@@ -123,9 +127,9 @@ const HowToUse = () => {
                     <img 
                       src={creativeImage} 
                       alt="Generate creative content and drafts" 
-                      className="object-contain max-h-[85%] rounded-lg shadow-md"
+                      className="object-contain max-h-[85%] rounded-lg shadow-md my-auto"
                     />
-                    <p className="text-[var(--highlight-color)] mt-4 font-medium">
+                    <p className="text-blue-800 mt-4 font-medium">
                       Generate creative content and drafts
                     </p>
                   </div>
@@ -135,9 +139,9 @@ const HowToUse = () => {
                     <img 
                       src={problemImage} 
                       alt="Break down complex problems" 
-                      className="object-contain max-h-[85%] rounded-lg shadow-md"
+                      className="object-contain max-h-[85%] rounded-lg shadow-md my-auto"
                     />
-                    <p className="text-[var(--highlight-color)] mt-4 font-medium">
+                    <p className="text-blue-800 mt-4 font-medium">
                       Break down complex problems
                     </p>
                   </div>
@@ -147,9 +151,9 @@ const HowToUse = () => {
                     <img 
                       src={conversationImage} 
                       alt="Engage in contextual conversations" 
-                      className="object-contain max-h-[85%] rounded-lg shadow-md"
+                      className="object-contain max-h-[85%] rounded-lg shadow-md my-auto"
                     />
-                    <p className="text-[var(--highlight-color)] mt-4 font-medium">
+                    <p className="text-blue-800 mt-4 font-medium">
                       Engage in contextual conversations
                     </p>
                   </div>
@@ -159,27 +163,36 @@ const HowToUse = () => {
           </div>
 
           {/* Tutorial Text Area */}
-          <div className="space-y-6 order-1 md:order-2">
-            <h3 className="text-2xl font-bold text-[var(--highlight-color)]">
+          <div className="space-y-6 order-1 lg:order-2 bg-white rounded-2xl shadow-lg p-8 border border-blue-100">
+            <div className="inline-block px-4 py-2 rounded-lg bg-blue-100 text-blue-800 font-semibold mb-2">
               {tutorialSteps.find(step => step.id === activeStep)?.title}
+            </div>
+            
+            <h3 className="text-2xl font-bold text-blue-900">
+              Step {activeStep}: {tutorialSteps.find(step => step.id === activeStep)?.title}
             </h3>
             
-            <p className="text-[var(--text-color)] leading-relaxed text-lg">
+            <p className="text-blue-700 leading-relaxed text-lg">
               {tutorialSteps.find(step => step.id === activeStep)?.description}
             </p>
             
-            <div className="pt-4">
-              <h4 className="font-semibold text-[var(--highlight-color)] mb-3">Pro Tips:</h4>
-              <ul className="space-y-2">
+            <div className="pt-6 bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl">
+              <h4 className="font-semibold text-blue-900 mb-4 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-[var(--highlight-color)]" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
+                </svg>
+                Pro Tips:
+              </h4>
+              <ul className="space-y-3">
                 {activeStep === 1 && (
                   <>
                     <li className="flex items-start">
-                      <span className="text-[var(--highlight-color)] mr-2">•</span>
-                      <span>Ensure your computer meets the minimum system requirements for optimal performance.</span>
+                      <span className="text-indigo-600 mr-2 text-lg">•</span>
+                      <span className="text-blue-800">Ensure your computer meets the minimum system requirements for optimal performance.</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-[var(--highlight-color)] mr-2">•</span>
-                      <span>Check for updates regularly to access the latest features and improvements.</span>
+                      <span className="text-indigo-600 mr-2 text-lg">•</span>
+                      <span className="text-blue-800">Check for updates regularly to access the latest features and improvements.</span>
                     </li>
                   </>
                 )}
@@ -187,12 +200,12 @@ const HowToUse = () => {
                 {activeStep === 2 && (
                   <>
                     <li className="flex items-start">
-                      <span className="text-[var(--highlight-color)] mr-2">•</span>
-                      <span>Be specific with your questions to get more accurate responses.</span>
+                      <span className="text-indigo-600 mr-2 text-lg">•</span>
+                      <span className="text-blue-800">Be specific with your questions to get more accurate responses.</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-[var(--highlight-color)] mr-2">•</span>
-                      <span>Ask Herma to refine or expand on its previous answers if needed.</span>
+                      <span className="text-indigo-600 mr-2 text-lg">•</span>
+                      <span className="text-blue-800">Ask Herma to refine or expand on its previous answers if needed.</span>
                     </li>
                   </>
                 )}
@@ -200,12 +213,12 @@ const HowToUse = () => {
                 {activeStep === 3 && (
                   <>
                     <li className="flex items-start">
-                      <span className="text-[var(--highlight-color)] mr-2">•</span>
-                      <span>White highlighted files mean it is selected and will be used to answer your questions.</span>
+                      <span className="text-indigo-600 mr-2 text-lg">•</span>
+                      <span className="text-blue-800">White highlighted files mean it is selected and will be used to answer your questions.</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-[var(--highlight-color)] mr-2">•</span>
-                      <span>Ask specific questions about document content rather than general ones for better results.</span>
+                      <span className="text-indigo-600 mr-2 text-lg">•</span>
+                      <span className="text-blue-800">Ask specific questions about document content rather than general ones for better results.</span>
                     </li>
                   </>
                 )}
@@ -213,12 +226,12 @@ const HowToUse = () => {
                 {activeStep === 4 && (
                   <>
                     <li className="flex items-start">
-                      <span className="text-[var(--highlight-color)] mr-2">•</span>
-                      <span>Provide examples or context to help Herma understand your desired tone and style.</span>
+                      <span className="text-indigo-600 mr-2 text-lg">•</span>
+                      <span className="text-blue-800">Provide examples or context to help Herma understand your desired tone and style.</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-[var(--highlight-color)] mr-2">•</span>
-                      <span>Iteratively refine generated content by asking for specific changes or improvements.</span>
+                      <span className="text-indigo-600 mr-2 text-lg">•</span>
+                      <span className="text-blue-800">Iteratively refine generated content by asking for specific changes or improvements.</span>
                     </li>
                   </>
                 )}
@@ -226,12 +239,12 @@ const HowToUse = () => {
                 {activeStep === 5 && (
                   <>
                     <li className="flex items-start">
-                      <span className="text-[var(--highlight-color)] mr-2">•</span>
-                      <span>For math or coding problems, clearly state what you're trying to achieve.</span>
+                      <span className="text-indigo-600 mr-2 text-lg">•</span>
+                      <span className="text-blue-800">For math or coding problems, clearly state what you're trying to achieve.</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-[var(--highlight-color)] mr-2">•</span>
-                      <span>Ask Herma to explain its reasoning process to better understand complex solutions.</span>
+                      <span className="text-indigo-600 mr-2 text-lg">•</span>
+                      <span className="text-blue-800">Ask Herma to explain its reasoning process to better understand complex solutions.</span>
                     </li>
                   </>
                 )}
@@ -239,12 +252,12 @@ const HowToUse = () => {
                 {activeStep === 6 && (
                   <>
                     <li className="flex items-start">
-                      <span className="text-[var(--highlight-color)] mr-2">•</span>
-                      <span>Start a new chat for entirely different topics to avoid confusion.</span>
+                      <span className="text-indigo-600 mr-2 text-lg">•</span>
+                      <span className="text-blue-800">Start a new chat for entirely different topics to avoid confusion.</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-[var(--highlight-color)] mr-2">•</span>
-                      <span>Use references like "as I mentioned earlier" to help Herma connect related questions.</span>
+                      <span className="text-indigo-600 mr-2 text-lg">•</span>
+                      <span className="text-blue-800">Use references like "as I mentioned earlier" to help Herma connect related questions.</span>
                     </li>
                   </>
                 )}
@@ -252,46 +265,55 @@ const HowToUse = () => {
             </div>
             
             {/* Navigation Buttons */}
-            <div className="flex justify-between pt-8">
+            <div className="flex justify-between pt-6">
               <button 
-                className={`px-4 py-2 rounded-lg bg-[var(--secondary-bg)]/30 text-[var(--highlight-color)] transition-all duration-300 ${
-                  activeStep === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-[var(--secondary-bg)]/50'
+                className={`px-6 py-3 rounded-lg flex items-center transition-all duration-300 ${
+                  activeStep === 1 
+                    ? 'bg-blue-100 text-blue-400 cursor-not-allowed' 
+                    : 'bg-white border border-blue-500 text-blue-700 hover:bg-blue-50'
                 }`}
                 onClick={() => setActiveStep(prev => Math.max(prev - 1, 1))}
                 disabled={activeStep === 1}
               >
-                Previous Step
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+                Previous
               </button>
               
               <button 
-                className={`px-4 py-2 rounded-lg bg-[var(--highlight-color)] text-white transition-all duration-300 ${
-                  activeStep === tutorialSteps.length ? 'opacity-50 cursor-not-allowed' : 'hover:shadow-md'
+                className={`px-6 py-3 rounded-lg flex items-center transition-all duration-300 ${
+                  activeStep === tutorialSteps.length 
+                    ? 'bg-blue-100 text-blue-400 cursor-not-allowed' 
+                    : 'bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 text-white hover:shadow-lg'
                 }`}
                 onClick={() => setActiveStep(prev => Math.min(prev + 1, tutorialSteps.length))}
                 disabled={activeStep === tutorialSteps.length}
               >
-                Next Step
+                Next
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                </svg>
               </button>
             </div>
           </div>
         </div>
         
         {/* Additional Help Section */}
-        <div className="mt-20 text-center">
-          <div className="bg-[var(--secondary-bg)]/20 rounded-xl shadow-sm p-8 max-w-3xl mx-auto">
-            <h3 className="text-xl font-bold text-[var(--highlight-color)] mb-4">Need More Help?</h3>
-            <p className="text-[var(--highlight-color)]/80 mb-6">
-              This basic tutorial covers the essentials, but Herma has many more capabilities to explore. 
-              Try experimenting with different requests to discover all that Herma can do for you.
-            </p>
-            {/* <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <button className="px-6 py-3 bg-[var(--highlight-color)] text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
-                View Full Documentation
-              </button>
-              <button className="px-6 py-3 bg-transparent border border-[var(--highlight-color)] text-[var(--highlight-color)] font-medium rounded-lg hover:bg-[var(--highlight-color)]/10 transition-all duration-300">
-                Watch Tutorial Videos
-              </button>
-            </div> */}
+        <div className="mt-24">
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl shadow-lg p-12 max-w-4xl mx-auto">
+            <div className="text-center">
+              <h3 className="text-2xl font-bold text-blue-900 mb-4">Need More Help?</h3>
+              <p className="text-lg text-blue-700 mb-6 max-w-2xl mx-auto">
+                This basic tutorial covers the essentials, but Herma has many more capabilities to explore. 
+                Try experimenting with different requests to discover all that Herma can do for you.
+              </p>
+              <div className="flex flex-col sm:flex-row justify-center gap-4">
+                <button className="px-8 py-4 bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                  Start Using Herma Now
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

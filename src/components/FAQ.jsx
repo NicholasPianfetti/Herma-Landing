@@ -54,33 +54,36 @@ const FAQ = () => {
   };
 
   return (
-    <section className="py-20 bg-[var(--primary-bg)]" id="faq">
+    <section className="py-24 bg-gradient-to-b from-blue-50 to-white" id="faq">
       <div className="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-[var(--highlight-color)] mb-4">Frequently Asked Questions</h2>
-          <p className="text-lg text-[var(--highlight-color)]/80 max-w-3xl mx-auto">
+          <h2 className="text-3xl font-bold text-blue-900 mb-4">Frequently Asked Questions</h2>
+          <p className="text-lg text-blue-600 max-w-3xl mx-auto">
             Find answers to common questions about Herma and how it can enhance your productivity while preserving your privacy.
           </p>
+          <div className="w-32 h-1 bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 mx-auto mt-6"></div>
         </div>
 
         {/* FAQ Accordion */}
-        <div className="space-y-4 bg-[var(--secondary-bg)] p-6 rounded-lg shadow-lg">
+        <div className="space-y-4 bg-white rounded-2xl p-8 shadow-xl border border-blue-100">
           {faqItems.map((item) => (
             <div 
               key={item.id} 
-              className="bg-[var(--primary-bg)] rounded-lg shadow-md overflow-hidden transition-shadow duration-300 hover:shadow-lg"
+              className="bg-white rounded-xl overflow-hidden transition-all duration-300 border border-blue-100 hover:border-blue-300"
             >
               <button 
-                className={`w-full text-left p-5 focus:outline-none flex justify-between items-center ${
-                  expandedId === item.id ? 'bg-[var(--secondary-bg)]/30' : 'bg-[var(--primary-bg)]'
+                className={`w-full text-left p-5 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50 flex justify-between items-center transition-colors ${
+                  expandedId === item.id ? 'bg-gradient-to-r from-blue-50 to-indigo-50' : 'bg-white'
                 }`}
                 onClick={() => toggleExpand(item.id)}
                 aria-expanded={expandedId === item.id}
               >
-                <h3 className="text-lg font-medium text-[var(--highlight-color)]">{item.question}</h3>
-                <span className={`transform transition-transform duration-300 text-[var(--highlight-color)] ${
-                  expandedId === item.id ? 'rotate-180' : 'rotate-0'
+                <h3 className="text-lg font-semibold text-blue-900">{item.question}</h3>
+                <span className={`flex items-center justify-center w-8 h-8 rounded-full transition-all duration-300 ${
+                  expandedId === item.id 
+                    ? 'bg-[var(--highlight-color)] text-white rotate-180' 
+                    : 'bg-blue-100 text-blue-700 rotate-0'
                 }`}>
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -93,8 +96,8 @@ const FAQ = () => {
                   expandedId === item.id ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
                 }`}
               >
-                <div className="p-5 bg-[var(--secondary-bg)]/10 border-t border-[var(--highlight-color)]/10">
-                  <p className="text-[var(--text-color)] leading-relaxed">{item.answer}</p>
+                <div className="p-6 bg-blue-50/50 border-t border-blue-100">
+                  <p className="text-blue-700 leading-relaxed">{item.answer}</p>
                 </div>
               </div>
             </div>
@@ -102,16 +105,19 @@ const FAQ = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="mt-16 text-center">
-          <div className="inline-block bg-[var(--secondary-bg)] p-8 rounded-xl shadow-sm">
-            <h3 className="text-xl font-bold text-[var(--highlight-color)] mb-3">Have more questions?</h3>
-            <p className="text-[var(--highlight-color)]/80 mb-5">
+        <div className="mt-20">
+          <div className="bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 rounded-2xl p-10 shadow-xl text-center">
+            <h3 className="text-2xl font-bold text-white mb-4">Have more questions?</h3>
+            <p className="text-white text-lg opacity-90 mb-8 max-w-2xl mx-auto">
               We're here to help! Contact us directly for personalized assistance.
             </p>
             <a 
               href="mailto:hermalocal@gmail.com" 
-              className="px-6 py-3 bg-[var(--highlight-color)] text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 inline-block"
+              className="px-8 py-4 bg-white text-[var(--highlight-color)] font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 inline-flex items-center"
             >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
               Contact Support
             </a>
           </div>
