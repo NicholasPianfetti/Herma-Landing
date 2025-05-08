@@ -10,6 +10,22 @@ import conversationImage from './conversation-image.png';
 const HowToUse = () => {
   // State for active tutorial step
   const [activeStep, setActiveStep] = useState(1);
+  // State for enlarged image
+  const [enlargedImage, setEnlargedImage] = useState(null);
+
+  // Function to handle image click
+  const handleImageClick = (image, alt) => {
+    setEnlargedImage({ 
+      image, 
+      alt, 
+      title: tutorialSteps.find(step => step.id === activeStep)?.title 
+    });
+  };
+
+  // Function to close enlarged image
+  const closeEnlargedImage = () => {
+    setEnlargedImage(null);
+  };
 
   // Tutorial steps data
   const tutorialSteps = [
@@ -91,7 +107,8 @@ const HowToUse = () => {
                     <img 
                       src={installImage} 
                       alt="Install and launch Herma" 
-                      className="object-contain max-h-[85%] rounded-lg shadow-md my-auto"
+                      className="object-contain max-h-[85%] rounded-lg shadow-md my-auto cursor-pointer"
+                      onClick={() => handleImageClick(installImage, "Install and launch Herma")}
                     />
                     <p className="text-blue-800 mt-4 font-medium">
                       Install and launch Herma on your device
@@ -103,7 +120,8 @@ const HowToUse = () => {
                     <img 
                       src={questionImage} 
                       alt="Ask questions in the chat interface" 
-                      className="object-contain max-h-[85%] rounded-lg shadow-md my-auto"
+                      className="object-contain max-h-[85%] rounded-lg shadow-md my-auto cursor-pointer"
+                      onClick={() => handleImageClick(questionImage, "Ask questions in the chat interface")}
                     />
                     <p className="text-blue-800 mt-4 font-medium">
                       Ask questions in the chat interface
@@ -115,7 +133,8 @@ const HowToUse = () => {
                     <img 
                       src={uploadImage} 
                       alt="Upload documents for analysis" 
-                      className="object-contain max-h-[85%] rounded-lg shadow-md my-auto"
+                      className="object-contain max-h-[85%] rounded-lg shadow-md my-auto cursor-pointer"
+                      onClick={() => handleImageClick(uploadImage, "Upload documents for analysis")}
                     />
                     <p className="text-blue-800 mt-4 font-medium">
                       Upload documents for analysis
@@ -127,7 +146,8 @@ const HowToUse = () => {
                     <img 
                       src={creativeImage} 
                       alt="Generate creative content and drafts" 
-                      className="object-contain max-h-[85%] rounded-lg shadow-md my-auto"
+                      className="object-contain max-h-[85%] rounded-lg shadow-md my-auto cursor-pointer"
+                      onClick={() => handleImageClick(creativeImage, "Generate creative content and drafts")}
                     />
                     <p className="text-blue-800 mt-4 font-medium">
                       Generate creative content and drafts
@@ -139,7 +159,8 @@ const HowToUse = () => {
                     <img 
                       src={problemImage} 
                       alt="Break down complex problems" 
-                      className="object-contain max-h-[85%] rounded-lg shadow-md my-auto"
+                      className="object-contain max-h-[85%] rounded-lg shadow-md my-auto cursor-pointer"
+                      onClick={() => handleImageClick(problemImage, "Break down complex problems")}
                     />
                     <p className="text-blue-800 mt-4 font-medium">
                       Break down complex problems
@@ -151,7 +172,8 @@ const HowToUse = () => {
                     <img 
                       src={conversationImage} 
                       alt="Engage in contextual conversations" 
-                      className="object-contain max-h-[85%] rounded-lg shadow-md my-auto"
+                      className="object-contain max-h-[85%] rounded-lg shadow-md my-auto cursor-pointer"
+                      onClick={() => handleImageClick(conversationImage, "Engage in contextual conversations")}
                     />
                     <p className="text-blue-800 mt-4 font-medium">
                       Engage in contextual conversations
@@ -184,6 +206,20 @@ const HowToUse = () => {
                 Pro Tips:
               </h4>
               <ul className="space-y-3">
+                {activeStep === 1 && (
+                  <>
+                    <li className="flex items-start">
+                      <span className="text-indigo-600 mr-2 text-lg">•</span>
+                      <span className="text-blue-800">Ensure your computer meets the minimum system requirements for optimal performance.</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-indigo-600 mr-2 text-lg">•</span>
+                      <span className="text-blue-800">Check for updates regularly to access the latest features and improvements.</span>
+                    </li>
+                  </>
+                )}
+                
+                <ul className="space-y-3">
                 {activeStep === 1 && (
                   <>
                     <li className="flex items-start">
@@ -261,6 +297,7 @@ const HowToUse = () => {
                     </li>
                   </>
                 )}
+                </ul>
               </ul>
             </div>
             
@@ -317,6 +354,35 @@ const HowToUse = () => {
           </div>
         </div>
       </div>
+      
+      {/* Enlarged Image Modal */}
+      {enlargedImage && (
+        <div 
+          className="fixed top-0 left-0 w-full h-full bg-black/90 flex items-center justify-center z-50 p-4"
+          onClick={closeEnlargedImage}
+        >
+          <div 
+            className="relative max-w-4xl w-full rounded-lg overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button 
+              className="absolute top-4 right-4 bg-black/50 text-white w-10 h-10 rounded-full flex items-center justify-center z-10 hover:bg-black/80 transition-colors"
+              onClick={closeEnlargedImage}
+            >
+              ✕
+            </button>
+            <img 
+              src={enlargedImage.image} 
+              alt={enlargedImage.alt} 
+              className="w-full h-auto max-h-[80vh] object-contain"
+            />
+            <div className="absolute bottom-0 left-0 right-0 bg-black/70 text-white p-4">
+              <h3 className="text-xl font-bold">{enlargedImage.title}</h3>
+              <p>{enlargedImage.alt}</p>
+            </div>
+          </div>
+        </div>
+      )}
       
       {/* CSS for hiding scrollbar */}
       <style jsx>{`

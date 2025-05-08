@@ -195,54 +195,71 @@ const Hero = () => {
             <div className="w-full lg:w-1/2 relative">
               <div className="absolute -top-16 -right-16 w-64 h-64 bg-[var(--highlight-color)] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
               <div className="absolute -bottom-16 -left-16 w-64 h-64 bg-indigo-600 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
-              
-              {/* App Preview Frame */}
-              <div className="relative rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 p-1 shadow-2xl">
-                <div className="absolute top-0 left-0 right-0 h-8 bg-gray-800 rounded-t-2xl flex items-center px-4">
-                  <div className="flex space-x-2">
-                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                  </div>
-                </div>
-                <div className="bg-white rounded-b-xl pt-8">
-                  {gallerySlides.map((slide, index) => (
-                    <div 
-                      key={index} 
-                      className={`transition-all duration-500 ease-in-out ${index === activeSlide ? "opacity-100" : "opacity-0 absolute top-0 left-0"}`}
-                    >
-                      <div className="relative pt-[56.25%]">
-                        <img 
-                          src={slide.image} 
-                          alt={slide.alt} 
-                          className="absolute top-0 left-0 w-full h-full object-cover cursor-pointer"
-                          onClick={() => handleImageClick(slide)}
-                        />
-                      </div>
-                      <div className="py-4 px-6 bg-gradient-to-r from-blue-50 to-indigo-50">
-                        <h3 className="text-lg font-bold text-blue-900">{slide.title}</h3>
-                        <p className="text-sm text-blue-700">{slide.description}</p>
+                  {/* App Preview Frame */}
+                  <div className="relative rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 p-1 shadow-2xl">
+                    <div className="absolute top-0 left-0 right-0 h-8 bg-gray-800 rounded-t-2xl flex items-center px-4 z-20">
+                      <div className="flex space-x-2">
+                        <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                        <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                        <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                       </div>
                     </div>
-                  ))}
-                
-                  {/* Carousel Navigation */}
-                  <div className="absolute bottom-14 left-0 right-0 flex justify-center gap-2 p-2">
-                    {gallerySlides.map((_, index) => (
-                      <button
-                        key={index}
-                        className={`w-2.5 h-2.5 rounded-full transition-all ${
-                          index === activeSlide 
-                            ? "bg-[var(--highlight-color)] w-8" 
-                            : "bg-blue-300 hover:bg-blue-400"
-                        }`}
-                        onClick={() => setActiveSlide(index)}
-                        aria-label={`Go to slide ${index + 1}`}
-                      />
-                    ))}
+                    <div className="bg-white rounded-b-xl pt-7 overflow-hidden">
+                      {/* Fixed image container with original aspect ratio */}
+                      <div className="relative" style={{ paddingBottom: "56.25%" }}>
+                        {gallerySlides.map((slide, index) => (
+                          <div 
+                            key={index} 
+                            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', opacity: index === activeSlide ? 1 : 0, zIndex: index === activeSlide ? 10 : 0, transition: 'opacity 500ms ease-in-out' }}
+                          >
+                            <img 
+                              src={slide.image} 
+                              alt={slide.alt} 
+                              className="w-full h-full object-cover cursor-pointer"
+                              onClick={() => handleImageClick(slide)}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                      
+                      {/* Info section with original styling */}
+                      <div className="py-4 px-6 bg-gradient-to-r from-blue-50 to-indigo-50 relative">
+                        {gallerySlides.map((slide, index) => (
+                          <div 
+                            key={index} 
+                            style={{ 
+                              position: index === activeSlide ? 'relative' : 'absolute', 
+                              top: 0, 
+                              left: 0, 
+                              width: '100%', 
+                              opacity: index === activeSlide ? 1 : 0, 
+                              transition: 'opacity 500ms ease-in-out',
+                              pointerEvents: index === activeSlide ? 'auto' : 'none'
+                            }}
+                          >
+                            <h3 className="text-lg font-bold text-blue-900">{slide.title}</h3>
+                            <p className="text-sm text-blue-700">{slide.description}</p>
+                          </div>
+                        ))}
+                        
+                        {/* Carousel Navigation - original position */}
+                        <div className="absolute bottom-14 left-0 right-0 flex justify-center gap-2 p-2 z-20">
+                          {gallerySlides.map((_, index) => (
+                            <button
+                              key={index}
+                              className={`w-2.5 h-2.5 rounded-full transition-all ${
+                                index === activeSlide 
+                                  ? "bg-[var(--highlight-color)] w-8" 
+                                  : "bg-blue-300 hover:bg-blue-400"
+                              }`}
+                              onClick={() => setActiveSlide(index)}
+                              aria-label={`Go to slide ${index + 1}`}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -260,10 +277,11 @@ const Hero = () => {
 
           <div className="grid md:grid-cols-2 gap-8">
             {/* System Requirements Card */}
-            <div className="bg-white rounded-xl overflow-hidden shadow-xl border border-blue-100 hover:shadow-2xl transition-all duration-300">
+            <div className={`bg-white rounded-xl overflow-hidden shadow-xl border border-blue-100 hover:shadow-2xl transition-shadow duration-300 ${requirementsOpen ? 'h-auto' : 'h-[4.5rem]'}`}>
               <div 
                 className="bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 px-6 py-5 cursor-pointer flex justify-between items-center"
                 onClick={toggleRequirements}
+                style={{ borderRadius: requirementsOpen ? '0.75rem 0.75rem 0 0' : '0.75rem' }}
               >
                 <h3 className="text-xl font-semibold text-white">System Suggestions</h3>
                 <span className="text-white text-xl bg-white/20 w-8 h-8 rounded-full flex items-center justify-center">
@@ -271,9 +289,9 @@ const Hero = () => {
                 </span>
               </div>
               
-              <div className={`transition-all duration-300 ${requirementsOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+              <div className={`transition-all duration-300 ${requirementsOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
                 <div className="p-6">
-                  <div className="grid sm:grid-cols-2 gap-4 mb-6">
+                <div className="grid sm:grid-cols-2 gap-4 mb-6">
                     <div className="bg-blue-50 p-4 rounded-lg">
                       <h4 className="font-semibold text-blue-900 mb-2">Processor</h4>
                       <p className="text-sm text-blue-700">Modern CPU (Intel i5/AMD Ryzen 5 or higher)</p>
@@ -299,10 +317,11 @@ const Hero = () => {
             </div>
 
             {/* Tips Card */}
-            <div className="bg-white rounded-xl overflow-hidden shadow-xl border border-blue-100 hover:shadow-2xl transition-all duration-300">
+            <div className={`bg-white rounded-xl overflow-hidden shadow-xl border border-blue-100 hover:shadow-2xl transition-shadow duration-300 ${tipsOpen ? 'h-auto' : 'h-[4.5rem]'}`}>
               <div 
                 className="bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 px-6 py-5 cursor-pointer flex justify-between items-center"
                 onClick={toggleTips}
+                style={{ borderRadius: tipsOpen ? '0.75rem 0.75rem 0 0' : '0.75rem' }}
               >
                 <h3 className="text-xl font-semibold text-white">Helpful Tips</h3>
                 <span className="text-white text-xl bg-white/20 w-8 h-8 rounded-full flex items-center justify-center">
@@ -310,9 +329,9 @@ const Hero = () => {
                 </span>
               </div>
               
-              <div className={`transition-all duration-300 ${tipsOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+              <div className={`transition-all duration-300 ${tipsOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
                 <div className="p-6">
-                  <div className="grid sm:grid-cols-2 gap-4 mb-6">
+                <div className="grid sm:grid-cols-2 gap-4 mb-6">
                     <div className="bg-indigo-50 p-4 rounded-lg">
                       <h4 className="font-semibold text-indigo-900 mb-2">Be Specific</h4>
                       <p className="text-sm text-indigo-700">Clearly state your problem and provide extra context for better responses.</p>
