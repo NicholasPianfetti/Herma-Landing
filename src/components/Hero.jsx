@@ -271,7 +271,7 @@ const Hero = () => {
                 </span>
               </div>
               
-              <div className={`transition-all duration-300 ${requirementsOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
+              <div className={`transition-all duration-300 ${requirementsOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
                 <div className="p-6">
                   <div className="grid sm:grid-cols-2 gap-4 mb-6">
                     <div className="bg-blue-50 p-4 rounded-lg">
@@ -310,7 +310,7 @@ const Hero = () => {
                 </span>
               </div>
               
-              <div className={`transition-all duration-300 ${tipsOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
+              <div className={`transition-all duration-300 ${tipsOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
                 <div className="p-6">
                   <div className="grid sm:grid-cols-2 gap-4 mb-6">
                     <div className="bg-indigo-50 p-4 rounded-lg">
