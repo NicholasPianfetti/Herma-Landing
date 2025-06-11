@@ -1,10 +1,13 @@
+// src/components/Hero.jsx - Updated with authentication and pricing integration
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 import appPreviewImage from './app-preview.png';
 import docUploadImage from './doc-upload.png';
 import creativeContentImage from './creative-content.png';
 import complexProblemImage from './complex-problem.png';
-import handleDownload from './handleDownload';
+import handleDownload from '../utils/handleDownload';
+import AuthModal from './AuthModal';
 
 const Hero = () => {
   const [requirementsOpen, setRequirementsOpen] = useState(false);
@@ -12,6 +15,10 @@ const Hero = () => {
   const [enlargedImage, setEnlargedImage] = useState(null);
   const [osType, setOsType] = useState('unknown');
   const [activeSlide, setActiveSlide] = useState(0);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authModalMode, setAuthModalMode] = useState('login');
+
+  const { currentUser, getUserSubscriptionTier, userHasActiveSubscription } = useAuth();
 
   // Detect OS on component mount
   useEffect(() => {
@@ -77,11 +84,25 @@ const Hero = () => {
       description: "Get step-by-step guidance for any challenge"
     }
   ];
+
+  // Get user's current subscription tier
+  const userTier = getUserSubscriptionTier();
+  const hasActiveSub = userHasActiveSubscription();
   
   // Handler for download button click
-  const handleDownloadClick = (osType) => {
+  const handleDownloadClick = (downloadType = 'free') => {
     return () => {
-      handleDownload(osType);
+      if (downloadType === 'pro' && !hasActiveSub) {
+        // User wants pro but doesn't have subscription
+        setAuthModalMode('signup');
+        setIsAuthModalOpen(true);
+        return;
+      }
+      
+      // Determine the actual tier for download tracking
+      const tierForDownload = downloadType === 'pro' && hasActiveSub ? 'pro' : 'free';
+      
+      handleDownload(osType === 'mac' ? 'mac' : 'windows', tierForDownload, currentUser?.uid);
     };
   };
 
@@ -150,37 +171,65 @@ const Hero = () => {
                 Take the short way. All your data stays on your device.
               </p>
 
+              {/* Updated download buttons with subscription awareness */}
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-6">
                 <button 
-                  onClick={handleDownloadClick(osType === 'mac' ? 'mac' : 'windows')} 
-                  className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 text-white font-semibold rounded-lg shadow-xl hover:shadow-2xl transform transition duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[var(--highlight-color)] focus:ring-opacity-50"
+                  onClick={handleDownloadClick('free')} 
+                  className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-gray-600 to-gray-700 text-white font-semibold rounded-lg shadow-xl hover:shadow-2xl transform transition duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50"
                 >
                   {osType === 'mac' ? (
                     <span className="flex items-center justify-center">
-                      <span className="mr-2 text-xl">⌘</span> Download for Mac
+                      <span className="mr-2 text-xl">⌘</span> Download Free (Mac)
                     </span>
                   ) : osType === 'windows' ? (
                     <span className="flex items-center justify-center">
-                      <span className="mr-2 text-xl">⊞</span> Download for Windows
+                      <span className="mr-2 text-xl">⊞</span> Download Free (Windows)
                     </span>
                   ) : (
                     <span className="flex items-center justify-center">
-                      <span className="mr-2 text-xl">↓</span> Download Herma
+                      <span className="mr-2 text-xl">↓</span> Download Free
                     </span>
                   )}
                 </button>
-                
-                <Link 
-                  to="#tutorial" 
-                  className="w-full sm:w-auto px-8 py-4 bg-white border-2 border-[var(--highlight-color)] text-[var(--highlight-color)] font-semibold rounded-lg transition duration-300 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection('features');
-                  }}
-                >
-                  Learn More
-                </Link>
+
+                {hasActiveSub ? (
+                  <button 
+                    onClick={handleDownloadClick('pro')} 
+                    className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 text-white font-semibold rounded-lg shadow-xl hover:shadow-2xl transform transition duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[var(--highlight-color)] focus:ring-opacity-50"
+                  >
+                    <span className="flex items-center justify-center">
+                      <span className="mr-2 text-xl">⭐</span> Download Pro Version
+                    </span>
+                  </button>
+                ) : (
+                  <Link 
+                    to="#pricing" 
+                    className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 text-white font-semibold rounded-lg shadow-xl hover:shadow-2xl transform transition duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[var(--highlight-color)] focus:ring-opacity-50 text-center"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection('pricing');
+                    }}
+                  >
+                    <span className="flex items-center justify-center">
+                      <span className="mr-2 text-xl">⭐</span> Get Pro Features
+                    </span>
+                  </Link>
+                )}
               </div>
+
+              {/* User status indicator */}
+              {currentUser && (
+                <div className="mb-4 p-3 bg-blue-100 rounded-lg">
+                  <p className="text-sm text-blue-800">
+                    Welcome back, {currentUser.displayName || currentUser.email}! 
+                    {hasActiveSub ? (
+                      <span className="font-semibold text-green-700"> You have Pro access.</span>
+                    ) : (
+                      <span> You're using the free version.</span>
+                    )}
+                  </p>
+                </div>
+              )}
               
               <p className="text-sm text-blue-800/70 mb-2">
                 {osType === 'mac' ? 'Available for Mac' : osType === 'windows' ? 'Available for Windows' : 'Available for Windows and macOS'} • Completely Private • No internet needed
@@ -191,7 +240,7 @@ const Hero = () => {
               </p>
             </div>
 
-            {/* Image Column */}
+            {/* Image Column - unchanged */}
             <div className="w-full lg:w-1/2 relative">
               <div className="absolute -top-16 -right-16 w-64 h-64 bg-[var(--highlight-color)] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
               <div className="absolute -bottom-16 -left-16 w-64 h-64 bg-indigo-600 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
@@ -265,6 +314,7 @@ const Hero = () => {
         </div>
       </section>
 
+      {/* Rest of the component remains the same... */}
       {/* Features Section */}
       <section className="py-24 bg-white" id="features">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -407,7 +457,7 @@ const Hero = () => {
                 Download Herma today and take control of your AI experience
               </p>
               <button 
-                onClick={handleDownloadClick(osType === 'mac' ? 'mac' : 'windows')} 
+                onClick={handleDownloadClick('free')} 
                 className="px-10 py-5 bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 text-white text-xl font-medium rounded-lg shadow-xl transform transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
               >
                 Download Herma Now
@@ -448,8 +498,14 @@ const Hero = () => {
           </div>
         </div>
       )}
+
+      {/* Auth Modal */}
+      <AuthModal 
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        defaultMode={authModalMode}
+      />
     </div>
-  );
-};
+)};
 
 export default Hero;

@@ -1,14 +1,17 @@
-// App.jsx - Main Application Component
+// App.jsx - Updated with authentication and new components
 import React, { useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
+import { AuthProvider } from './contexts/AuthContext';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
 import Footer from './components/Footer';
+import PricingCard from './components/PricingCard';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import Attributions from './pages/Attributions';
+import Dashboard from './pages/Dashboard';
 import ReactGA from 'react-ga4';
 import FAQ from './components/FAQ';
 import HowToUse from './components/HowToUse';
@@ -88,6 +91,7 @@ const Home = () => {
     <>
       <Hero />
       <About />
+      <PricingCard />
       <HowToUse />
       <Contact />
       <FAQ />
@@ -115,19 +119,22 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <div className="app">
-        <RouteTracker />
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms-of-service" element={<TermsOfService />} />
-          <Route path="/attributions" element={<Attributions />} />
-        </Routes>
-        <Footer />
-      </div>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <div className="app">
+          <RouteTracker />
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
+            <Route path="/attributions" element={<Attributions />} />
+          </Routes>
+          <Footer />
+        </div>
+      </Router>
+    </AuthProvider>
   );
 }
 
