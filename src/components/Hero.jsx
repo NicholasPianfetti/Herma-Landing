@@ -182,6 +182,18 @@ const Hero = () => {
                 </Link>
               </div>
               
+              {/* New Pro Upgrade Button */}
+              <div className="mb-6">
+                <button
+                  onClick={() => navigate('/upgrade')}
+                  className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform transition duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-opacity-50"
+                >
+                  <span className="flex items-center justify-center">
+                    <span className="mr-2">⭐</span> Upgrade to Pro
+                  </span>
+                </button>
+              </div>
+
               <p className="text-sm text-blue-800/70 mb-2">
                 {osType === 'mac' ? 'Available for Mac' : osType === 'windows' ? 'Available for Windows' : 'Available for Windows and macOS'} • Completely Private • No internet needed
               </p>

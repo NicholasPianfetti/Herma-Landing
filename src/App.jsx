@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import Attributions from './pages/Attributions';
+import PurchasePage from './pages/PurchasePage';
 import ReactGA from 'react-ga4';
 import FAQ from './components/FAQ';
 import HowToUse from './components/HowToUse';
@@ -121,6 +122,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/upgrade" element={<PurchasePage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/attributions" element={<Attributions />} />
