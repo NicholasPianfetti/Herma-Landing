@@ -15,6 +15,11 @@ import FAQ from './components/FAQ';
 import HowToUse from './components/HowToUse';
 import Contact from './components/Contact';
 import { initializeAnalytics, trackAppUsers } from './utils/analytics';
+import TestUpgradePage from './components/TestUpgradePage';
+import SuccessPage from './components/SuccessPage';
+import AuthButton from './components/AuthButton';
+import Login from './pages/Login';
+import { useAuth } from './context/AuthContext';
 
 initializeAnalytics();
 // Initialize with enhanced configuration options
@@ -97,6 +102,8 @@ const Home = () => {
 };
 
 function App() {
+  const { currentUser } = useAuth();
+
   // Track app load performance
   useEffect(() => {
     // Report initial page load performance
@@ -121,13 +128,17 @@ function App() {
         <RouteTracker />
         <Header />
         <Routes>
+          <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
           <Route path="/upgrade" element={<PurchasePage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/attributions" element={<Attributions />} />
+          <Route path="/test-upgrade" element={<TestUpgradePage />} />
+          <Route path="/success" element={<SuccessPage />} />
         </Routes>
         <Footer />
+        <AuthButton />
       </div>
     </Router>
   );

@@ -24,5 +24,9 @@
   },
   "remoteconfig": {
     "template": "remoteconfig.template.json"
+  },
+  "functions": {
+    "source": "functions",
+    "runtime": "nodejs20"
   }
 }

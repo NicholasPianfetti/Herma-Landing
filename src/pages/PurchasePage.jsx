@@ -3,12 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import Login from '../components/Login';
 import Signup from '../components/Signup';
 import { onAuthStateChange, logOut, getUserSubscriptionStatus } from '../firebase/auth';
+import { loadStripe } from '@stripe/stripe-js';
 
 const PurchasePage = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('login');
   const [subscriptionStatus, setSubscriptionStatus] = useState('free');
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -39,6 +41,67 @@ const PurchasePage = () => {
   const handleGoHome = () => {
     navigate('/');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleSubscribe = async () => {
+    if (!user) {
+      setError('Please sign in first');
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
+      console.log('Creating checkout session...');
+      console.log('API URL:', apiUrl);
+      
+      // Create checkout session
+      const response = await fetch(`${apiUrl}/create-checkout-session`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: user.uid,
+          userEmail: user.email,
+          priceId: process.env.REACT_APP_STRIPE_MONTHLY_PRICE_ID,
+          successUrl: `${window.location.origin}/success`,
+          cancelUrl: `${window.location.origin}/upgrade`,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ error: 'Failed to parse error response' }));
+        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log('Checkout session created:', data);
+
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
+      // Redirect to Stripe Checkout
+      const stripe = await loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
+      if (!stripe) {
+        throw new Error('Failed to load Stripe');
+      }
+
+      const { error } = await stripe.redirectToCheckout({
+        sessionId: data.id,
+      });
+
+      if (error) {
+        throw new Error(error.message);
+      }
+    } catch (error) {
+      console.error('Subscription error:', error);
+      setError(error.message || 'Failed to process payment. Please try again.');
+      setLoading(false);
+    }
   };
 
   if (loading) {
@@ -175,10 +238,21 @@ const PurchasePage = () => {
                       Lifetime access to all Pro features
                     </div>
                   </div>
-                  <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
-                    <p className="text-yellow-800 text-sm">
-                      🚧 <strong>Payment integration coming soon!</strong> We're working on connecting Stripe to enable secure payments. 
-                      You'll be notified as soon as Pro upgrades are available.
+                  <button
+                    onClick={handleSubscribe}
+                    disabled={loading}
+                    className="w-full px-6 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform transition duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                  >
+                    {loading ? 'Processing...' : 'Upgrade to Pro'}
+                  </button>
+                  {error && (
+                    <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+                      <p className="text-red-700 text-sm">{error}</p>
+                    </div>
+                  )}
+                  <div className="text-center mt-4">
+                    <p className="text-xs text-gray-500">
+                      Secure payment powered by Stripe. Your data stays private and on your device.
                     </p>
                   </div>
                 </div>

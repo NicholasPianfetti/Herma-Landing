@@ -5,6 +5,11 @@ import docUploadImage from './doc-upload.png';
 import creativeContentImage from './creative-content.png';
 import complexProblemImage from './complex-problem.png';
 import handleDownload from './handleDownload';
+import { useAuth } from '../context/AuthContext';
+import { createCheckoutSession } from '../services/stripeService';
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 const Hero = () => {
   const [requirementsOpen, setRequirementsOpen] = useState(false);
@@ -12,6 +17,10 @@ const Hero = () => {
   const [enlargedImage, setEnlargedImage] = useState(null);
   const [osType, setOsType] = useState('unknown');
   const [activeSlide, setActiveSlide] = useState(0);
+  const navigate = useNavigate();
+  const { user } = useAuth();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   // Detect OS on component mount
   useEffect(() => {
@@ -103,8 +112,42 @@ const Hero = () => {
     setTipsOpen(!tipsOpen);
   };
 
-  const navigate = useNavigate();
-    
+  const handleUpgradeClick = async () => {
+    if (!user) {
+      navigate('/login');
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const { session, error: sessionError } = await createCheckoutSession(
+        user.uid,
+        user.email,
+        process.env.REACT_APP_STRIPE_MONTHLY_PRICE_ID
+      );
+
+      if (sessionError) {
+        throw new Error(sessionError);
+      }
+
+      const stripe = await stripePromise;
+      const { error } = await stripe.redirectToCheckout({
+        sessionId: session.id,
+      });
+
+      if (error) {
+        throw new Error(error.message);
+      }
+    } catch (error) {
+      console.error('Upgrade error:', error);
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // Function to handle navigation and scroll to top
   const handleNavigation = (path, e) => {
     e.preventDefault();
@@ -150,53 +193,50 @@ const Hero = () => {
                 Take the short way. All your data stays on your device.
               </p>
 
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-6">
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 mb-6">
                 <button 
                   onClick={handleDownloadClick(osType === 'mac' ? 'mac' : 'windows')} 
-                  className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 text-white font-semibold rounded-lg shadow-xl hover:shadow-2xl transform transition duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[var(--highlight-color)] focus:ring-opacity-50"
+                  className="group relative overflow-hidden px-6 py-3 bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 text-white font-medium rounded-xl shadow-lg hover:shadow-xl transform transition-all duration-200 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-[var(--highlight-color)]/30 focus:ring-offset-2 w-full sm:w-auto sm:min-w-[180px]"
                 >
-                  {osType === 'mac' ? (
-                    <span className="flex items-center justify-center">
-                      <span className="mr-2 text-xl">⌘</span> Download for Mac
-                    </span>
-                  ) : osType === 'windows' ? (
-                    <span className="flex items-center justify-center">
-                      <span className="mr-2 text-xl">⊞</span> Download for Windows
-                    </span>
-                  ) : (
-                    <span className="flex items-center justify-center">
-                      <span className="mr-2 text-xl">↓</span> Download Herma
-                    </span>
-                  )}
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                  <span className="relative flex items-center justify-center gap-2">
+                    {osType === 'mac' ? (
+                      <>
+                        <span className="text-lg">⌘</span>
+                        <span>Download for Mac</span>
+                      </>
+                    ) : osType === 'windows' ? (
+                      <>
+                        <span className="text-lg">⊞</span>
+                        <span>Download for Free</span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="text-lg">↓</span>
+                        <span>Download Herma</span>
+                      </>
+                    )}
+                  </span>
                 </button>
                 
-                <Link 
-                  to="#tutorial" 
-                  className="w-full sm:w-auto px-8 py-4 bg-white border-2 border-[var(--highlight-color)] text-[var(--highlight-color)] font-semibold rounded-lg transition duration-300 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection('features');
-                  }}
-                >
-                  Learn More
-                </Link>
-              </div>
-              
-              {/* New Pro Upgrade Button */}
-              <div className="mb-6">
                 <button
-                  onClick={() => navigate('/upgrade')}
-                  className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform transition duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-opacity-50"
+                  onClick={handleUpgradeClick}
+                  disabled={loading}
+                  className="group relative overflow-hidden px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-600 text-white font-medium rounded-xl shadow-lg hover:shadow-xl transform transition-all duration-200 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-amber-500/30 focus:ring-offset-2 w-full sm:w-auto sm:min-w-[160px] disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <span className="flex items-center justify-center">
-                    <span className="mr-2">⭐</span> Upgrade to Pro
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                  <span className="relative flex items-center justify-center gap-2">
+                    <span className="text-lg">⭐</span>
+                    <span>{loading ? 'Processing...' : 'Upgrade to Pro'}</span>
                   </span>
                 </button>
               </div>
 
-              <p className="text-sm text-blue-800/70 mb-2">
-                {osType === 'mac' ? 'Available for Mac' : osType === 'windows' ? 'Available for Windows' : 'Available for Windows and macOS'} • Completely Private • No internet needed
-              </p>
+              {error && (
+                <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+                  <p className="text-red-700 text-sm">{error}</p>
+                </div>
+              )}
 
               <p className="text-[0.75rem] text-blue-800/70">
                 By downloading, you agree to our <a href="/privacy-policy" onClick={(e) => handleNavigation('/privacy-policy', e)} className="underline hover:text-blue-800">License</a> and <a href="/terms-of-service" onClick={(e) => handleNavigation('/terms-of-service', e)} className="underline hover:text-blue-800">Terms of Service</a>.
