@@ -83,6 +83,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   const value = {
+    currentUser: user,
     user,
     loading,
     error,

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { createCheckoutSession } from '../services/stripeService';
 //import SocialAuth from '../components/SocialAuth';
 
 const Login = () => {
@@ -13,14 +14,43 @@ const Login = () => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const { signin, signup, signInWithGoogle } = useAuth();
+  const { signin, signup, signInWithGoogle, user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Check if user should be redirected to checkout after login
+  useEffect(() => {
+    if (user && location.search.includes('redirect=checkout')) {
+      handleCheckoutRedirect();
+    }
+  }, [user, location.search]);
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+  };
+
+  const handleCheckoutRedirect = async () => {
+    if (!user) return;
+    
+    setLoading(true);
+    setError('');
+
+    try {
+      // createCheckoutSession already handles the redirect to Stripe
+      await createCheckoutSession(user);
+      // If we reach here, the redirect should have happened
+      // No need to do anything else
+    } catch (error) {
+      console.error('Checkout redirect error:', error);
+      setError(error.message);
+      // If checkout fails, redirect to home page
+      navigate('/');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -37,6 +67,13 @@ const Login = () => {
         }
         await signup(formData.email, formData.password);
       }
+      
+      // Check if we should redirect to checkout or home
+      if (location.search.includes('redirect=checkout')) {
+        // The useEffect will handle the checkout redirect
+        return;
+      }
+      
       navigate('/');
     } catch (error) {
       setError(error.message);
@@ -50,6 +87,13 @@ const Login = () => {
     setError('');
     try {
       await signInWithGoogle();
+      
+      // Check if we should redirect to checkout or home
+      if (location.search.includes('redirect=checkout')) {
+        // The useEffect will handle the checkout redirect
+        return;
+      }
+      
       navigate('/');
     } catch (error) {
       setError(error.message);
@@ -81,7 +125,12 @@ const Login = () => {
                 <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
                 <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
               </svg>
-              Continue with Google
+              {loading 
+                ? (location.search.includes('redirect=checkout') 
+                    ? 'Redirecting to checkout...' 
+                    : 'Processing...')
+                : 'Continue with Google'
+              }
             </button>
           </div>
 
@@ -174,7 +223,12 @@ const Login = () => {
                 disabled={loading}
                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
               >
-                {loading ? 'Processing...' : (isLogin ? 'Sign in' : 'Sign up')}
+                {loading 
+                  ? (location.search.includes('redirect=checkout') 
+                      ? 'Redirecting to checkout...' 
+                      : 'Processing...')
+                  : (isLogin ? 'Sign in' : 'Sign up')
+                }
               </button>
             </div>
           </form>

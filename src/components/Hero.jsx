@@ -114,7 +114,7 @@ const Hero = () => {
 
   const handleUpgradeClick = async () => {
     if (!user) {
-      navigate('/login');
+      navigate('/login?redirect=checkout');
       return;
     }
 
@@ -122,11 +122,7 @@ const Hero = () => {
     setError(null);
 
     try {
-      const { session, error: sessionError } = await createCheckoutSession(
-        user.uid,
-        user.email,
-        process.env.REACT_APP_STRIPE_MONTHLY_PRICE_ID
-      );
+      const { session, error: sessionError } = await createCheckoutSession(user);
 
       if (sessionError) {
         throw new Error(sessionError);

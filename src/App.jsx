@@ -15,7 +15,6 @@ import FAQ from './components/FAQ';
 import HowToUse from './components/HowToUse';
 import Contact from './components/Contact';
 import { initializeAnalytics, trackAppUsers } from './utils/analytics';
-import TestUpgradePage from './components/TestUpgradePage';
 import SuccessPage from './components/SuccessPage';
 import AuthButton from './components/AuthButton';
 import Login from './pages/Login';
@@ -102,7 +101,7 @@ const Home = () => {
 };
 
 function App() {
-  const { currentUser } = useAuth();
+  const { user } = useAuth();
 
   // Track app load performance
   useEffect(() => {
@@ -134,8 +133,8 @@ function App() {
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/attributions" element={<Attributions />} />
-          <Route path="/test-upgrade" element={<TestUpgradePage />} />
           <Route path="/success" element={<SuccessPage />} />
+          <Route path="/cancel" element={<Home />} />
         </Routes>
         <Footer />
         <AuthButton />

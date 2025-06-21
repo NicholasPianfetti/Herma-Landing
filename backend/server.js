@@ -47,7 +47,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:3002', 'http://localhost:3001'],
+  origin: ['http://localhost:3000', 'http://localhost:3002', 'http://localhost:3001', 'http://hermaai.com', 'http://www.hermaai.com', 'https://herma-landing-b5105.web.app/'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']

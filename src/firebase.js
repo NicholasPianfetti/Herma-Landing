@@ -8,7 +8,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup
 } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 
 // Your Firebase configuration
 const firebaseConfig = {
@@ -29,6 +29,33 @@ export const auth = getAuth(app);
 
 // Initialize Cloud Firestore and get a reference to the service
 export const db = getFirestore(app);
+
+// Function to check if user has pro subscription
+export const checkProSubscription = async (userId) => {
+  try {
+    const userDoc = await getDoc(doc(db, 'users', userId));
+    if (userDoc.exists()) {
+      return userDoc.data().isPro || false;
+    }
+    return false;
+  } catch (error) {
+    console.error('Error checking subscription:', error);
+    return false;
+  }
+};
+
+// Function to update user's pro status
+export const updateProStatus = async (userId, isPro) => {
+  try {
+    await setDoc(doc(db, 'users', userId), {
+      isPro,
+      updatedAt: new Date().toISOString()
+    }, { merge: true });
+  } catch (error) {
+    console.error('Error updating pro status:', error);
+    throw error;
+  }
+};
 
 // Export auth functions for easy importing
 export {
