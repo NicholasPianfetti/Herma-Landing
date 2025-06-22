@@ -1,10 +1,10 @@
 // src/services/stripeService.js
 
-const FUNCTIONS_URL = process.env.REACT_APP_FUNCTIONS_URL || 
+const FUNCTIONS_URL = process.env.REACT_APP_FIREBASE_FUNCTIONS_URL || 
   (process.env.NODE_ENV === 'development' 
     ? 'http://localhost:5001/herma-landing-b5105/us-central1/api'
     : 'https://api-opcyvaprha-uc.a.run.app');
-
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
 const STRIPE_PRICE_ID = 'price_1Ra4P4Pq3xOWKbiJbjwxqQ8G'; // Replace with your actual price ID from Step 3
 
 export const createCheckoutSession = async (user) => {
@@ -72,22 +72,30 @@ export const getSubscriptionStatus = async (userId) => {
 
 export const createPortalSession = async (customerId) => {
   try {
-    const response = await fetch(`${FUNCTIONS_URL}/create-portal-session`, {
+    console.log('Creating portal session for customer:', customerId);
+    console.log('API URL:', `${API_URL}/create-portal-session`);
+
+    const response = await fetch(`${API_URL}/create-portal-session`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         customerId,
-        returnUrl: window.location.origin,
+        returnUrl: window.location.origin + '/success',
       }),
     });
 
+    console.log('Response status:', response.status);
+
     if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Portal session error response:', errorText);
       throw new Error(`Failed to create portal session: ${response.status}`);
     }
 
     const data = await response.json();
+    console.log('Portal session created successfully:', data);
     return data.url;
   } catch (error) {
     console.error('Error creating portal session:', error);
@@ -108,3 +116,4 @@ export const testConnection = async () => {
     return false;
   }
 };
+

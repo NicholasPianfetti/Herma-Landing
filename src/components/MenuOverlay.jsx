@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import handleDownload from './handleDownload';
+import { useAuth } from '../context/AuthContext';
+import { getSubscriptionStatus } from '../services/stripeService';
 
 const MenuOverlay = ({ isOpen, onClose, osType }) => {
+  const navigate = useNavigate();
+  const { user } = useAuth();
+  
   // Handle ESC key press to close the menu
   useEffect(() => {
     const handleEscKey = (event) => {
@@ -40,6 +45,35 @@ const MenuOverlay = ({ isOpen, onClose, osType }) => {
     onClose();
   };
 
+  // Function to handle subscription button click
+  const handleSubscriptionClick = async (e) => {
+    e.preventDefault();
+    onClose();
+    
+    if (!user) {
+      // If not logged in, go to login page
+      navigate('/login');
+      return;
+    }
+
+    try {
+      // Check if user has a subscription
+      const subscriptionData = await getSubscriptionStatus(user.uid);
+      
+      if (subscriptionData && subscriptionData.status === 'active') {
+        // User has an active subscription, go to subscription page
+        navigate('/success');
+      } else {
+        // User doesn't have a subscription, go to purchase page
+        navigate('/upgrade');
+      }
+    } catch (error) {
+      console.error('Error checking subscription status:', error);
+      // If there's an error (like 404), assume user doesn't have subscription
+      navigate('/upgrade');
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -63,6 +97,13 @@ const MenuOverlay = ({ isOpen, onClose, osType }) => {
           </div>
 
           <nav className="flex flex-col gap-4">
+            <a 
+              href="/subscription" 
+              className="px-4 py-3 rounded-lg hover:bg-blue-50 text-blue-900 transition-colors"
+              onClick={handleSubscriptionClick}
+            >
+              Subscription
+            </a>
             <Link 
               to="#features" 
               className="px-4 py-3 rounded-lg hover:bg-blue-50 text-blue-900 transition-colors"

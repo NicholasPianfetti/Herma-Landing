@@ -1,14 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import HermaLogo from './Herma.jpeg';
 import handleDownload from './handleDownload';
 import MenuOverlay from './MenuOverlay'; // Import the new menu overlay component
+import { useAuth } from '../context/AuthContext';
+import { getSubscriptionStatus } from '../services/stripeService';
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [osType, setOsType] = useState('unknown');
   const [menuOpen, setMenuOpen] = useState(false); // Menu state
+  const navigate = useNavigate();
+  const { user } = useAuth();
   
+  // Safety check for navigate function
+  const safeNavigate = (path) => {
+    if (navigate) {
+      navigate(path);
+    } else {
+      // Fallback to window.location if navigate is not available
+      window.location.href = path;
+    }
+  };
+
   // Detect OS on component mount
   useEffect(() => {
     const detectOS = () => {
@@ -92,6 +106,48 @@ const Header = () => {
     closeMenu();
   };
 
+  // Function to handle subscription button click
+  const handleSubscriptionClick = async (e) => {
+    e.preventDefault();
+    
+    if (!user) {
+      // If not logged in, go to login page
+      safeNavigate('/login');
+      return;
+    }
+
+    try {
+      // Check if user has a subscription
+      const subscriptionData = await getSubscriptionStatus(user.uid);
+      
+      if (subscriptionData && subscriptionData.status === 'active') {
+        // User has an active subscription, go to subscription page
+        safeNavigate('/success');
+      } else {
+        // User doesn't have a subscription, go to purchase page
+        safeNavigate('/upgrade');
+      }
+    } catch (error) {
+      console.error('Error checking subscription status:', error);
+      // If there's an error (like 404), assume user doesn't have subscription
+      safeNavigate('/upgrade');
+    }
+  };
+
+  // Function to handle navigation and scroll to top
+  const handleNavigation = (path, e) => {
+    e.preventDefault();
+    
+    // Navigate to the page
+    safeNavigate(path);
+    
+    // Scroll to top
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   return (
     <>
       <header 
@@ -137,6 +193,23 @@ const Header = () => {
               {/* Desktop Navigation */}
               <nav className="hidden md:flex items-center gap-2">
                 <div className="px-4 py-1.5 bg-[var(--secondary-bg)]/20 rounded-full flex items-center mr-2">
+                <a 
+                    href="/upgrade" 
+                    className="px-4 py-1 rounded-full text-[var(--text-color)] hover:text-[var(--highlight-color)] hover:bg-[var(--secondary-bg)]/40 transition-colors duration-200"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavigation('/upgrade', e);
+                    }}
+                  >
+                    Pricing
+                  </a>
+                  <a 
+                    href="/subscription" 
+                    className="px-4 py-1 rounded-full text-[var(--text-color)] hover:text-[var(--highlight-color)] hover:bg-[var(--secondary-bg)]/40 transition-colors duration-200"
+                    onClick={handleSubscriptionClick}
+                  >
+                    Subscription
+                  </a>
                   <Link 
                     to="#features" 
                     className="px-4 py-1 rounded-full text-[var(--text-color)] hover:text-[var(--highlight-color)] hover:bg-[var(--secondary-bg)]/40 transition-colors duration-200"
@@ -156,6 +229,16 @@ const Header = () => {
                     }}
                   >
                     About
+                  </Link>
+                  <Link 
+                    to="#contact" 
+                    className="px-4 py-1 rounded-full text-[var(--text-color)] hover:text-[var(--highlight-color)] hover:bg-[var(--secondary-bg)]/40 transition-colors duration-200"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection('contact');
+                    }}
+                  >
+                    Contact Us
                   </Link>
                 </div>
               </nav>
