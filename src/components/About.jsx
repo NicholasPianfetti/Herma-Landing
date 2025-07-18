@@ -45,30 +45,46 @@ const About = () => {
 
   // Top row features
   const topRowFeatures = [
-    {
-      id: 4,
-      icon: (
-        <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10">
-            <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/>
-          </svg>
-        </div>
-      ),
-      title: "100% Private",
-      description: "Your conversations and documents stay on your device. No information leaves your control."
-    },
-    {
-      id: 5,
-      icon: (
-        <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10">
-            <path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/>
-          </svg>
-        </div>
-      ),
-      title: "No Internet Required",
-      description: "Herma runs locally, so you can get fast responses without the need for an internet connection."
-    },
+    // {
+    //   id: 4,
+    //   icon: (
+    //     <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center">
+    //       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10">
+    //         <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/>
+    //       </svg>
+    //     </div>
+    //   ),
+    //   title: "100% Private",
+    //   description: ""
+    // },
+    // {
+    //   id: 5,
+    //   icon: (
+    //     <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center">
+    //       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10">
+    //         <path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/>
+    //       </svg>
+    //     </div>
+    //   ),
+    //   title: "No Internet Required",
+    //   description: ""
+    // },
+    // {
+    //   id: 1,
+    //   icon: (
+    //     <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center">
+    //       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10">
+    //         <path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"/>
+    //       </svg>
+    //     </div>
+    //   ),
+    //   title: "Contextual Intelligence",
+    //   description: ""
+    // }
+  ];
+
+  // Bottom row features
+  const bottomRowFeatures = [
     {
       id: 6,
       icon: (
@@ -80,22 +96,6 @@ const About = () => {
       ),
       title: "Document Analysis",
       description: "Herma can handle large documents, making it easy to analyze and summarize complex information."
-    }
-  ];
-
-  // Bottom row features
-  const bottomRowFeatures = [
-    {
-      id: 1,
-      icon: (
-        <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10">
-            <path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"/>
-          </svg>
-        </div>
-      ),
-      title: "Contextual Intelligence",
-      description: "Context from documents, memory, and more allows Herma to provide accurate and efficient responses."
     },
     {
       id: 2,
@@ -107,7 +107,7 @@ const About = () => {
         </div>
       ),
       title: "Smart Conversations",
-      description: "Herma combines local LLMs with powerful memory to have helpful conversations."
+      description: "Herma combines local LLMs with powerful cloud models to create enhanced responses."
     },
     {
       id: 3,
@@ -148,13 +148,13 @@ const About = () => {
             to cloud services or struggle with complicated local solutions that don't work as well.
           </p>
           <p className="text-center text-lg text-blue-800 leading-relaxed">
-            Herma gives you the best of both worlds — powerful AI capabilities that run entirely on your device. 
-            We're making private AI usable, affordable, and accessible to everyone.
+            Herma gives you the best of both worlds — powerful AI capabilities that keep private data on your device. 
+            Unlock the power of agentic AI without compromising your data.
           </p>
         </div>
         
         {/* Features Grid with Animation */}
-        <div className="space-y-16" id="features">
+        <div className="space-y-2" id="features">
           {/* Decorative title for Features section */}
           <div className="text-center mb-8">
             <h3 className="text-2xl font-bold text-blue-900 mb-2">Key Features</h3>
@@ -202,7 +202,7 @@ const About = () => {
         <div className="mt-24">
           <div className="bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 rounded-2xl py-12 px-8 shadow-xl">
             <div className="text-center">
-              <h3 className="text-3xl font-bold text-white mb-4">Experience the Power of Local AI</h3>
+              <h3 className="text-3xl font-bold text-white mb-4">Experience the Power of Secure AI</h3>
               <p className="text-white text-lg opacity-90 mb-8 max-w-2xl mx-auto">
                 Join us in building a future where AI is powerful, private, and accessible to everyone.
               </p>
@@ -213,7 +213,7 @@ const About = () => {
                 Download Now
               </button>
               <p className="mt-4 text-white/80 text-sm">
-                {osType === 'mac' ? 'Available for Mac' : osType === 'windows' ? 'Available for Windows' : 'Available for Windows and macOS'} • No Internet Required
+                {osType === 'mac' ? 'Available for Mac' : osType === 'windows' ? 'Available for Windows' : 'Available for Windows and macOS'} • No Payment Required
               </p>
             </div>
           </div>

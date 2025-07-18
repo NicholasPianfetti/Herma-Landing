@@ -5,43 +5,43 @@ const FAQ = () => {
   const faqItems = [
     {
       id: 1,
-      question: "How does Herma keep my data private?",
-      answer: "Herma runs entirely on your local device, which means your data never leaves your computer. Unlike cloud-based AI services, we don't send your conversations, documents, or queries to external servers. All processing happens directly on your machine, ensuring complete privacy and data security."
+      question: "How does Herma keep my data private while using cloud AI?",
+      answer: "Herma acts as a local data governor that intelligently filters your queries before they reach cloud services. When you ask a question or request a task, Herma first identifies and redacts all private and proprietary information locally on your device. Only the sanitized, non-sensitive portion of your query is sent to cloud AI models for processing. The private data is then seamlessly reinserted into the response on your local device, giving you the power of cloud AI without compromising your sensitive information."
     },
     {
       id: 2,
-      question: "Do I need internet to use Herma?",
-      answer: "No, Herma works completely offline. Once installed, you can use all of Herma's features without an internet connection. This makes it perfect for working with sensitive data or in environments where connectivity is limited or unavailable."
+      question: "What makes Herma different from other AI assistants?",
+      answer: "Herma uniquely combines the best of both worlds: the power of large cloud AI models with the security of local processing. Unlike purely cloud-based assistants that see all your data, or purely local models with limited capabilities, Herma's hybrid approach provides enterprise-grade privacy protection while maintaining access to cutting-edge AI capabilities. It's your personal data firewall for the AI age."
     },
     {
       id: 3,
-      question: "How does Herma compare to cloud-based AI assistants?",
-      answer: "While cloud-based AI assistants may offer access to larger models, Herma provides comparable functionality with the added benefit of complete privacy. Herma is optimized to run efficiently on consumer hardware while still delivering high-quality responses, document analysis, and creative content generation."
+      question: "How does the agentic system work?",
+      answer: "Herma features a fully agentic system that can interact with a variety of applications through a single chat interface. When you request a task, Herma's local data governor first filters out sensitive information, then uses cloud AI models to understand and execute complex multi-step workflows. Whether you need to analyze documents, generate content, or automate tasks across different apps, Herma handles it all while keeping your private data secure."
     },
     {
       id: 4,
-      question: "What types of files can Herma analyze?",
-      answer: "Herma can analyze various document types including text files, PDFs, Word documents, spreadsheets, and more. You can use Herma to summarize documents, extract key information, answer questions about the content, and generate insights based on your files."
+      question: "What types of private information does Herma filter?",
+      answer: "Herma's local data governor automatically identifies and protects various types of sensitive information including personal identifiers (names, emails, phone numbers), financial data, proprietary business information, confidential documents, and any custom data patterns you specify. This filtering happens entirely on your device before any data reaches external cloud services."
     },
     {
       id: 5,
-      question: "Will my computer be powerful enough to run Herma?",
-      answer: "Herma is designed to run efficiently on modern computers. For optimal performance, we recommend at least an Intel i5/AMD Ryzen 5 processor (or equivalent), 16GB RAM, and 20GB of available storage. For more complex tasks, having a GPU with CUDA support will improve performance, but it's not strictly required for basic functionality."
+      question: "Does Herma work offline?",
+      answer: "Yes, Herma has robust offline capabilities for basic AI tasks and document analysis using local models. However, its true power shines when connected to the internet, where it can leverage powerful cloud AI models while maintaining privacy through local data filtering. You get the best of both worlds: offline functionality when needed, and enhanced capabilities when online."
     },
     {
       id: 6,
-      question: "How often is Herma updated?",
-      answer: "We regularly release updates to improve performance, add new features, and enhance the underlying AI models. Updates are designed to be lightweight and non-intrusive, and you'll be notified when new versions are available. Since Herma runs locally, you have complete control over when to update."
+      question: "Is Herma suitable for businesses and enterprises?",
+      answer: "Absolutely. Herma's local data governor makes it ideal for organizations concerned about data leakage while still wanting to leverage advanced AI capabilities. Companies can confidently use Herma for sensitive tasks like analyzing proprietary documents, handling customer data, or processing confidential information, knowing that their private data never leaves their control while still accessing the latest AI innovations."
     },
     {
       id: 7,
-      question: "Can I customize Herma for specific use cases?",
-      answer: "Yes, Herma learns from your interactions and the documents you provide, allowing it to better understand your specific needs and preferences over time. This makes Herma increasingly valuable for specialized tasks like research, content creation, or information analysis in your particular domain."
+      question: "How does Herma solve the AI data leakage problem?",
+      answer: "Herma directly addresses the growing concern about data leakage in AI systems by creating a secure bridge between local and cloud AI. Traditional cloud AI services require sending all your data externally, while local-only solutions lack power. Herma's innovative approach filters sensitive information locally, sends only non-sensitive context to cloud models, and reconstructs complete responses locally. This eliminates data leakage risks while maintaining AI effectiveness."
     },
     {
       id: 8,
-      question: "Is Herma good for work use?",
-      answer: "Absolutely. Herma's privacy-first approach makes it ideal for businesses handling sensitive information. With no data leaving your devices, you can confidently use Herma for proprietary research, financial analysis, customer data processing, and other sensitive tasks without privacy concerns."
+      question: "Can I control what information gets filtered?",
+      answer: "Yes, Herma provides granular control over its data filtering system. You can customize which types of information should be considered sensitive, add specific patterns or terms to protect, and adjust the filtering sensitivity based on your needs. The local data governor learns from your preferences to provide increasingly accurate protection while maintaining the functionality you need."
     }
   ];
 

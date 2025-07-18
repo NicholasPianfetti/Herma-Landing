@@ -181,7 +181,7 @@ const Header = () => {
                   </span>
                   {!scrolled && (
                     <span className="hidden sm:inline-block text-xs text-blue-800/60 font-medium -mt-1">
-                      Local AI Assistant
+                      Local Data Governor
                     </span>
                   )}
                 </div>

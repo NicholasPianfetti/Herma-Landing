@@ -8,6 +8,7 @@ import handleDownload from './handleDownload';
 import { useAuth } from '../context/AuthContext';
 import { createCheckoutSession } from '../services/stripeService';
 import { loadStripe } from '@stripe/stripe-js';
+import StarBorder from './StarBorder';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
@@ -178,15 +179,11 @@ const Hero = () => {
             {/* Text Column */}
             <div className="w-full lg:w-1/2 text-center lg:text-left">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 leading-tight">
-                Privacy is Power
+                Agentic Unity
               </h1>
               
               <p className="text-xl md:text-2xl text-blue-800 mb-6 font-light max-w-xl mx-auto lg:mx-0">
-                A local alternative to cloud-based AI
-              </p>
-              
-              <p className="text-lg text-blue-700 mb-8 max-w-lg mx-auto lg:mx-0">
-                Take the short way. All your data stays on your device.
+                The power of the cloud with the security of local
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 mb-6">
@@ -215,17 +212,22 @@ const Hero = () => {
                   </span>
                 </button>
                 
-                <button
+                <StarBorder
                   onClick={handleUpgradeClick}
                   disabled={loading}
-                  className="group relative overflow-hidden px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-600 text-white font-medium rounded-xl shadow-lg hover:shadow-xl transform transition-all duration-200 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-amber-500/30 focus:ring-offset-2 w-full sm:w-auto sm:min-w-[160px] disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full sm:w-auto sm:min-w-[160px]"
+                  color="#fbbf24"
+                  speed="4s"
+                  thickness={2}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-                  <span className="relative flex items-center justify-center gap-2">
-                    <span className="text-lg">⭐</span>
-                    <span>{loading ? 'Processing...' : 'Upgrade to Pro'}</span>
-                  </span>
-                </button>
+                  <div className="group relative overflow-hidden px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-600 text-white font-medium rounded-xl shadow-lg hover:shadow-xl transform transition-all duration-200 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-amber-500/30 focus:ring-offset-2 w-full h-full flex items-center justify-center">
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                    <span className="relative flex items-center justify-center gap-2">
+                      <span className="text-lg">⭐</span>
+                      <span>{loading ? 'Processing...' : 'Upgrade to Pro'}</span>
+                    </span>
+                  </div>
+                </StarBorder>
               </div>
 
               {error && (
@@ -316,16 +318,16 @@ const Hero = () => {
       {/* Features Section */}
       <section className="py-24 bg-white" id="features">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          {/* <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-blue-900 mb-4">Everything You Need to Know</h2>
             <p className="text-lg text-blue-600 max-w-2xl mx-auto">
               Get started with Herma and experience private AI on your device
             </p>
-          </div>
+          </div> */}
 
-          <div className="grid md:grid-cols-2 gap-8">
+           {/* <div className="grid md:grid-cols-2 gap-8">  */}
             {/* System Requirements Card */}
-            <div className={`bg-white rounded-xl overflow-hidden shadow-xl border border-blue-100 hover:shadow-2xl transition-shadow duration-300 ${requirementsOpen ? 'h-auto' : 'h-[4.5rem]'}`}>
+             {/* <div className={`bg-white rounded-xl overflow-hidden shadow-xl border border-blue-100 hover:shadow-2xl transition-shadow duration-300 ${requirementsOpen ? 'h-auto' : 'h-[4.5rem]'}`}>
               <div 
                 className="bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 px-6 py-5 cursor-pointer flex justify-between items-center"
                 onClick={toggleRequirements}
@@ -335,9 +337,9 @@ const Hero = () => {
                 <span className="text-white text-xl bg-white/20 w-8 h-8 rounded-full flex items-center justify-center">
                   {requirementsOpen ? "−" : "+"}
                 </span>
-              </div>
+              </div> */}
               
-              <div className={`transition-all duration-300 ${requirementsOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
+              {/* <div className={`transition-all duration-300 ${requirementsOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
                 <div className="p-6">
                 <div className="grid sm:grid-cols-2 gap-4 mb-6">
                     <div className="bg-blue-50 p-4 rounded-lg">
@@ -362,10 +364,10 @@ const Hero = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div>  */}
 
             {/* Tips Card */}
-            <div className={`bg-white rounded-xl overflow-hidden shadow-xl border border-blue-100 hover:shadow-2xl transition-shadow duration-300 ${tipsOpen ? 'h-auto' : 'h-[4.5rem]'}`}>
+             {/*<div className={`bg-white rounded-xl overflow-hidden shadow-xl border border-blue-100 hover:shadow-2xl transition-shadow duration-300 ${tipsOpen ? 'h-auto' : 'h-[4.5rem]'}`}>
               <div 
                 className="bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 px-6 py-5 cursor-pointer flex justify-between items-center"
                 onClick={toggleTips}
@@ -402,11 +404,11 @@ const Hero = () => {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </div>*/}
+          {/* </div>  */}
 
           {/* Key Benefits Section */}
-          <div className="mt-24">
+          <div className="mt-0">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-bold text-blue-900 mb-4">Key Benefits</h2>
               <p className="text-lg text-blue-600 max-w-2xl mx-auto">
@@ -421,8 +423,8 @@ const Hero = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-blue-900 mb-3">100% Private</h3>
-                <p className="text-blue-700">Your data never leaves your device. No cloud processing means total privacy protection.</p>
+                <h3 className="text-xl font-bold text-blue-900 mb-3">Local Filter</h3>
+                <p className="text-blue-700">Your private data gets redacted so only you see it not big cloud companies.</p>
               </div>
               
               <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-blue-100 flex flex-col items-center text-center">
@@ -442,15 +444,15 @@ const Hero = () => {
                   </svg>
                 </div>
                 <h3 className="text-xl font-bold text-blue-900 mb-3">Always Available</h3>
-                <p className="text-blue-700">Works offline with no subscription required. Access powerful AI capabilities anytime, anywhere.</p>
+                <p className="text-blue-700">Works offline, access powerful AI capabilities anytime, anywhere.</p>
               </div>
             </div>
           </div>
 
           {/* CTA Section */}
-          <div className="mt-24 text-center">
+          <div className="mt-12 text-center">
             <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-12 rounded-2xl shadow-lg">
-              <h3 className="text-3xl font-bold text-blue-900 mb-6">Ready to experience private AI?</h3>
+              <h3 className="text-3xl font-bold text-blue-900 mb-6">Ready to unlock AI?</h3>
               <p className="text-xl text-blue-700 mb-8 max-w-2xl mx-auto">
                 Download Herma today and take control of your AI experience
               </p>
@@ -458,10 +460,10 @@ const Hero = () => {
                 onClick={handleDownloadClick(osType === 'mac' ? 'mac' : 'windows')} 
                 className="px-10 py-5 bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 text-white text-xl font-medium rounded-lg shadow-xl transform transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
               >
-                Download Herma Now
+                Download Herma Today
               </button>
               <p className="mt-4 text-sm text-blue-600">
-                {osType === 'mac' ? 'Available for Mac' : osType === 'windows' ? 'Available for Windows' : 'Available for Windows and macOS'} • No Internet Required
+                {osType === 'mac' ? 'Available for Mac' : osType === 'windows' ? 'Available for Windows' : 'Available for Windows and macOS'} • No Payment Required
               </p>
             </div>
           </div>

@@ -27,7 +27,7 @@ const Footer = () => {
           <div className="text-center md:text-left">
             <h3 className="text-2xl font-bold mb-4">HΞRMΛ</h3>
             <p className="text-white/80">
-              Local AI that prioritizes your privacy and security.
+              Local data governor that prioritizes your privacy and security.
             </p>
             <div className="mt-4 flex space-x-4 justify-center md:justify-start">
               <a 
