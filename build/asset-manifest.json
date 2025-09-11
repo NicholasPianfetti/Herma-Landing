@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.b3f299d6.css",
-    "main.js": "/static/js/main.7e6efe9d.js",
+    "main.css": "/static/css/main.52187ae7.css",
+    "main.js": "/static/js/main.8fb2f7df.js",
     "static/media/question-image.png": "/static/media/question-image.98d13a1f0c7ee28a7dda.png",
     "static/media/creative-image.png": "/static/media/creative-image.0ce8a0e752efba43c2e0.png",
     "static/media/problem-image.png": "/static/media/problem-image.d41628eafcbddfe1e272.png",
@@ -13,11 +13,11 @@
     "static/media/app-preview.png": "/static/media/app-preview.f801fb6443f54eca28b0.png",
     "static/media/Herma.jpeg": "/static/media/Herma.fbab95905cdc0de697f3.jpeg",
     "index.html": "/index.html",
-    "main.b3f299d6.css.map": "/static/css/main.b3f299d6.css.map",
-    "main.7e6efe9d.js.map": "/static/js/main.7e6efe9d.js.map"
+    "main.52187ae7.css.map": "/static/css/main.52187ae7.css.map",
+    "main.8fb2f7df.js.map": "/static/js/main.8fb2f7df.js.map"
   },
   "entrypoints": [
-    "static/css/main.b3f299d6.css",
-    "static/js/main.7e6efe9d.js"
+    "static/css/main.52187ae7.css",
+    "static/js/main.8fb2f7df.js"
   ]
 }

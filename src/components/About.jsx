@@ -142,29 +142,32 @@ const About = () => {
         </div>
         
         {/* Description Block with improved typography */}
-        <div className="max-w-3xl mx-auto mb-20 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-8 shadow-lg">
+        <div className="max-w-4xl mx-auto mb-20 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-8 shadow-lg">
           <p className="text-center text-lg text-blue-800 leading-relaxed mb-6">
-            When you use AI with your personal data, you typically face a difficult choice: either send your private information 
-            to cloud services or struggle with complicated local solutions that don't work as well.
+            Traditional AI solutions force you to choose between power and privacy. Cloud models are powerful but expose your sensitive data. 
+            Local models are private but limited in capability.
+          </p>
+          <p className="text-center text-lg text-blue-800 leading-relaxed mb-6">
+            <span className="font-semibold text-blue-900">Herma's data governance technology</span> solves this dilemma by automatically detecting and extracting sensitive information from your prompts locally, 
+            sending only sanitized queries to powerful cloud models, then seamlessly restoring your private data in the responses.
           </p>
           <p className="text-center text-lg text-blue-800 leading-relaxed">
-            Herma gives you the best of both worlds — powerful AI capabilities that keep private data on your device. 
-            Unlock the power of agentic AI without compromising your data.
+            Experience the computational power of GPT-4, Claude, and other advanced models while ensuring your confidential information never leaves your device.
           </p>
         </div>
         
         {/* Features Grid with Animation */}
         <div className="space-y-2" id="features">
           {/* Decorative title for Features section */}
-          <div className="text-center mb-8">
+          {/* <div className="text-center mb-8">
             <h3 className="text-2xl font-bold text-blue-900 mb-2">Key Features</h3>
             <p className="text-lg text-blue-600 max-w-xl mx-auto">
               Everything you need in a private AI assistant
             </p>
-          </div>
+          </div> */}
           
           {/* First Row of Features */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {topRowFeatures.map((feature, index) => (
               <div 
                 key={feature.id} 
@@ -178,10 +181,10 @@ const About = () => {
                 />
               </div>
             ))}
-          </div>
+          </div> */}
           
           {/* Second Row of Features */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {bottomRowFeatures.map((feature, index) => (
               <div 
                 key={feature.id} 
@@ -195,11 +198,11 @@ const About = () => {
                 />
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
         
         {/* Final CTA Banner */}
-        <div className="mt-24">
+        {/* <div className="mt-24">
           <div className="bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 rounded-2xl py-12 px-8 shadow-xl">
             <div className="text-center">
               <h3 className="text-3xl font-bold text-white mb-4">Experience the Power of Secure AI</h3>
@@ -217,7 +220,7 @@ const About = () => {
               </p>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
       
       {/* Add CSS animations */}

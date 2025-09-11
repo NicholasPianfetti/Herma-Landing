@@ -175,21 +175,25 @@ const Hero = () => {
         </div>
 
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
-            {/* Text Column */}
-            <div className="w-full lg:w-1/2 text-center lg:text-left">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 leading-tight">
-                Agentic Unity
+          <div className="flex flex-col items-center text-center">
+            {/* Main Text Section */}
+            <div className="w-full max-w-4xl mb-16">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 leading-tight mt-50">
+                AI That Protects Your Data
               </h1>
               
-              <p className="text-xl md:text-2xl text-blue-800 mb-6 font-light max-w-xl mx-auto lg:mx-0">
-                The power of the cloud with the security of local
+              <p className="text-xl md:text-2xl text-blue-800 mb-8 font-light max-w-3xl mx-auto">
+                Unify cloud and local models with complete data security
               </p>
 
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 mb-6">
+              {/* <p className="text-lg text-blue-700 mb-8 max-w-3xl mx-auto leading-relaxed">
+                Herma is a data governor that extracts sensitive information locally before sending sanitized prompts to powerful cloud models, then restores your data on return. Get the computational power of cloud AI with the security of local processing.
+              </p> */}
+
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
                 <button 
                   onClick={handleDownloadClick(osType === 'mac' ? 'mac' : 'windows')} 
-                  className="group relative overflow-hidden px-6 py-3 bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 text-white font-medium rounded-xl shadow-lg hover:shadow-xl transform transition-all duration-200 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-[var(--highlight-color)]/30 focus:ring-offset-2 w-full sm:w-auto sm:min-w-[180px]"
+                  className="group relative overflow-hidden px-8 py-4 bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 text-white font-medium rounded-xl shadow-lg hover:shadow-xl transform transition-all duration-200 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-[var(--highlight-color)]/30 focus:ring-offset-2 w-full sm:w-auto sm:min-w-[200px]"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                   <span className="relative flex items-center justify-center gap-2">
@@ -211,27 +215,10 @@ const Hero = () => {
                     )}
                   </span>
                 </button>
-                
-                <StarBorder
-                  onClick={handleUpgradeClick}
-                  disabled={loading}
-                  className="w-full sm:w-auto sm:min-w-[160px]"
-                  color="#fbbf24"
-                  speed="4s"
-                  thickness={2}
-                >
-                  <div className="group relative overflow-hidden px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-600 text-white font-medium rounded-xl shadow-lg hover:shadow-xl transform transition-all duration-200 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-amber-500/30 focus:ring-offset-2 w-full h-full flex items-center justify-center">
-                    <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-                    <span className="relative flex items-center justify-center gap-2">
-                      <span className="text-lg">⭐</span>
-                      <span>{loading ? 'Processing...' : 'Upgrade to Pro'}</span>
-                    </span>
-                  </div>
-                </StarBorder>
               </div>
 
               {error && (
-                <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+                <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg max-w-md mx-auto">
                   <p className="text-red-700 text-sm">{error}</p>
                 </div>
               )}
@@ -241,8 +228,8 @@ const Hero = () => {
               </p>
             </div>
 
-            {/* Image Column */}
-            <div className="w-full lg:w-1/2 relative">
+            {/* Demo Section */}
+            <div className="w-full max-w-4xl relative">
               <div className="absolute -top-16 -right-16 w-64 h-64 bg-[var(--highlight-color)] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
               <div className="absolute -bottom-16 -left-16 w-64 h-64 bg-indigo-600 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
                   {/* App Preview Frame */}
@@ -316,8 +303,8 @@ const Hero = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-24 bg-white" id="features">
-        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {/* <section className="py-24 bg-white" id="features">
+        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"> */}
           {/* <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-blue-900 mb-4">Everything You Need to Know</h2>
             <p className="text-lg text-blue-600 max-w-2xl mx-auto">
@@ -408,7 +395,7 @@ const Hero = () => {
           {/* </div>  */}
 
           {/* Key Benefits Section */}
-          <div className="mt-0">
+          {/* <div className="mt-0">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-bold text-blue-900 mb-4">Key Benefits</h2>
               <p className="text-lg text-blue-600 max-w-2xl mx-auto">
@@ -447,10 +434,10 @@ const Hero = () => {
                 <p className="text-blue-700">Works offline, access powerful AI capabilities anytime, anywhere.</p>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* CTA Section */}
-          <div className="mt-12 text-center">
+          {/* <div className="mt-12 text-center">
             <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-12 rounded-2xl shadow-lg">
               <h3 className="text-3xl font-bold text-blue-900 mb-6">Ready to unlock AI?</h3>
               <p className="text-xl text-blue-700 mb-8 max-w-2xl mx-auto">
@@ -466,9 +453,9 @@ const Hero = () => {
                 {osType === 'mac' ? 'Available for Mac' : osType === 'windows' ? 'Available for Windows' : 'Available for Windows and macOS'} • No Payment Required
               </p>
             </div>
-          </div>
-        </div>
-      </section>
+          </div> */}
+        {/* </div>
+      </section> */}
 
       {/* Enlarged Image Modal */}
       {enlargedImage && (

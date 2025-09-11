@@ -203,7 +203,7 @@ const Header = () => {
                   >
                     Pricing
                   </a>
-                  <a 
+                  {/* <a 
                     href="/subscription" 
                     className="px-4 py-1 rounded-full text-[var(--text-color)] hover:text-[var(--highlight-color)] hover:bg-[var(--secondary-bg)]/40 transition-colors duration-200"
                     onClick={handleSubscriptionClick}
@@ -219,7 +219,7 @@ const Header = () => {
                     }}
                   >
                     Features
-                  </Link>
+                  </Link> */}
                   <Link 
                     to="#about" 
                     className="px-4 py-1 rounded-full text-[var(--text-color)] hover:text-[var(--highlight-color)] hover:bg-[var(--secondary-bg)]/40 transition-colors duration-200"
@@ -230,7 +230,7 @@ const Header = () => {
                   >
                     About
                   </Link>
-                  <Link 
+                  {/* <Link 
                     to="#contact" 
                     className="px-4 py-1 rounded-full text-[var(--text-color)] hover:text-[var(--highlight-color)] hover:bg-[var(--secondary-bg)]/40 transition-colors duration-200"
                     onClick={(e) => {
@@ -239,7 +239,7 @@ const Header = () => {
                     }}
                   >
                     Contact Us
-                  </Link>
+                  </Link> */}
                 </div>
               </nav>
               

@@ -59,9 +59,6 @@ const FAQ = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl font-bold text-blue-900 mb-4">Frequently Asked Questions</h2>
-          <p className="text-lg text-blue-600 max-w-3xl mx-auto">
-            Find answers to common questions about Herma and how it can enhance your productivity while preserving your privacy.
-          </p>
           <div className="w-32 h-1 bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 mx-auto mt-6"></div>
         </div>
 
@@ -105,7 +102,7 @@ const FAQ = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="mt-20">
+        {/* <div className="mt-20">
           <div className="bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 rounded-2xl p-10 shadow-xl text-center">
             <h3 className="text-2xl font-bold text-white mb-4">Have more questions?</h3>
             <p className="text-white text-lg opacity-90 mb-8 max-w-2xl mx-auto">
@@ -121,7 +118,7 @@ const FAQ = () => {
               Contact Support
             </a>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
