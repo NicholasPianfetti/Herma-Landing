@@ -165,7 +165,7 @@ const Hero = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white overflow-hidden">
       {/* Hero Section */}
-      <section className="relative w-full min-h-screen flex items-center justify-center pt-16 pb-24 overflow-hidden">
+      <section className="relative w-full min-h-screen flex items-center justify-center pt-28 pb-24 overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-[var(--highlight-color)] opacity-5 rounded-bl-full transform -translate-y-1/4 translate-x-1/4"></div>
@@ -178,12 +178,13 @@ const Hero = () => {
           <div className="flex flex-col items-center text-center">
             {/* Main Text Section */}
             <div className="w-full max-w-4xl mb-16">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 leading-tight mt-50">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 leading-tight">
                 AI That Protects Your Data
               </h1>
               
               <p className="text-xl md:text-2xl text-blue-800 mb-8 font-light max-w-3xl mx-auto">
-                Unify cloud and local models with complete data security
+                {/* Unify cloud and local models with complete data security */}
+                Leverage the power of cloud AI with the security of local models
               </p>
 
               {/* <p className="text-lg text-blue-700 mb-8 max-w-3xl mx-auto leading-relaxed">
