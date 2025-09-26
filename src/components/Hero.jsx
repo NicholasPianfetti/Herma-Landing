@@ -170,7 +170,7 @@ const Hero = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 via-blue-25 to-white overflow-hidden">
       {/* Hero Section */}
       <section className="relative w-full min-h-screen flex items-center justify-center pt-28 pb-24 overflow-hidden">
         {/* Background Elements */}

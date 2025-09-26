@@ -136,10 +136,10 @@ const About = () => {
   };
 
   return (
-    <section className="py-24 bg-white" id="about">
+    <section className="py-12 bg-gradient-to-b from-blue-50 via-blue-25 to-white" id="about">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         {/* Section Header with modern styling */}
-        <div
+        {/* <div
           ref={headerAnimation.ref}
           className={`text-center mb-16 ${headerAnimation.isVisible ? 'animate-fadeInUp' : 'opacity-0'}`}
         >
@@ -147,12 +147,12 @@ const About = () => {
             About <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 font-bold">HΞRMΛ</span>
           </h2>
           <div className="w-32 h-1 bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 mx-auto transition-all duration-500 hover:w-48"></div>
-        </div>
+        </div> */}
         
         {/* Description Block with improved typography */}
         <div
           ref={containerRef}
-          className={`max-w-4xl mx-auto mb-20 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-500 ${itemsVisible.includes(0) ? 'animate-fadeInUp' : 'opacity-0'}`}
+          className={`max-w-4xl mx-auto bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-500 ${itemsVisible.includes(0) ? 'animate-fadeInUp' : 'opacity-0'}`}
         >
           <p className={`text-center text-lg text-blue-800 leading-relaxed mb-6 ${itemsVisible.includes(1) ? 'animate-fadeInUp' : 'opacity-0'}`}>
             Traditional AI solutions force you to choose between power and privacy. Cloud models are powerful but expose your sensitive data.

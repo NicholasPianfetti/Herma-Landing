@@ -95,10 +95,10 @@ const KeyBenefits = () => {
   const { containerRef: gridRef, itemsVisible } = useStaggeredAnimation(5, 400);
 
   return (
-    <section className="py-24 bg-gradient-to-b from-white to-blue-50" id="benefits">
+    <section className="py-12 bg-gradient-to-b from-white via-blue-25 to-blue-50" id="benefits">
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div
+        {/* <div
           ref={headerAnimation.ref}
           className={`text-center mb-16 ${headerAnimation.isVisible ? 'animate-fadeInUp' : 'opacity-0'}`}
         >
@@ -108,7 +108,7 @@ const KeyBenefits = () => {
           <p className="text-lg text-blue-600 max-w-2xl mx-auto">
             Why choose Herma's data governance approach
           </p>
-        </div>
+        </div> */}
         
         {/* Benefits Grid */}
         <div ref={gridRef} className="grid md:grid-cols-3 gap-8">
@@ -206,8 +206,8 @@ const Home = () => {
       <KeyBenefits />
       <About />
       {/* <HowToUse /> */}
-      {/* <Contact /> */}
-      <FAQ />
+      <Contact />
+      {/* <FAQ /> */}
     </>
   );
 };
