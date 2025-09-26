@@ -152,7 +152,7 @@ const Contact = () => {
   };
 
   return (
-    <section className="py-12 bg-gradient-to-b from-white via-blue-25 to-blue-50" id="contact">
+    <section className="py-12 bg-gradient-to-b from-blue-50 via-blue-25 to-white" id="contact">
       <div className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div

@@ -14,6 +14,7 @@ import ReactGA from 'react-ga4';
 import FAQ from './components/FAQ';
 import HowToUse from './components/HowToUse';
 import Contact from './components/Contact';
+import Workflow from './components/Workflow';
 import { initializeAnalytics, trackAppUsers } from './utils/analytics';
 import SuccessPage from './components/SuccessPage';
 import AuthButton from './components/AuthButton';
@@ -205,6 +206,7 @@ const Home = () => {
       <Hero />
       <KeyBenefits />
       <About />
+      <Workflow />
       {/* <HowToUse /> */}
       <Contact />
       {/* <FAQ /> */}

@@ -23,6 +23,7 @@ const Hero = () => {
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   // Scroll animation hooks
   const titleAnimation = useScrollAnimation();
@@ -35,27 +36,40 @@ const Hero = () => {
     const detectOS = () => {
       const userAgent = window.navigator.userAgent;
       const platform = window.navigator.platform;
-      
-      if (platform.indexOf('Mac') !== -1 || 
-          userAgent.indexOf('Macintosh') !== -1 || 
+
+      if (platform.indexOf('Mac') !== -1 ||
+          userAgent.indexOf('Macintosh') !== -1 ||
           userAgent.indexOf('MacIntel') !== -1) {
         return 'mac';
       }
-      
-      if (platform.indexOf('Win') !== -1 || 
+
+      if (platform.indexOf('Win') !== -1 ||
           userAgent.indexOf('Windows') !== -1) {
         return 'windows';
       }
-      
-      if (platform.indexOf('Linux') !== -1 || 
+
+      if (platform.indexOf('Linux') !== -1 ||
           userAgent.indexOf('Linux') !== -1) {
         return 'linux';
       }
-      
+
       return 'unknown';
     };
-    
+
     setOsType(detectOS());
+  }, []);
+
+  // Scroll effect for blurring grid background
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrolled = window.scrollY;
+      const heroHeight = window.innerHeight;
+      const progress = Math.min(scrolled / heroHeight, 1);
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // Auto rotate slides
@@ -170,18 +184,37 @@ const Hero = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 via-blue-25 to-white overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 via-blue-25 to-white overflow-hidden relative">
       {/* Hero Section */}
       <section className="relative w-full min-h-screen flex items-center justify-center pt-28 pb-24 overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-[var(--highlight-color)] opacity-5 rounded-bl-full transform -translate-y-1/4 translate-x-1/4 animate-float"></div>
-          <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-indigo-500 opacity-5 rounded-tr-full transform translate-y-1/4 -translate-x-1/4 animate-float" style={{ animationDelay: '2s' }}></div>
-          <div className="absolute top-0 left-0 w-full h-full bg-repeat opacity-30 pointer-events-none"
-               style={{backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSIjMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoNDB2NDBoLTQweiIgZmlsbD0ibm9uZSIvPjxjaXJjbGUgY3g9IjIwIiBjeT0iMjAiIHI9IjEiLz48L2c+PC9zdmc+')"}}></div>
+        {/* Background Elements with scroll-based effects */}
+        <div className="absolute inset-0 overflow-hidden z-10">
+          <div
+            className="absolute top-0 right-0 w-1/2 h-1/2 bg-[var(--highlight-color)] opacity-5 rounded-bl-full transform -translate-y-1/4 translate-x-1/4 animate-float transition-all duration-300"
+            style={{
+              opacity: 0.05 * (1 - scrollProgress),
+              filter: `blur(${scrollProgress * 8}px)`
+            }}
+          ></div>
+          <div
+            className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-indigo-500 opacity-5 rounded-tr-full transform translate-y-1/4 -translate-x-1/4 animate-float transition-all duration-300"
+            style={{
+              animationDelay: '2s',
+              opacity: 0.05 * (1 - scrollProgress),
+              filter: `blur(${scrollProgress * 8}px)`
+            }}
+          ></div>
+          <div
+            className="absolute top-0 left-0 w-full h-full bg-repeat pointer-events-none transition-all duration-300"
+            style={{
+              backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSIjMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoNDB2NDBoLTQweiIgZmlsbD0ibm9uZSIvPjxjaXJjbGUgY3g9IjIwIiBjeT0iMjAiIHI9IjEiLz48L2c+PC9zdmc+')",
+              opacity: 0.3 * (1 - scrollProgress),
+              filter: `blur(${scrollProgress * 12}px)`
+            }}
+          ></div>
         </div>
 
-        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-20">
           <div className="flex flex-col items-center text-center">
             {/* Main Text Section */}
             <div className="w-full max-w-4xl mb-4">
