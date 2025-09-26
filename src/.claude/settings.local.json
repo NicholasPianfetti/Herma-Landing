@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/nickp/OneDrive/GT Classes/Spring 2025/Herma/Landing/Herma-Landing/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

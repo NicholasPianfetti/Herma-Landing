@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import handleDownload from './handleDownload';
+import { useScrollAnimation, useStaggeredAnimation } from '../hooks/useScrollAnimation';
 
 // Enhanced Feature Card component with improved styling
 const FeatureCard = ({ icon, title, description }) => (
@@ -14,6 +15,10 @@ const FeatureCard = ({ icon, title, description }) => (
 
 const About = () => {
   const [osType, setOsType] = useState('unknown');
+
+  // Scroll animation hooks
+  const headerAnimation = useScrollAnimation();
+  const { containerRef, itemsVisible } = useStaggeredAnimation(3, 300);
   
   // Detect OS on component mount
   useEffect(() => {
@@ -134,24 +139,30 @@ const About = () => {
     <section className="py-24 bg-white" id="about">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         {/* Section Header with modern styling */}
-        <div className="text-center mb-16">
+        <div
+          ref={headerAnimation.ref}
+          className={`text-center mb-16 ${headerAnimation.isVisible ? 'animate-fadeInUp' : 'opacity-0'}`}
+        >
           <h2 className="text-3xl font-bold text-blue-900 mb-4">
             About <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 font-bold">HΞRMΛ</span>
           </h2>
-          <div className="w-32 h-1 bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 mx-auto"></div>
+          <div className="w-32 h-1 bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 mx-auto transition-all duration-500 hover:w-48"></div>
         </div>
         
         {/* Description Block with improved typography */}
-        <div className="max-w-4xl mx-auto mb-20 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-8 shadow-lg">
-          <p className="text-center text-lg text-blue-800 leading-relaxed mb-6">
-            Traditional AI solutions force you to choose between power and privacy. Cloud models are powerful but expose your sensitive data. 
+        <div
+          ref={containerRef}
+          className={`max-w-4xl mx-auto mb-20 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-500 ${itemsVisible.includes(0) ? 'animate-fadeInUp' : 'opacity-0'}`}
+        >
+          <p className={`text-center text-lg text-blue-800 leading-relaxed mb-6 ${itemsVisible.includes(1) ? 'animate-fadeInUp' : 'opacity-0'}`}>
+            Traditional AI solutions force you to choose between power and privacy. Cloud models are powerful but expose your sensitive data.
             Local models are private but limited in capability.
           </p>
-          <p className="text-center text-lg text-blue-800 leading-relaxed mb-6">
-            <span className="font-semibold text-blue-900">Herma's data governance technology</span> solves this dilemma by automatically detecting and extracting sensitive information from your prompts locally, 
+          <p className={`text-center text-lg text-blue-800 leading-relaxed mb-6 ${itemsVisible.includes(2) ? 'animate-fadeInUp' : 'opacity-0'}`}>
+            <span className="font-semibold text-blue-900">Herma's data governance technology</span> solves this dilemma by automatically detecting and extracting sensitive information from your prompts locally,
             sending only sanitized queries to powerful cloud models, then seamlessly restoring your private data in the responses.
           </p>
-          <p className="text-center text-lg text-blue-800 leading-relaxed">
+          <p className={`text-center text-lg text-blue-800 leading-relaxed ${itemsVisible.includes(2) ? 'animate-fadeInUp' : 'opacity-0'}`} style={{ animationDelay: '0.2s' }}>
             Experience the computational power of GPT-4, Claude, and other advanced models while ensuring your confidential information never leaves your device.
           </p>
         </div>
@@ -228,16 +239,17 @@ const About = () => {
         @keyframes fadeInUp {
           from {
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(30px);
           }
           to {
             opacity: 1;
             transform: translateY(0);
           }
         }
-        
+
         .animate-fadeInUp {
-          animation: fadeInUp 0.5s ease-out forwards;
+          animation: fadeInUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+          opacity: 0;
         }
       `}</style>
     </section>

@@ -153,3 +153,35 @@ REACT_APP_API_URL=http://localhost:5000
 **Comprehensive Documentation**:
 - See `PAYMENT_PIPELINE.md` for detailed payment flow documentation
 - Contains specific line references and modification guides
+
+## Quality Assurance & Testing
+
+**Development Workflow**:
+- Always run `npm run build` before deploying to catch build errors
+- Test payment flows using Stripe test cards: `4242 4242 4242 4242` (success)
+- Check Firebase Functions logs for webhook processing errors
+- Use browser developer tools to monitor API requests and console errors
+
+**Required Testing Steps**:
+1. Authentication flow (login, Google OAuth, logout)
+2. Payment flow end-to-end with test cards
+3. Webhook delivery in Stripe dashboard
+4. Success page subscription status updates
+5. Responsive design on mobile devices
+
+## Windows Development Notes
+
+**Node.js Compatibility**:
+- All scripts require `NODE_OPTIONS=--openssl-legacy-provider` (already configured in package.json)
+- Required for React Scripts 5.0.1 compatibility with newer Node.js versions
+
+**Firebase Deployment**:
+- Install Firebase CLI globally: `npm install -g firebase-tools`
+- Login with `firebase login`
+- Deploy with `npm run deploy` (hosting only) or `npm run deploy:all` (all services)
+
+# Important Instruction Reminders
+Do what has been asked; nothing more, nothing less.
+NEVER create files unless they're absolutely necessary for achieving your goal.
+ALWAYS prefer editing an existing file to creating a new one.
+NEVER proactively create documentation files (*.md) or README files. Only create documentation files if explicitly requested by the User.

@@ -161,13 +161,13 @@ const Header = () => {
           <div className="flex justify-between items-center">
             {/* Logo */}
             <div className="flex items-center relative z-10">
-              <Link 
-                to="/" 
+              <Link
+                to="/"
                 className="flex items-center group"
                 aria-label="Home"
               >
-                <div className={`h-8 w-8 sm:h-10 sm:w-10 overflow-hidden rounded-lg mr-2 sm:mr-3 shadow-sm transition-all duration-300 
-                  group-hover:shadow-lg ${scrolled ? 'scale-90' : ''}`}>
+                <div className={`h-8 w-8 sm:h-10 sm:w-10 overflow-hidden rounded-lg mr-2 sm:mr-3 shadow-sm transition-all duration-300
+                  group-hover:shadow-lg group-hover:scale-110 ${scrolled ? 'scale-90' : ''}`}>
                   <img 
                     src={HermaLogo} 
                     alt="Herma Logo" 
@@ -244,9 +244,9 @@ const Header = () => {
               </nav>
               
               {/* Download Button */}
-              <button 
+              <button
                 onClick={handleDownloadClick}
-                className="hidden sm:flex px-5 py-2 bg-blue-900 text-white font-medium rounded-full shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 items-center gap-2 group"
+                className="hidden sm:flex px-5 py-2 bg-blue-900 text-white font-medium rounded-full shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1 hover:scale-105 items-center gap-2 group"
               >
                 <span className="text-sm text-white/90 group-hover:text-white transition-colors">
                   Download

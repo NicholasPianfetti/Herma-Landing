@@ -9,6 +9,7 @@ import { useAuth } from '../context/AuthContext';
 import { createCheckoutSession } from '../services/stripeService';
 import { loadStripe } from '@stripe/stripe-js';
 import StarBorder from './StarBorder';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
@@ -22,6 +23,12 @@ const Hero = () => {
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  // Scroll animation hooks
+  const titleAnimation = useScrollAnimation();
+  const subtitleAnimation = useScrollAnimation();
+  const buttonAnimation = useScrollAnimation();
+  const demoAnimation = useScrollAnimation();
 
   // Detect OS on component mount
   useEffect(() => {
@@ -168,8 +175,8 @@ const Hero = () => {
       <section className="relative w-full min-h-screen flex items-center justify-center pt-28 pb-24 overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-[var(--highlight-color)] opacity-5 rounded-bl-full transform -translate-y-1/4 translate-x-1/4"></div>
-          <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-indigo-500 opacity-5 rounded-tr-full transform translate-y-1/4 -translate-x-1/4"></div>
+          <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-[var(--highlight-color)] opacity-5 rounded-bl-full transform -translate-y-1/4 translate-x-1/4 animate-float"></div>
+          <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-indigo-500 opacity-5 rounded-tr-full transform translate-y-1/4 -translate-x-1/4 animate-float" style={{ animationDelay: '2s' }}></div>
           <div className="absolute top-0 left-0 w-full h-full bg-repeat opacity-30 pointer-events-none"
                style={{backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSIjMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoNDB2NDBoLTQweiIgZmlsbD0ibm9uZSIvPjxjaXJjbGUgY3g9IjIwIiBjeT0iMjAiIHI9IjEiLz48L2c+PC9zdmc+')"}}></div>
         </div>
@@ -177,12 +184,19 @@ const Hero = () => {
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col items-center text-center">
             {/* Main Text Section */}
-            <div className="w-full max-w-4xl mb-16">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 leading-tight">
+            <div className="w-full max-w-4xl mb-4">
+              <h1
+                ref={titleAnimation.ref}
+                className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 leading-tight ${titleAnimation.isVisible ? 'animate-fadeInUp' : 'opacity-0'}`}
+              >
                 AI That Protects Your Data
               </h1>
-              
-              <p className="text-xl md:text-2xl text-blue-800 mb-8 font-light max-w-3xl mx-auto">
+
+              <p
+                ref={subtitleAnimation.ref}
+                className={`text-xl md:text-2xl text-blue-800 mb-8 font-light max-w-3xl mx-auto ${subtitleAnimation.isVisible ? 'animate-fadeInUp' : 'opacity-0'}`}
+                style={{ animationDelay: subtitleAnimation.isVisible ? '0.2s' : '0s' }}
+              >
                 {/* Unify cloud and local models with complete data security */}
                 Leverage the power of cloud AI with the security of local models
               </p>
@@ -191,17 +205,21 @@ const Hero = () => {
                 Herma is a data governor that extracts sensitive information locally before sending sanitized prompts to powerful cloud models, then restores your data on return. Get the computational power of cloud AI with the security of local processing.
               </p> */}
 
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
-                <button 
-                  onClick={handleDownloadClick(osType === 'mac' ? 'mac' : 'windows')} 
-                  className="group relative overflow-hidden px-8 py-4 bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 text-white font-medium rounded-xl shadow-lg hover:shadow-xl transform transition-all duration-200 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-[var(--highlight-color)]/30 focus:ring-offset-2 w-full sm:w-auto sm:min-w-[200px]"
+              <div
+                ref={buttonAnimation.ref}
+                className={`flex flex-col sm:flex-row items-center justify-center gap-3 mb-6 ${buttonAnimation.isVisible ? 'animate-fadeInUp' : 'opacity-0'}`}
+                style={{ animationDelay: buttonAnimation.isVisible ? '0.4s' : '0s' }}
+              >
+                <button
+                  onClick={handleDownloadClick(osType === 'mac' ? 'mac' : 'windows')}
+                  className="group relative overflow-hidden px-8 py-4 bg-gradient-to-r from-[var(--highlight-color)] to-indigo-600 text-white font-medium rounded-xl shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-[var(--highlight-color)]/30 focus:ring-offset-2 w-full sm:w-auto sm:min-w-[200px]"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                   <span className="relative flex items-center justify-center gap-2">
                     {osType === 'mac' ? (
                       <>
                         <span className="text-lg">⌘</span>
-                        <span>Download for Mac</span>
+                        <span>Download for Free</span>
                       </>
                     ) : osType === 'windows' ? (
                       <>
@@ -224,17 +242,22 @@ const Hero = () => {
                 </div>
               )}
 
-              <p className="text-[0.75rem] text-blue-800/70">
+              {/* Agreeing to privacy policy and terms of service*/}
+              {/* <p className="text-[0.75rem] text-blue-800/70">
                 By downloading, you agree to our <a href="/privacy-policy" onClick={(e) => handleNavigation('/privacy-policy', e)} className="underline hover:text-blue-800">License</a> and <a href="/terms-of-service" onClick={(e) => handleNavigation('/terms-of-service', e)} className="underline hover:text-blue-800">Terms of Service</a>.
-              </p>
+              </p> */}
             </div>
 
             {/* Demo Section */}
-            <div className="w-full max-w-4xl relative">
+            <div
+              ref={demoAnimation.ref}
+              className={`w-full max-w-4xl relative ${demoAnimation.isVisible ? 'animate-fadeInUp' : 'opacity-0'}`}
+              style={{ animationDelay: demoAnimation.isVisible ? '0.6s' : '0s' }}
+            >
               <div className="absolute -top-16 -right-16 w-64 h-64 bg-[var(--highlight-color)] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
               <div className="absolute -bottom-16 -left-16 w-64 h-64 bg-indigo-600 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
                   {/* App Preview Frame */}
-                  <div className="relative rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 p-1 shadow-2xl">
+                  <div className="relative rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 p-1 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.01]">
                     <div className="absolute top-0 left-0 right-0 h-8 bg-gray-800 rounded-t-2xl flex items-center px-4 z-20">
                       <div className="flex space-x-2">
                         <div className="w-3 h-3 bg-red-500 rounded-full"></div>
@@ -486,6 +509,38 @@ const Hero = () => {
           </div>
         </div>
       )}
+
+      {/* Add CSS animations */}
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-8px);
+          }
+        }
+
+        .animate-fadeInUp {
+          animation: fadeInUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+          opacity: 0;
+        }
+
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+      `}</style>
     </div>
   );
 };
