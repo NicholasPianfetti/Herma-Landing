@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import HermaLogo from './Herma.jpeg';
-import handleDownload from './handleDownload';
+// Commented out - no longer using download/auth functionality
+// import handleDownload from './handleDownload';
 import MenuOverlay from './MenuOverlay'; // Import the new menu overlay component
-import { useAuth } from '../context/AuthContext';
-import { getSubscriptionStatus } from '../services/stripeService';
+// import { useAuth } from '../context/AuthContext';
+// import { getSubscriptionStatus } from '../services/stripeService';
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [osType, setOsType] = useState('unknown');
+  // Commented out - no longer using OS detection for downloads
+  // const [osType, setOsType] = useState('unknown');
   const [menuOpen, setMenuOpen] = useState(false); // Menu state
   const navigate = useNavigate();
-  const { user } = useAuth();
+  // Commented out - no longer using auth functionality
+  // const { user } = useAuth();
   
   // Safety check for navigate function
   const safeNavigate = (path) => {
@@ -23,33 +26,34 @@ const Header = () => {
     }
   };
 
-  // Detect OS on component mount
-  useEffect(() => {
-    const detectOS = () => {
-      const userAgent = window.navigator.userAgent;
-      const platform = window.navigator.platform;
-      
-      if (platform.indexOf('Mac') !== -1 || 
-          userAgent.indexOf('Macintosh') !== -1 || 
-          userAgent.indexOf('MacIntel') !== -1) {
-        return 'mac';
-      }
-      
-      if (platform.indexOf('Win') !== -1 || 
-          userAgent.indexOf('Windows') !== -1) {
-        return 'windows';
-      }
-      
-      if (platform.indexOf('Linux') !== -1 || 
-          userAgent.indexOf('Linux') !== -1) {
-        return 'linux';
-      }
-      
-      return 'unknown';
-    };
-    
-    setOsType(detectOS());
-  }, []);
+  // Commented out - no longer detecting OS for downloads
+  // // Detect OS on component mount
+  // useEffect(() => {
+  //   const detectOS = () => {
+  //     const userAgent = window.navigator.userAgent;
+  //     const platform = window.navigator.platform;
+  //
+  //     if (platform.indexOf('Mac') !== -1 ||
+  //         userAgent.indexOf('Macintosh') !== -1 ||
+  //         userAgent.indexOf('MacIntel') !== -1) {
+  //       return 'mac';
+  //     }
+  //
+  //     if (platform.indexOf('Win') !== -1 ||
+  //         userAgent.indexOf('Windows') !== -1) {
+  //       return 'windows';
+  //     }
+  //
+  //     if (platform.indexOf('Linux') !== -1 ||
+  //         userAgent.indexOf('Linux') !== -1) {
+  //       return 'linux';
+  //     }
+  //
+  //     return 'unknown';
+  //   };
+  //
+  //   setOsType(detectOS());
+  // }, []);
 
   // Handle scroll event to change header appearance
   useEffect(() => {
@@ -101,38 +105,45 @@ const Header = () => {
     closeMenu();
   };
   
-  const handleDownloadClick = () => {
-    handleDownload(osType === 'mac' ? 'mac' : 'windows');
+  // Commented out - no longer using download functionality
+  // const handleDownloadClick = () => {
+  //   handleDownload(osType === 'mac' ? 'mac' : 'windows');
+  //   closeMenu();
+  // };
+
+  const handleRequestDemo = () => {
+    window.open('https://calendly.com/hermalocal/30min', '_blank');
     closeMenu();
   };
 
-  // Function to handle subscription button click
-  const handleSubscriptionClick = async (e) => {
-    e.preventDefault();
-    
-    if (!user) {
-      // If not logged in, go to login page
-      safeNavigate('/login');
-      return;
-    }
+  // Commented out - no longer using subscription functionality
+  // // Function to handle subscription button click
+  // const handleSubscriptionClick = async (e) => {
+  //   e.preventDefault();
+  //
+  //   if (!user) {
+  //     // If not logged in, go to login page
+  //     safeNavigate('/login');
+  //     return;
+  //   }
 
-    try {
-      // Check if user has a subscription
-      const subscriptionData = await getSubscriptionStatus(user.uid);
-      
-      if (subscriptionData && subscriptionData.status === 'active') {
-        // User has an active subscription, go to subscription page
-        safeNavigate('/success');
-      } else {
-        // User doesn't have a subscription, go to purchase page
-        safeNavigate('/upgrade');
-      }
-    } catch (error) {
-      console.error('Error checking subscription status:', error);
-      // If there's an error (like 404), assume user doesn't have subscription
-      safeNavigate('/upgrade');
-    }
-  };
+  //   try {
+  //     // Check if user has a subscription
+  //     const subscriptionData = await getSubscriptionStatus(user.uid);
+  //
+  //     if (subscriptionData && subscriptionData.status === 'active') {
+  //       // User has an active subscription, go to subscription page
+  //       safeNavigate('/success');
+  //     } else {
+  //       // User doesn't have a subscription, go to purchase page
+  //       safeNavigate('/upgrade');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error checking subscription status:', error);
+  //     // If there's an error (like 404), assume user doesn't have subscription
+  //     safeNavigate('/upgrade');
+  //   }
+  // };
 
   // Function to handle navigation and scroll to top
   const handleNavigation = (path, e) => {
@@ -179,11 +190,6 @@ const Header = () => {
                     ${scrolled ? 'text-lg sm:text-xl' : 'text-xl sm:text-2xl'}`}>
                     <span className="text-[var(--highlight-color)]">HΞRMΛ</span>
                   </span>
-                  {!scrolled && (
-                    <span className="hidden sm:inline-block text-xs text-blue-800/60 font-medium -mt-1">
-                      Local Data Governor
-                    </span>
-                  )}
                 </div>
               </Link>
             </div>
@@ -191,10 +197,11 @@ const Header = () => {
             {/* Desktop Navigation and Mobile Menu Toggle */}
             <div className="flex items-center gap-2">
               {/* Desktop Navigation */}
-              <nav className="hidden md:flex items-center gap-2">
+              {/* Commented out - navigation items removed */}
+              {/* <nav className="hidden md:flex items-center gap-2">
                 <div className="px-4 py-1.5 bg-[var(--secondary-bg)]/20 rounded-full flex items-center mr-2">
-                <a 
-                    href="/upgrade" 
+                <a
+                    href="/upgrade"
                     className="px-4 py-1 rounded-full text-[var(--text-color)] hover:text-[var(--highlight-color)] hover:bg-[var(--secondary-bg)]/40 transition-colors duration-200"
                     onClick={(e) => {
                       e.preventDefault();
@@ -203,25 +210,8 @@ const Header = () => {
                   >
                     Pricing
                   </a>
-                  {/* <a 
-                    href="/subscription" 
-                    className="px-4 py-1 rounded-full text-[var(--text-color)] hover:text-[var(--highlight-color)] hover:bg-[var(--secondary-bg)]/40 transition-colors duration-200"
-                    onClick={handleSubscriptionClick}
-                  >
-                    Subscription
-                  </a>
-                  <Link 
-                    to="#features" 
-                    className="px-4 py-1 rounded-full text-[var(--text-color)] hover:text-[var(--highlight-color)] hover:bg-[var(--secondary-bg)]/40 transition-colors duration-200"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      scrollToSection('features');
-                    }}
-                  >
-                    Features
-                  </Link> */}
-                  <Link 
-                    to="#about" 
+                  <Link
+                    to="#about"
                     className="px-4 py-1 rounded-full text-[var(--text-color)] hover:text-[var(--highlight-color)] hover:bg-[var(--secondary-bg)]/40 transition-colors duration-200"
                     onClick={(e) => {
                       e.preventDefault();
@@ -230,34 +220,21 @@ const Header = () => {
                   >
                     About
                   </Link>
-                  {/* <Link 
-                    to="#contact" 
-                    className="px-4 py-1 rounded-full text-[var(--text-color)] hover:text-[var(--highlight-color)] hover:bg-[var(--secondary-bg)]/40 transition-colors duration-200"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      scrollToSection('contact');
-                    }}
-                  >
-                    Contact Us
-                  </Link> */}
                 </div>
-              </nav>
+              </nav> */}
               
-              {/* Download Button */}
-              <button 
-                onClick={handleDownloadClick}
+              {/* Request Demo Button */}
+              <button
+                onClick={handleRequestDemo}
                 className="hidden sm:flex px-5 py-2 bg-blue-900 text-white font-medium rounded-full shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 items-center gap-2 group"
+                style={{ fontFamily: 'var(--font-ui)' }}
               >
                 <span className="text-sm text-white/90 group-hover:text-white transition-colors">
-                  Download
+                  Request a Demo
                 </span>
-                <span className="bg-white/20 w-6 h-6 rounded-full flex items-center justify-center text-sm group-hover:bg-white/30 transition-colors">
-                  {osType === 'mac' 
-                    ? '⌘' 
-                    : osType === 'windows' 
-                      ? '⊞' 
-                      : '↓'}
-                </span>
+                <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
               </button>
               
               {/* Mobile Menu Button */}
@@ -277,10 +254,9 @@ const Header = () => {
       </header>
 
       {/* Menu Overlay - Completely separate from the header */}
-      <MenuOverlay 
-        isOpen={menuOpen} 
-        onClose={closeMenu} 
-        osType={osType} 
+      <MenuOverlay
+        isOpen={menuOpen}
+        onClose={closeMenu}
       />
     </>
   );

@@ -1,0 +1,268 @@
+import React from 'react';
+
+const HowItWorksSection = () => {
+  return (
+    <section className="py-24 bg-gradient-to-b from-white to-blue-50" id="how-it-works">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center mb-20">
+          <h2
+            className="text-4xl md:text-5xl font-bold text-[#242424] mb-4 tracking-tight"
+            style={{ fontFamily: 'var(--font-heading)' }}
+          >
+            How Herma Works
+          </h2>
+          <p
+            className="text-xl text-gray-600 max-w-3xl mx-auto"
+            style={{ fontFamily: 'var(--font-body)' }}
+          >
+            Intelligent privacy routing that maintains on-prem security with public cloud efficiency
+          </p>
+        </div>
+
+        {/* Main Unified Diagram */}
+        <div className="bg-white rounded-3xl p-8 md:p-12 shadow-2xl border border-gray-200 mb-16">
+
+          {/* Privacy Constitution Callout */}
+          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 mb-12 border-2 border-[var(--highlight-color)]">
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0">
+                <svg className="w-8 h-8 text-[var(--highlight-color)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-[#242424] mb-2" style={{ fontFamily: 'var(--font-ui)' }}>
+                  Privacy Constitution
+                </h3>
+                <p className="text-gray-700" style={{ fontFamily: 'var(--font-body)' }}>
+                  Define any data type as private — PII, financial records, proprietary code, medical info, or custom patterns. The Data Governor enforces your rules with precision.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Visual Flow Diagram */}
+          <div className="relative">
+
+            {/* Step 1: Request Arrives */}
+            <div className="flex flex-col items-center mb-8">
+              <div className="bg-gray-100 rounded-xl p-6 w-full max-w-md border-2 border-gray-300">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                  </div>
+                  <h4 className="font-bold text-lg text-gray-900" style={{ fontFamily: 'var(--font-ui)' }}>
+                    User Prompt
+                  </h4>
+                </div>
+                <p className="text-sm text-gray-600 ml-11" style={{ fontFamily: 'var(--font-body)' }}>
+                  Your application sends request with potentially sensitive data
+                </p>
+              </div>
+              {/* Arrow Down */}
+              <div className="my-4">
+                <svg className="w-8 h-8 text-[var(--highlight-color)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </div>
+            </div>
+
+            {/* Step 2: Data Governor - THE KEY COMPONENT */}
+            <div className="flex flex-col items-center mb-8">
+              <div className="bg-gradient-to-br from-[var(--highlight-color)] to-indigo-700 rounded-2xl p-8 w-full max-w-2xl border-4 border-blue-300 shadow-2xl relative">
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="flex-shrink-0">
+                    <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                      <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-bold text-2xl text-white mb-2" style={{ fontFamily: 'var(--font-ui)' }}>
+                      Data Governor
+                    </h4>
+                    <p className="text-blue-100 text-sm mb-4" style={{ fontFamily: 'var(--font-body)' }}>
+                      Runs in your private environment • Analyzes every request in real-time
+                    </p>
+                  </div>
+                </div>
+
+                {/* Data Governor Actions */}
+                <div className="grid md:grid-cols-2 gap-4 mb-6">
+                  <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
+                    <div className="flex items-center gap-2 mb-2">
+                      <svg className="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                      </svg>
+                      <span className="text-white font-semibold text-sm" style={{ fontFamily: 'var(--font-ui)' }}>Detects Sensitive Data</span>
+                    </div>
+                    <p className="text-blue-100 text-xs" style={{ fontFamily: 'var(--font-body)' }}>
+                      Uses optimized LLMs to identify private information per your constitution
+                    </p>
+                  </div>
+
+                  <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
+                    <div className="flex items-center gap-2 mb-2">
+                      <svg className="w-5 h-5 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                      <span className="text-white font-semibold text-sm" style={{ fontFamily: 'var(--font-ui)' }}>Intelligent Routing</span>
+                    </div>
+                    <p className="text-blue-100 text-xs" style={{ fontFamily: 'var(--font-body)' }}>
+                      Routes to optimal destination based on sensitivity and model requirements
+                    </p>
+                  </div>
+
+                  <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
+                    <div className="flex items-center gap-2 mb-2">
+                      <svg className="w-5 h-5 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                      </svg>
+                      <span className="text-white font-semibold text-sm" style={{ fontFamily: 'var(--font-ui)' }}>Sanitizes Requests</span>
+                    </div>
+                    <p className="text-blue-100 text-xs" style={{ fontFamily: 'var(--font-body)' }}>
+                      Extracts sensitive data, sends only sanitized content to cloud
+                    </p>
+                  </div>
+
+                  <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
+                    <div className="flex items-center gap-2 mb-2">
+                      <svg className="w-5 h-5 text-orange-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span className="text-white font-semibold text-sm" style={{ fontFamily: 'var(--font-ui)' }}>Ultra-Low Latency</span>
+                    </div>
+                    <p className="text-blue-100 text-xs" style={{ fontFamily: 'var(--font-body)' }}>
+                      Processing overhead &lt;500ms — imperceptible to end users
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                  <p className="text-white text-center text-sm font-medium" style={{ fontFamily: 'var(--font-ui)' }}>
+                    ✓ Airtight filtering ensures privacy at on-prem standards
+                  </p>
+                </div>
+              </div>
+
+              {/* Three-way arrow */}
+              <div className="my-6 flex items-center justify-center gap-4">
+                <svg className="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+                <span className="text-gray-600 font-semibold text-sm" style={{ fontFamily: 'var(--font-ui)' }}>Routes to optimal destination</span>
+                <svg className="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </div>
+            </div>
+
+            {/* Step 3: Three Routing Destinations */}
+            <div className="mb-6 text-center">
+              <p className="text-sm text-gray-600 italic" style={{ fontFamily: 'var(--font-body)' }}>
+                Configure routing based on your security needs — most companies route between Private + Public Cloud, with custom on-prem integration available for high security environments
+              </p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-6 mb-8">
+              {/* On-Prem */}
+              <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-6 border-2 border-gray-300 shadow-lg">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 bg-gray-600 rounded-full flex items-center justify-center">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                    </svg>
+                  </div>
+                  <h5 className="font-bold text-gray-900" style={{ fontFamily: 'var(--font-ui)' }}>On-Premises</h5>
+                </div>
+                <p className="text-sm text-gray-700 mb-3" style={{ fontFamily: 'var(--font-body)' }}>
+                  Ultra-sensitive data stays in your air-gapped infrastructure
+                </p>
+                <div className="bg-gray-200 rounded px-3 py-1 text-xs font-semibold text-gray-700 mb-2" style={{ fontFamily: 'var(--font-ui)' }}>
+                  Maximum Security
+                </div>
+                <p className="text-xs text-gray-500 italic" style={{ fontFamily: 'var(--font-body)' }}>
+                  Your deployed models
+                </p>
+              </div>
+
+              {/* Private Cloud */}
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-xl p-6 border-2 border-[var(--highlight-color)] shadow-lg">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 bg-[var(--highlight-color)] rounded-full flex items-center justify-center">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                  </div>
+                  <h5 className="font-bold text-[var(--highlight-color)]" style={{ fontFamily: 'var(--font-ui)' }}>Private Cloud</h5>
+                </div>
+                <p className="text-sm text-gray-700 mb-3" style={{ fontFamily: 'var(--font-body)' }}>
+                  Sanitized business data to enterprise private APIs with zero retention
+                </p>
+                <div className="bg-blue-200 rounded px-3 py-1 text-xs font-semibold text-[var(--highlight-color)] mb-2" style={{ fontFamily: 'var(--font-ui)' }}>
+                  Balanced Performance
+                </div>
+                <p className="text-xs text-gray-600 italic" style={{ fontFamily: 'var(--font-body)' }}>
+                  ChatGPT, Claude, Gemini, etc. — unified under optimized router
+                </p>
+              </div>
+
+              {/* Public Cloud */}
+              <div className="bg-gradient-to-br from-green-50 to-emerald-100 rounded-xl p-6 border-2 border-green-400 shadow-lg">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                    </svg>
+                  </div>
+                  <h5 className="font-bold text-green-700" style={{ fontFamily: 'var(--font-ui)' }}>Public Cloud</h5>
+                </div>
+                <p className="text-sm text-gray-700 mb-3" style={{ fontFamily: 'var(--font-body)' }}>
+                  Fully sanitized requests to all models at lowest cost
+                </p>
+                <div className="bg-green-200 rounded px-3 py-1 text-xs font-semibold text-green-700 mb-2" style={{ fontFamily: 'var(--font-ui)' }}>
+                  Maximum Efficiency
+                </div>
+                <p className="text-xs text-gray-600 italic" style={{ fontFamily: 'var(--font-body)' }}>
+                  ChatGPT, Claude, Gemini, etc. — unified under optimized router
+                </p>
+              </div>
+            </div>
+
+            {/* Step 4: Processing & Return */}
+            <div className="flex flex-col items-center">
+              <div className="my-4">
+                <svg className="w-8 h-8 text-[var(--highlight-color)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </div>
+
+              <div className="bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-6 w-full max-w-md border-2 border-green-300">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center">
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                  <h4 className="font-bold text-lg text-gray-900" style={{ fontFamily: 'var(--font-ui)' }}>
+                    Secure Response
+                  </h4>
+                </div>
+                <p className="text-sm text-gray-600 ml-11" style={{ fontFamily: 'var(--font-body)' }}>
+                  Data Governor restores any extracted sensitive data locally, returns complete response
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
+};
+
+export default HowItWorksSection;

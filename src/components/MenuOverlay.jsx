@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import handleDownload from './handleDownload';
-import { useAuth } from '../context/AuthContext';
-import { getSubscriptionStatus } from '../services/stripeService';
+// Commented out - no longer using download/auth functionality
+// import handleDownload from './handleDownload';
+// import { useAuth } from '../context/AuthContext';
+// import { getSubscriptionStatus } from '../services/stripeService';
 
-const MenuOverlay = ({ isOpen, onClose, osType }) => {
+const MenuOverlay = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  // Commented out - no longer using auth functionality
+  // const { user } = useAuth();
   
   // Handle ESC key press to close the menu
   useEffect(() => {
@@ -40,39 +42,46 @@ const MenuOverlay = ({ isOpen, onClose, osType }) => {
     }
   };
 
-  const handleDownloadClick = () => {
-    handleDownload(osType === 'mac' ? 'mac' : 'windows');
+  // Commented out - no longer using download functionality
+  // const handleDownloadClick = () => {
+  //   handleDownload(osType === 'mac' ? 'mac' : 'windows');
+  //   onClose();
+  // };
+
+  const handleRequestDemo = () => {
+    window.open('https://calendly.com/hermalocal/30min', '_blank');
     onClose();
   };
 
-  // Function to handle subscription button click
-  const handleSubscriptionClick = async (e) => {
-    e.preventDefault();
-    onClose();
-    
-    if (!user) {
-      // If not logged in, go to login page
-      navigate('/login');
-      return;
-    }
+  // Commented out - no longer using subscription functionality
+  // // Function to handle subscription button click
+  // const handleSubscriptionClick = async (e) => {
+  //   e.preventDefault();
+  //   onClose();
+  //
+  //   if (!user) {
+  //     // If not logged in, go to login page
+  //     navigate('/login');
+  //     return;
+  //   }
 
-    try {
-      // Check if user has a subscription
-      const subscriptionData = await getSubscriptionStatus(user.uid);
-      
-      if (subscriptionData && subscriptionData.status === 'active') {
-        // User has an active subscription, go to subscription page
-        navigate('/success');
-      } else {
-        // User doesn't have a subscription, go to purchase page
-        navigate('/upgrade');
-      }
-    } catch (error) {
-      console.error('Error checking subscription status:', error);
-      // If there's an error (like 404), assume user doesn't have subscription
-      navigate('/upgrade');
-    }
-  };
+  //   try {
+  //     // Check if user has a subscription
+  //     const subscriptionData = await getSubscriptionStatus(user.uid);
+  //
+  //     if (subscriptionData && subscriptionData.status === 'active') {
+  //       // User has an active subscription, go to subscription page
+  //       navigate('/success');
+  //     } else {
+  //       // User doesn't have a subscription, go to purchase page
+  //       navigate('/upgrade');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error checking subscription status:', error);
+  //     // If there's an error (like 404), assume user doesn't have subscription
+  //     navigate('/upgrade');
+  //   }
+  // };
 
   if (!isOpen) return null;
 
@@ -96,16 +105,17 @@ const MenuOverlay = ({ isOpen, onClose, osType }) => {
             </button>
           </div>
 
-          <nav className="flex flex-col gap-4">
-            <a 
-              href="/subscription" 
+          {/* Commented out - all navigation items removed */}
+          {/* <nav className="flex flex-col gap-4">
+            <a
+              href="/subscription"
               className="px-4 py-3 rounded-lg hover:bg-blue-50 text-blue-900 transition-colors"
               onClick={handleSubscriptionClick}
             >
               Subscription
             </a>
-            <Link 
-              to="#features" 
+            <Link
+              to="#features"
               className="px-4 py-3 rounded-lg hover:bg-blue-50 text-blue-900 transition-colors"
               onClick={(e) => {
                 e.preventDefault();
@@ -114,8 +124,8 @@ const MenuOverlay = ({ isOpen, onClose, osType }) => {
             >
               Features
             </Link>
-            <Link 
-              to="#about" 
+            <Link
+              to="#about"
               className="px-4 py-3 rounded-lg hover:bg-blue-50 text-blue-900 transition-colors"
               onClick={(e) => {
                 e.preventDefault();
@@ -124,17 +134,18 @@ const MenuOverlay = ({ isOpen, onClose, osType }) => {
             >
               About
             </Link>
-          </nav>
+          </nav> */}
 
           <div className="mt-auto pt-4 border-t border-gray-200">
-            <button 
-              onClick={handleDownloadClick}
+            <button
+              onClick={handleRequestDemo}
               className="w-full py-3 bg-blue-900 text-white font-medium rounded-lg flex items-center justify-center gap-2"
+              style={{ fontFamily: 'var(--font-ui)' }}
             >
-              <span>Download for {osType === 'mac' ? 'Mac' : osType === 'windows' ? 'Windows' : 'Your Device'}</span>
-              <span className="bg-white/20 w-6 h-6 rounded-full flex items-center justify-center text-sm">
-                {osType === 'mac' ? '⌘' : osType === 'windows' ? '⊞' : '↓'}
-              </span>
+              <span>Request a Demo</span>
+              <svg className="w-4 h-4 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
             </button>
           </div>
         </div>
