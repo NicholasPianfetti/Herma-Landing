@@ -111,45 +111,38 @@ REACT_APP_API_URL=http://localhost:5000
 
 **Payment Implementation**:
 - `src/services/stripeService.js` - Stripe checkout session creation
-- `functions/index.js:91-158` - Checkout session backend
-- `functions/index.js:228-572` - Webhook event processing
+- `functions/index.js` - Checkout session backend and webhook event processing
 
 **Authentication System**:
 - `src/context/AuthContext.js` - Auth provider and hooks
 - `src/firebase/auth.js` - Firebase auth utilities
-- `src/components/Hero.jsx:113-115` - Auth-payment integration
+- `src/components/Hero.jsx` - Auth-payment integration (see `handleUpgradeClick`)
 
 **Database Schema**:
 - `users` collection: `{uid, email, stripeCustomerId, subscriptionStatus, isPro, updatedAt}`
 - Subscription statuses: `free`, `active`, `payment_failed`, `canceled`
 
-## Testing & Quality
+## Payment Testing
 
-**Payment Testing**:
-- Use Stripe test cards: `4242 4242 4242 4242` (success)
+- Use Stripe test cards: `4242 4242 4242 4242` (success), `4000 0000 0000 0002` (decline)
 - Test webhook delivery in Stripe dashboard
-- Monitor Firebase Functions logs for debugging
-
-**No Automated Testing**:
-- Project uses Create React App's default Jest setup
-- No existing test suites implemented
-- Manual testing for payment flows recommended
+- Monitor Firebase Functions logs: `cd functions && npm run logs`
 
 ## Special Considerations
 
-**Legacy Node Configuration**:
-- All npm scripts use `NODE_OPTIONS=--openssl-legacy-provider` for compatibility
+**Windows-Specific Scripts**:
+- npm scripts use Windows syntax: `set NODE_OPTIONS=--openssl-legacy-provider`
 - Required for React Scripts 5.0.1 with current Node versions
+- If developing on macOS/Linux, change `set` to `export` in package.json scripts
 
 **HashRouter Usage**:
 - Uses HashRouter instead of BrowserRouter for Firebase Hosting compatibility
-- All routes prefixed with `#` in URLs
+- All routes prefixed with `#` in URLs (e.g., `/#/login`, `/#/success`)
 
 **Dual Backend Support**:
-- Firebase Functions for production (recommended)
-- Express backend in `/backend` for development/local testing
+- Firebase Functions (`functions/`) for production (recommended)
+- Express backend (`backend/`) for development/local testing
 - Both implement identical API endpoints
 
-**Comprehensive Documentation**:
-- See `PAYMENT_PIPELINE.md` for detailed payment flow documentation
-- Contains specific line references and modification guides
+**Additional Documentation**:
+- `PAYMENT_PIPELINE.md` - Detailed payment flow documentation with modification guides

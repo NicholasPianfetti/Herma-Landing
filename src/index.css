@@ -71,3 +71,121 @@ a {
 .font-code {
   font-family: 'Inconsolata', 'Courier New', monospace;
 }
+
+/* Mobile menu slide animation */
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.3s ease-out forwards;
+}
+
+/* Scroll-triggered animations */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Animation classes - initial state (hidden) */
+.animate-on-scroll {
+  opacity: 0;
+}
+
+.animate-on-scroll.animate-fade-up {
+  transform: translateY(40px);
+}
+
+.animate-on-scroll.animate-fade-left {
+  transform: translateX(-60px);
+}
+
+.animate-on-scroll.animate-fade-right {
+  transform: translateX(60px);
+}
+
+.animate-on-scroll.animate-scale {
+  transform: scale(0.95);
+}
+
+/* Animation classes - visible state */
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0) translateX(0) scale(1);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Staggered delays for children */
+.animate-on-scroll.is-visible.delay-100 { transition-delay: 0.1s; }
+.animate-on-scroll.is-visible.delay-200 { transition-delay: 0.2s; }
+.animate-on-scroll.is-visible.delay-300 { transition-delay: 0.3s; }
+.animate-on-scroll.is-visible.delay-400 { transition-delay: 0.4s; }
+.animate-on-scroll.is-visible.delay-500 { transition-delay: 0.5s; }
+
+/* Hero specific animation - plays on load */
+.animate-hero {
+  animation: fade-in-up 1s ease-out forwards;
+}
+
+.animate-hero-delayed {
+  opacity: 0;
+  animation: fade-in-up 1s ease-out 0.3s forwards;
+}
+
+.animate-hero-delayed-more {
+  opacity: 0;
+  animation: fade-in-up 1s ease-out 0.5s forwards;
+}

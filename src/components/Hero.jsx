@@ -60,9 +60,9 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative w-full bg-gradient-to-b from-blue-50 via-white to-blue-50 overflow-hidden">
+    <div className="relative w-full bg-gradient-to-b from-blue-50 to-white overflow-hidden">
       {/* Hero Section */}
-      <section className="relative w-full min-h-[85vh] flex items-center justify-center pt-32 pb-24">
+      <section className="relative w-full min-h-[70vh] sm:min-h-[80vh] md:min-h-[85vh] flex items-center justify-center pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-20 md:pb-24">
         {/* Background Pattern */}
         <div className="absolute inset-0 overflow-hidden opacity-30">
           <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-[var(--highlight-color)] opacity-5 rounded-bl-full transform -translate-y-1/4 translate-x-1/4"></div>
@@ -74,7 +74,7 @@ const Hero = () => {
             {/* Main Headline */}
             <div className="w-full max-w-5xl mb-8">
               <h1
-                className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-[1.1] tracking-tight"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-[1.1] tracking-tight animate-hero"
                 style={{ fontFamily: 'var(--font-heading)' }}
               >
                 <span className="text-[#242424]">Unify All AI Models</span>
@@ -83,14 +83,14 @@ const Hero = () => {
               </h1>
 
               <p
-                className="text-xl md:text-2xl text-[#242424] mb-8 font-normal max-w-3xl mx-auto leading-relaxed opacity-90"
+                className="text-base sm:text-lg md:text-xl lg:text-2xl text-[#242424] mb-8 font-normal max-w-3xl mx-auto leading-relaxed opacity-90 px-2 sm:px-0 animate-hero-delayed"
                 style={{ fontFamily: 'var(--font-body)' }}
               >
-                Herma intelligently routes AI requests based on data sensitivity — maximizing cost savings and model access while maintaining airtight privacy and compliance.
+                Herma intelligently routes AI requests based on data sensitivity to maximize cost savings and model access while maintaining privacy.
               </p>
 
               {/* CTA Button - Centered */}
-              <div className="flex items-center justify-center mb-4">
+              <div className="flex items-center justify-center mb-4 animate-hero-delayed-more">
                 <button
                   onClick={handleBookDemo}
                   className="group relative overflow-hidden px-8 py-4 bg-[var(--highlight-color)] text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform transition-all duration-200 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-[var(--highlight-color)]/30 focus:ring-offset-2 min-w-[200px]"
@@ -129,7 +129,7 @@ const Hero = () => {
             </div>
 
             {/* Demo Video Section */}
-            <div className="w-full max-w-5xl mt-8">
+            <div className="w-full max-w-5xl mt-8 animate-hero-delayed-more">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-[var(--highlight-color)] to-indigo-700 p-1">
                 {/* MacOS-style Window Chrome */}
                 <div className="absolute top-0 left-0 right-0 h-10 bg-gray-800/95 backdrop-blur-sm flex items-center justify-center px-4 z-20 rounded-t-2xl">
